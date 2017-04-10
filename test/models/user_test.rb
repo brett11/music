@@ -93,4 +93,18 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     assert_equal mixed_case_email.downcase, @user.reload.email
   end
+
+  test "first name should be saved as title case" do
+    mixed_case_name = 'roBerT'
+    @user.name_first = mixed_case_name
+    @user.save
+    assert_equal mixed_case_name.titlecase, @user.reload.name_first
+  end
+
+    test "last name should be saved as title case" do
+      mixed_case_name = 'SMith'
+      @user.name_last = mixed_case_name
+      @user.save
+      assert_equal mixed_case_name.titlecase, @user.reload.name_last
+  end
 end

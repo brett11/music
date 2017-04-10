@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+  <%= form_for(user) do |f| %>
+      <%= render 'shared/error', object: f.object %>
+
+      <fieldset>
+        <legend>Enter your details:</legend>
+
+        <div class="field">
+          <%= f.label :name_first, 'First name:' %>
+          <%= f.text_field :name_first %>
+        </div>
+
+        <div class="field">
+          <%= f.label :name_last, 'Last name:' %>
+          <%= f.text_field :name_last %>
+        </div>
+
+        <div class="field">
+          <%= f.label :email, 'Email:' %>
+          <%= f.email_field :email, size: 40 %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password, 'Password:' %>
+          <%= f.password_field :password %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation, 'Confirm password:' %>
+          <%= f.password_field :password_confirmation, size: 40 %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit buttonTitle(yield(:buttonTitle)), class: "btn btn-primary" %>
+        </div>
+
+      </fieldset>
+  <% end %>
+
+  </div>
+</div>
