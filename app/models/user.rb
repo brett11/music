@@ -13,7 +13,7 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
 
-  attr_accessor :activation_token, :remember_token
+  attr_accessor :activation_token, :remember_token, :reset_token
 
   #Returns the hash digest of the given string.
   def User.digest(string)
@@ -44,9 +44,20 @@ class User < ApplicationRecord
     self.activation_digest = User.digest(activation_token)
   end
 
+  def create_reset_digest
+    self.reset_token = User.new_token
+    #update_attribute updates the database. we can't use here because user not yet saved in database
+    self.reset_digest = User.digest(reset_token)
+  end
+
   #Sends activation email.
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+  #Sends password reset email.
+  def send_reset_email
+    UserMailer.password_reset(self).deliver_now
   end
 
   #two below methods are in this section because they are callbacks called during particular time during user object's life
