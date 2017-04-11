@@ -1,0 +1,13 @@
+<h1>MyFavArtists</h1>
+
+<p>
+  <%= @greeting %>,
+</p>
+
+
+<p>
+  Welcome to MyFavArtists! Click on the link below to activate your account:
+</p>
+
+
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token, email: @user.email) %>
