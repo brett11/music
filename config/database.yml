@@ -10,8 +10,15 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  database: Music2
+  pool: 5
+  username: root
+  password: <%= CONFIG[:MYSQL_PASSWORD] %>
+  socket: /tmp/mysql.sock
+
+  #got above socket by using this command: mysqladmin -u root -p variables | grep socket
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

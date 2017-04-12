@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_and_belongs_to_many :artists
   before_save :downcase_email
   before_save :titlecase_names
   before_create :create_activation_digest

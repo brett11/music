@@ -1,4 +1,28 @@
 Rails.application.routes.draw do
+  get 'artists/show'
+
+  get 'artists/index'
+
+  get 'concerts/show'
+
+  get 'concerts/index'
+
+  get 'venues/show'
+
+  get 'venues/index'
+
+  get 'cities/show'
+
+  get 'cities/index'
+
+  get 'states/show'
+
+  get 'states/index'
+
+  get 'countries/show'
+
+  get 'countries/index'
+
   get 'sessions/new'
 
   get 'sessions/create'
