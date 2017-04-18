@@ -6,7 +6,7 @@ class ConcertsController < ApplicationController
   end
 
   def index
-    @concerts = Concert.paginate(page: params[:page]).where('dateAndTime > ?', DateTime.now).order("dateAndTime ASC")
+    @concerts = Concert.paginate(page: params[:page]).where('dateandtime > ?', DateTime.now).order("dateandtime ASC")
   end
 
 end

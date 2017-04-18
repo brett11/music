@@ -2,7 +2,7 @@ class ArtistsController < ApplicationController
   before_action :set_artist, only:[:show, :edit, :update, :destroy]
 
   def show
-    @artist_concerts = @artist.concerts.where('dateAndTime > ?', DateTime.now).order("dateAndTime ASC").paginate(page: params[:page])
+    @artist_concerts = @artist.concerts.where('dateandtime > ?', DateTime.now).order("dateandtime ASC").paginate(page: params[:page])
   end
 
   def index

@@ -20,7 +20,7 @@ module ApplicationHelper
 
     def linkTitleGenerator(concert)
         linkTitle = ""
-        linkTitle += concert.dateAndTime.strftime("%m/%d/%Y") + ": "
+        linkTitle += concert.dateandtime.strftime("%m/%d/%Y") + ": "
         concert.artists.each do |artist|
             linkTitle += "#{artist.name_stage}, "
         end

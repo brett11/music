@@ -1,4 +1,4 @@
-<%= provide(:title, @concert.dateAndTime ) %>
+<%= provide(:title, @concert.dateandtime ) %>
 <div class="row">
   <aside class = "col-md-4">
     <section class="concert_info">
@@ -9,7 +9,7 @@
   </aside>
   <div class="col-md-8">
     <div class="concert_info">
-        <%= @concert.dateAndTime.strftime("%m/%d/%Y") %>
+        <%= @concert.dateandtime.strftime("%m/%d/%Y") %>
         <% @concert.artists.each do|artist| %>
             <%= artist.name_stage %>,
         <% end %>

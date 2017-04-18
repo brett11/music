@@ -45,7 +45,7 @@ class SetUpDatabase < ActiveRecord::Migration[5.0]
     end
 
     create_table "concerts", unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-      t.datetime "dateAndTime", null: false
+      t.datetime "dateandtime", null: false
       t.integer  "venue_id",    null: false, unsigned: true
       t.index ["id"], name: "id_Concerts_UNIQUE", unique: true, using: :btree
       t.index ["venue_id"], name: "FK_Venues_id_idx", using: :btree
