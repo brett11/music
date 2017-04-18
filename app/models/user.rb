@@ -3,6 +3,12 @@ class User < ApplicationRecord
   before_save :downcase_email
   before_save :titlecase_names
   before_create :create_activation_digest
+  has_attached_file :profile_pic, styles: {
+    thumb: '100x100>',
+    square: '200x200',
+    medium: '300x300>'
+  }
+  validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   has_secure_password
   validates :name_first, presence: true, length: { maximum: 50 }
   validates :name_last, presence: true, length: { maximum: 50 }

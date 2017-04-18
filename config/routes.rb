@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get 'artists/show'
-
-  get 'artists/index'
-
-  get 'concerts/show'
-
-  get 'concerts/index'
 
   get 'venues/show'
 
@@ -28,6 +21,9 @@ Rails.application.routes.draw do
   get 'sessions/create'
 
   get 'sessions/destroy'
+
+  resources :artists
+  resources :concerts
 
   resources :users
   get  '/signup', to: 'users#new'

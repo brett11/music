@@ -17,4 +17,13 @@ module ApplicationHelper
             base_title = custom_title
         end
     end
+
+    def linkTitleGenerator(concert)
+        linkTitle = ""
+        linkTitle += concert.dateAndTime.strftime("%m/%d/%Y") + ": "
+        concert.artists.each do |artist|
+            linkTitle += "#{artist.name_stage}, "
+        end
+        linkTitle += "#{concert.venue.name}"
+    end
 end

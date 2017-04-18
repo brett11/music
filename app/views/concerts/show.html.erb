@@ -1,2 +1,20 @@
-<h1>Concerts#show</h1>
-<p>Find me in app/views/concerts/show.html.erb</p>
+<%= provide(:title, @concert.dateAndTime ) %>
+<div class="row">
+  <aside class = "col-md-4">
+    <section class="concert_info">
+
+      <%= image_tag @concert.artists.first.avatar.url(:medium) %>
+
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <div class="concert_info">
+        <%= @concert.dateAndTime.strftime("%m/%d/%Y") %>
+        <% @concert.artists.each do|artist| %>
+            <%= artist.name_stage %>,
+        <% end %>
+        <%= @concert.venue.name %>
+    </div>
+    <p><%= link_to "<-- Back to all concerts", concerts_path %></p>
+  </div>
+</div>

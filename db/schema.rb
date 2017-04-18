@@ -10,38 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20170414195159) do
 
   create_table "albums", unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name",         limit: 100
     t.date   "release_date"
-    t.index ["id"], name: "id_Album_UNIQUE", unique: true, using: :btree
   end
 
-  create_table "albums_artists", primary_key: ["album_id", "artist_id"], force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "albums_artists", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "album_id",  null: false, unsigned: true
     t.integer "artist_id", null: false, unsigned: true
+    t.index ["album_id", "artist_id"], name: "index_albums_artists_on_album_id_and_artist_id", unique: true, using: :btree
     t.index ["album_id"], name: "FK_Album_idx", using: :btree
     t.index ["artist_id"], name: "FK_Artist_idx", using: :btree
   end
 
   create_table "artists", unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string "name_first", limit: 45
-    t.string "name_last",  limit: 45
-    t.string "name_stage", limit: 45, null: false
+    t.string   "name_first",          limit: 45
+    t.string   "name_last",           limit: 45
+    t.string   "name_stage",          limit: 45, null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["id"], name: "id_Artists_UNIQUE", unique: true, using: :btree
   end
 
-  create_table "artists_concerts", primary_key: ["artist_id", "concert_id"], force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "artists_concerts", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "artist_id",  null: false, unsigned: true
     t.integer "concert_id", null: false, unsigned: true
+    t.index ["artist_id", "concert_id"], name: "index_artists_concerts_on_artist_id_and_concert_id", unique: true, using: :btree
     t.index ["artist_id"], name: "FK_Artist_idx", using: :btree
     t.index ["concert_id"], name: "FK_Concert_idx", using: :btree
   end
 
-  create_table "artists_users", primary_key: ["user_id", "artist_id"], force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "artists_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "user_id",   null: false, unsigned: true
     t.integer "artist_id", null: false, unsigned: true
+    t.index ["artist_id", "user_id"], name: "index_artists_users_on_artist_id_and_user_id", unique: true, using: :btree
     t.index ["artist_id"], name: "FK_artist_id_idx", using: :btree
     t.index ["user_id"], name: "FK_user_id_idx", using: :btree
   end
@@ -82,19 +88,23 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "users", unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "name_first",        limit: 45,              null: false
-    t.string   "name_last",         limit: 45,              null: false
-    t.string   "email",             limit: 100,             null: false
+    t.string   "name_first",               limit: 45,              null: false
+    t.string   "name_last",                limit: 45,              null: false
+    t.string   "email",                    limit: 100,             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest",   limit: 250,             null: false
-    t.string   "remember_digest",   limit: 250
-    t.string   "activation_digest", limit: 250
-    t.integer  "activated",         limit: 1,   default: 0, null: false, unsigned: true
+    t.string   "password_digest",          limit: 250,             null: false
+    t.string   "remember_digest",          limit: 250
+    t.string   "activation_digest",        limit: 250
+    t.integer  "activated",                limit: 1,   default: 0, null: false, unsigned: true
     t.datetime "activated_at"
-    t.string   "reset_digest",      limit: 250
+    t.string   "reset_digest",             limit: 250
     t.datetime "reset_sent_at"
-    t.integer  "admin",             limit: 1,   default: 0, null: false, unsigned: true
+    t.integer  "admin",                    limit: 1,   default: 0, null: false, unsigned: true
+    t.string   "profile_pic_file_name"
+    t.string   "profile_pic_content_type"
+    t.integer  "profile_pic_file_size"
+    t.datetime "profile_pic_updated_at"
     t.index ["email"], name: "IX_Users_Email", unique: true, using: :btree
     t.index ["id"], name: "UQ_Users", unique: true, using: :btree
   end

@@ -2,9 +2,7 @@
 <div class="row">
   <aside class = "col-md-4">
     <section class="user_info">
-      <h1>
-        TODO: Going to put a picture here
-      </h1>
+      <%= image_tag @user.profile_pic.url(:medium) %>
     </section>
   </aside>
   <div class="col-md-8">
@@ -13,5 +11,6 @@
     </p>
     <%= @user.name_first %>
     <%= @user.name_last %>
+    <p><%= link_to "<-- Back to all users", users_path %></p>
   </div>
 </div>
