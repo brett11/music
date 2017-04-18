@@ -1,5 +1,5 @@
 class ConcertsController < ApplicationController
-
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
 
   def show
     @concert = Concert.find(params[:id])

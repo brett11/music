@@ -1,5 +1,6 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only:[:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
 
   def show
     @artist_concerts = @artist.concerts.where('dateandtime > ?', DateTime.now).order("dateandtime ASC").paginate(page: params[:page])
