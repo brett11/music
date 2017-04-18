@@ -15,7 +15,7 @@ development:
   database: Music2
   pool: 5
   username: root
-  password: <%= CONFIG[:MYSQL_PASSWORD] %>
+  password: <%= ENV["MYSQL_PASSWORD"] %>
   socket: /tmp/mysql.sock
 
   #got above socket by using this command: mysqladmin -u root -p variables | grep socket
@@ -28,5 +28,10 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: music_production
+  pool: 5
+  username: <%= ENV["POSTGRES_USERNAME"] %>
+  password:
+  host: localhost
