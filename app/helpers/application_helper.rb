@@ -24,6 +24,31 @@ module ApplicationHelper
         concert.artists.each do |artist|
             linkTitle += "#{artist.name_stage}, "
         end
-        linkTitle += "#{concert.venue.name}"
+        if concert.venue.name != "na"
+          linkTitle += "#{concert.venue.name}, "
+        end
+        linkTitle += full_city_name(concert.venue.city)
     end
+
+    def linkTitleGeneratorLessName(concert)
+      linkTitle = ""
+      linkTitle += concert.dateandtime.strftime("%m/%d/%Y") + ": "
+      linkTitle += "#{concert.venue.name}, "
+      linkTitle += full_city_name(concert.venue.city)
+    end
+
+    def linkAlbumGenerator(album)
+        linkTitle = "#{album.name}"
+        linkTitle += ", " + album.artists.map {|artist|
+            artist.name_stage}.join(', ')
+    end
+
+    def full_city_name(city)
+        if city.country.name == "USA" && city.name != "Washington DC"
+            city_name = city.name + ", " + city.state.abbreviation + ", " + city.country.name
+        else
+            city_name = city.name + ", " + city.country.name
+        end
+    end
+
 end

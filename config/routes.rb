@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   resources :artists
   resources :concerts
+  resources :albums
 
   resources :users
   get  '/signup', to: 'users#new'

@@ -9,12 +9,18 @@
   </aside>
   <div class="col-md-8">
     <div id="artist_name">
-        <%= @artist.name_stage %>
+      <%= @artist.name_stage %>
     </div>
     <p><%= link_to "Edit Artist Info", edit_artist_path(@artist) %></p>
     <br>
-    <h3>Upcoming shows</h3>
-    <%= render 'shared/artist_concerts' %>
+    <div class="artist_albums">
+      <h3>Albums</h3>
+      <%= render(partial: 'albums/album', collection: @artist.albums) %>
+    </div>
+    <div class="artist_upcoming_shows">
+      <h3>Upcoming shows</h3>
+      <%= render 'shared/artist_concerts' %>
+    </div>
 
     <p><%= link_to "<-- Back to all artists", artists_path %></p>
   </div>

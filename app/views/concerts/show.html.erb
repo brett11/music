@@ -1,20 +1,30 @@
 <%= provide(:title, @concert.dateandtime ) %>
 <div class="row">
   <aside class = "col-md-4">
-    <section class="concert_info">
+    <section class="concert_info_picture">
 
       <%= image_tag @concert.artists.first.avatar.url(:medium) %>
 
     </section>
   </aside>
   <div class="col-md-8">
-    <div class="concert_info">
-        <%= @concert.dateandtime.strftime("%m/%d/%Y") %>
-        <% @concert.artists.each do|artist| %>
-            <%= artist.name_stage %>,
-        <% end %>
-        <%= @concert.venue.name %>
+    <div class="concert_info_first_line">
+        <%= @concert.artists.map do|artist|
+            artist.name_stage end.join(", ").html_safe
+        %>
     </div>
+    <div class="concert_info_second_line">
+        <%= @concert.dateandtime.strftime("%m/%d/%Y") %>
+    </div>
+    <div class = "concert_info_second_line">
+      <% if @concert.venue.name != 'na' %>
+        <%= @concert.venue.name %>
+      <% end %>
+    </div>
+    <div class="concert_info_second_line">
+      <%= full_city_name(@concert.venue.city) %>
+    </div>
+    <br/>
     <p><%= link_to "<-- Back to all concerts", concerts_path %></p>
   </div>
 </div>

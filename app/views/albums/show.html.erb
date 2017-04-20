@@ -1,0 +1,26 @@
+<%= provide(:title, @album.name ) %>
+<div class="row">
+  <aside class = "col-md-4">
+    <section class="concert_info_picture">
+
+      <%= image_tag @album.artists.first.avatar.url(:medium) %>
+
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <div class="album_info_first_line">
+      <%= @album.name %>
+
+    </div>
+    <div class="album_info_second_line">
+      <%= @album.artists.map {|artist|
+          link_to(artist.name_stage, artist_path(artist))}.join(', ').html_safe
+              %>
+    </div>
+    <div class="album_info_third_line">
+      Release date:  <%= @album.release_date %>
+    </div>
+    <br/>
+    <p><%= link_to "<-- Back to albums", albums_path %></p>
+  </div>
+</div>

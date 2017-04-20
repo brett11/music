@@ -1,0 +1,21 @@
+<% provide(:title, 'All albums') %>
+<div class="row">
+  <h1>All albums</h1>
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-8">
+
+    <%= will_paginate %>
+
+
+    <!--Here Rails infers that @users is a list of User objects; moreover, when called with a collection of users,
+    Rails automatically iterates through them and renders each one with the _user.html.erb partial (inferring
+    the name of the partial from the name of the class). Basically as if the code has a user.each do loop -->
+    <ul class="albums">
+      <%= render @albums %>
+    </ul>
+
+
+    <%= will_paginate %>
+  </div>
+</div>
