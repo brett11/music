@@ -9,9 +9,9 @@
   </aside>
   <div class="col-md-8">
     <div class="concert_info_first_line">
-        <%= @concert.artists.map do|artist|
-            artist.name_stage end.join(", ").html_safe
-        %>
+      <%= @concert.artists.map {|artist|
+        link_to(artist.name_stage, artist_path(artist))}.join(', ').html_safe
+      %>
     </div>
     <div class="concert_info_second_line">
         <%= @concert.dateandtime.strftime("%m/%d/%Y") %>
