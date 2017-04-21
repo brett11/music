@@ -1,4 +1,7 @@
 <div id="album_link">
-    <%= image_tag album.artists.first.avatar.url(:thumb) %>
-    <%= link_to linkAlbumGenerator(album), album_path(album) %>
+
+  <% if album.album_cover.present? %>
+    <%= image_tag album.album_cover.url(:thumb) %>
+  <% end %>
+  <%= link_to linkAlbumGenerator(album), album_path(album) %>
 </div>

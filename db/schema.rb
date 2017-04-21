@@ -10,11 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418213954) do
+ActiveRecord::Schema.define(version: 20170421172931) do
 
   create_table "albums", unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string "name",         limit: 100
-    t.date   "release_date"
+    t.string   "name",                     limit: 100
+    t.date     "release_date"
+    t.string   "album_cover_file_name"
+    t.string   "album_cover_content_type"
+    t.integer  "album_cover_file_size"
+    t.datetime "album_cover_updated_at"
   end
 
   create_table "albums_artists", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
