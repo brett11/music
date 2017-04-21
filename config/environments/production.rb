@@ -88,6 +88,7 @@ Rails.application.configure do
   # config/environments/production.rb
   config.paperclip_defaults = {
     storage: :s3,
+    s3_protocol: ENV.fetch('S3_PROTOCOL'),
     s3_credentials: {
       # top config from https://github.com/thoughtbot/paperclip/issues/2151
       s3_host_name: "s3-#{ENV['AWS_REGION']}.amazonaws.com",
@@ -95,7 +96,6 @@ Rails.application.configure do
       access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
       secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
       s3_region: ENV.fetch('AWS_REGION'),
-      s3_protocol: ENV.fetch('S3_PROTOCOL'),
     }
   }
 end
