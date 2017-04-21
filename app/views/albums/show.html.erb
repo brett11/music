@@ -3,7 +3,11 @@
   <aside class = "col-md-4">
     <section class="concert_info_picture">
 
-      <%= image_tag @album.album_cover.url(:medium) %>
+      <% if @album.album_cover.present? %>
+          <%= image_tag @album.album_cover.url(:thumb) %>
+      <% else %>
+          <%= image_tag @album.artists.first.avatar.url(:medium) %>
+      <% end %>
 
     </section>
   </aside>
