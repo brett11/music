@@ -8,6 +8,7 @@ class AlbumsController < ApplicationController
 
   def index
     @albums = Album.paginate(page: params[:page]).order("release_date DESC")
+    store_location
   end
 
   def edit

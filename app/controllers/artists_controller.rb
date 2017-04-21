@@ -8,6 +8,7 @@ class ArtistsController < ApplicationController
 
   def index
     @artists=Artist.paginate(page: params[:page])
+    store_location
   end
 
   def edit

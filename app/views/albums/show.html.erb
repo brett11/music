@@ -26,6 +26,6 @@
       Release date:  <%= @album.release_date %>
     </div>
     <br/>
-    <p><%= link_to "<-- Back to albums", albums_path %></p>
+    <p><%= link_to "<-- Back to albums", session[:forwarding_url] %></p>
   </div>
 </div>
