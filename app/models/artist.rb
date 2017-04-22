@@ -8,4 +8,7 @@ class Artist < ApplicationRecord
     medium: '256x256>'
   }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  validates :name_first, length: { maximum: 45 }
+  validates :name_last, length: { maximum: 45 }
+  validates :name_stage, presence: true, length: { maximum: 45 }
 end
