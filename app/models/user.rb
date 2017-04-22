@@ -10,8 +10,8 @@ class User < ApplicationRecord
   }
   validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   has_secure_password
-  validates :name_first, presence: true, length: { maximum: 50 }
-  validates :name_last, presence: true, length: { maximum: 50 }
+  validates :name_first, presence: true, length: { maximum: 45 }
+  validates :name_last, presence: true, length: { maximum: 45 }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   validates :password_confirmation, presence: true, length: { minimum: 6 }, allow_nil: true
 

@@ -7,4 +7,5 @@ class Album < ApplicationRecord
     medium: '300x300>'
   }
   validates_attachment_content_type :album_cover, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  validates :name, presence: true, length: { maximum: 100 }
 end
