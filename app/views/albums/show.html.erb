@@ -15,8 +15,10 @@
     <div class="album_info_first_line">
       <%= @album.name %>
     </div>
-    <p><%= link_to "Edit Album Info", edit_album_path(@album) %></p>
+    <% if logged_in? && current_user.admin? %>
+      <p><%= link_to "Edit Album Info", edit_album_path(@album) %></p>
     <br>
+    <% end %>
     <div class="album_info_second_line">
       <%= @album.artists.map {|artist|
           link_to(artist.name_stage, artist_path(artist))}.join(', ').html_safe
