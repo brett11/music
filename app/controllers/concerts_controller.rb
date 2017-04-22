@@ -7,6 +7,7 @@ class ConcertsController < ApplicationController
 
   def index
     @concerts = Concert.paginate(page: params[:page]).where('dateandtime > ?', DateTime.now).order("dateandtime ASC")
+    store_location
   end
 
 end
