@@ -13,14 +13,14 @@ gem 'puma',                    '3.4.0'
 gem 'sass-rails',              '5.0.6'
 gem 'uglifier',                '3.0.0'
 gem 'coffee-rails',            '4.2.1'
-gem 'jquery-rails',            '4.1.1'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'turbolinks',              '5.0.1'
 gem 'jbuilder',                '2.4.1'
 gem 'mysql2',                  '0.4.5'
 gem "paperclip",            "~> 5.0.0"
 gem 'aws-sdk',              '~> 2.3'
 gem "figaro"
-gem 'client_side_validations'
+gem 'client_side_validations', '~> 9.3'
 
 group :development, :test do
   gem 'sqlite3', '1.3.12'
