@@ -6,12 +6,14 @@ bob:
   email: bob@bar.com
   password_digest: <%= BCrypt::Password.create('secret') %>
   admin: false
-  activated: false
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 anne:
   name_last: Jackson
   name_first: Anne
   email: anne@aol.com
   password_digest: <%= BCrypt::Password.create('secret') %>
-  admin: false
-  activated: false
+  admin: true
+  activated: true
+  activated_at: <%= Time.zone.now %>
