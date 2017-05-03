@@ -4,8 +4,10 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+concertOne:
+  dateandtime: 2017-12-15 20:00:00
+  venue: aragon
+
+concertTwo:
+  dateandtime: 2017-10-25 21:00:00
+  venue: bellahoustonPark

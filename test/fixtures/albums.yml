@@ -4,8 +4,12 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+thriller:
+  name: Thriller
+  release_date: 1982-11-30
+  artist: michaelJackson
+
+joshuaTree:
+  name: The Joshua Tree
+  release_date: 1987-03-09
+  artist: u2
