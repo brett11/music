@@ -1,14 +1,18 @@
 require 'test_helper'
 
 class ConcertsControllerTest < ActionDispatch::IntegrationTest
-  test "should get show" do
-    get concerts_show_url
-    assert_response :success
+  def setup
+    @concertOne = concerts(:concertOne)
+    @concertTwo = concerts(:concertTwo)
   end
 
   test "should get index" do
-    get concerts_index_url
+    get concerts_path
     assert_response :success
   end
 
+  test "should get show" do
+    get concert_path(@concertOne)
+    assert_response :success
+  end
 end

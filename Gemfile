@@ -21,6 +21,7 @@ gem "paperclip",            "~> 5.0.0"
 gem 'aws-sdk',              '~> 2.3'
 gem "figaro"
 gem 'client_side_validations', '~> 9.3'
+gem 'sendgrid', '~> 1.2', '>= 1.2.4'
 
 group :development, :test do
   gem 'sqlite3', '1.3.12'

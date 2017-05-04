@@ -7,7 +7,7 @@ bob:
   password_digest: <%= BCrypt::Password.create('secret') %>
   admin: false
   activated: true
-  activated_at: <%= Time.zone.now %>
+  activated_at: <%= Time.zone.now.to_datetime %>
 
 anne:
   name_last: Jackson
@@ -16,4 +16,4 @@ anne:
   password_digest: <%= BCrypt::Password.create('secret') %>
   admin: true
   activated: true
-  activated_at: <%= Time.zone.now %>
+  activated_at: <%= Time.zone.now.to_datetime %>
