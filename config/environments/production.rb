@@ -102,7 +102,7 @@ Rails.application.configure do
   #Listing 11.41 from Hartl tutorial
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'desolate-depths-41396.herokuapp.com'
+  host = 'polar-lake-58521.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
