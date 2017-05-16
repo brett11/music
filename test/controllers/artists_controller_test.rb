@@ -2,8 +2,8 @@ require 'test_helper'
 
 class ArtistsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @michaelJackson = artists(:michaelJackson)
     @u2 = artists(:u2)
+    @u2.avatar = sample_file("U2.jpg")
   end
 
   test "should get index" do
