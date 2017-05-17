@@ -3,4 +3,5 @@ class City < ApplicationRecord
   belongs_to :country
   has_many :venues
   validates :name, presence: true, length: { maximum: 45 }
+  validates :country_id, presence: true
 end
