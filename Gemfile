@@ -26,6 +26,7 @@ gem 'sendgrid', '~> 1.2', '>= 1.2.4'
 group :development, :test do
   gem 'sqlite3', '1.3.12'
   gem 'byebug',  '9.0.0', platform: :mri
+  gem 'rspec-rails', '~> 3.6'
 end
 
 group :development do
@@ -36,6 +37,9 @@ group :development do
 end
 
 group :test do
+  gem 'factory_girl_rails', '~> 4.8'
+  gem 'capybara', '~> 2.14'
+  gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'rails-controller-testing', '0.1.1'
   gem 'minitest-reporters',       '1.1.9'
   gem 'guard',                    '2.13.0'

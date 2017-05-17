@@ -1,5 +1,5 @@
-require 'test_helper'
-
-class StatesControllerTest < ActionDispatch::IntegrationTest
-
-end
+# require 'test_helper'
+#
+# class StatesControllerTest < ActionDispatch::IntegrationTest
+#
+# end

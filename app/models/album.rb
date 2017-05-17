@@ -8,4 +8,6 @@ class Album < ApplicationRecord
   }
   validates_attachment_content_type :album_cover, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   validates :name, presence: true, length: { maximum: 100 }
+  validates :release_date, presence: true
+  validates :artist_id, presence: true
 end

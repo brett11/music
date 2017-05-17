@@ -4,17 +4,17 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-chicago:
- name: Chicago
- latitude: 41.878114
- longitude: -87.629798
- state: illinois
- country: usa
-
-mexicoCity:
- name: Mexico City
- latitude: 19.432608
- longitude: -99.133208
- state: fc
- country: mexico
+#chicago:
+# name: Chicago
+# latitude: 41.878114
+# longitude: -87.629798
+# state: illinois
+# country: usa
+#
+#mexicoCity:
+# name: Mexico City
+# latitude: 19.432608
+# longitude: -99.133208
+# state: fc
+# country: mexico
 
