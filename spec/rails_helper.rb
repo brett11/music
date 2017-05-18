@@ -6,7 +6,12 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+#https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
+require 'support/factory_girl'
 require 'capybara/rspec'
+#http://stackoverflow.com/questions/22715519/rspec-error-uninitialized-constant-factorygirl-name-error
+#http://stackoverflow.com/questions/25648456/i-cant-seem-to-add-config-include-factorygirlsyntaxmethods-to-my-rspec-co/25649064#25649064
+require 'factory_girl_rails'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
