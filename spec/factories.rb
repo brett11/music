@@ -10,7 +10,8 @@ FactoryGirl.define do
   factory :album do
     name "Self-Titled"
     release_date { 3.years.ago }
-    artist
+    #http://stackoverflow.com/questions/1484374/how-to-create-has-and-belongs-to-many-associations-in-factory-girl
+    artists {[FactoryGirl.create(:artist)]}
   end
 
   factory :artist do
@@ -19,11 +20,14 @@ FactoryGirl.define do
 
   factory :city do
     name "New York City"
+    country
   end
 
   factory :concert do
     venue
-    artist
+    #http://stackoverflow.com/questions/1484374/how-to-create-has-and-belongs-to-many-associations-in-factory-girl
+    artists {[FactoryGirl.create(:artist)]}
+    dateandtime { DateTime.now }
   end
 
   factory :country do
