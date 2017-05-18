@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421172931) do
+ActiveRecord::Schema.define(version: 20170518164847) do
 
   create_table "albums", unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name",                     limit: 100
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20170421172931) do
 
   create_table "songs", unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "album_id", unsigned: true
+    t.string  "name"
     t.index ["album_id"], name: "FK_Album_idx", using: :btree
     t.index ["id"], name: "id_Song_UNIQUE", unique: true, using: :btree
   end
