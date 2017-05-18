@@ -73,8 +73,8 @@ class User < ApplicationRecord
   end
 
   def titlecase_names
-    self.name_first = name_first.titlecase
-    self.name_last = name_last.titlecase
+    self.name_first = name_first.downcase.capitalize
+    self.name_last = name_last.downcase.capitalize
   end
 
   # forgets a user
