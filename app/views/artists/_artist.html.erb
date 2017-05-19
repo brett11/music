@@ -1,5 +1,9 @@
-<div>
-  <%= image_tag artist.avatar.url(:thumb) %>
-  <%= link_to artist.name_stage, artist_path(artist) %>
+<div class="row">
+  <div class ="col-md-6 col-md-offset-2">
+    <div>
+      <%= image_tag artist.avatar.url(:thumb) %>
+      <%= link_to artist.name_stage, artist_path(artist) %>
+    </div>
+    <br>
+  </div>
 </div>
-<br>

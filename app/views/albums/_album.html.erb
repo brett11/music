@@ -1,7 +1,11 @@
-<div id="album_link">
+<div class="row">
+  <div class ="col-md-6 col-md-offset-2">
+    <div id="album_link">
 
-  <% if album.album_cover.present? %>
-    <%= image_tag album.album_cover.url(:thumb) %>
-  <% end %>
-  <%= link_to linkAlbumGenerator(album), album_path(album) %>
+      <% if album.album_cover.present? %>
+          <%= image_tag album.album_cover.url(:thumb) %>
+      <% end %>
+      <%= link_to linkAlbumGenerator(album), album_path(album) %>
+    </div>
+  </div>
 </div>
