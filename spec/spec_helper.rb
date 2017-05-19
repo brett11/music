@@ -12,8 +12,24 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 #
+
+#http://railscasts.com/episodes/275-how-i-test?autoplay=true
+# commented out for now because the same require statement is in rails_helper.rb
+# require capybara/rspec
+require 'support/mailer_macros'
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  #http://railscasts.com/episodes/275-how-i-test?autoplay=true
+  config.include(MailerMacros)
+  config.before(:each) { reset_email }
+
+  #rspec book pg 103
+  # config.alias_example_group_to :pdescribe, pry: true
+  # config.alias_example_to :pit, pry: true
+  # need to figure out how to add before hook based on this metadata. see pg 123 of rspec book
+
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
