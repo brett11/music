@@ -2,13 +2,11 @@
 
 <div class ="row">
 <h1>All artists</h1>
-  <div class ="col-md-8 col-md-offset-2">
+  <div class ="col-md-12">
 
-    <%= will_paginate %>
-
-    <!--Here Rails infers that @users is a list of User objects; moreover, when called with a collection of users,
-    Rails automatically iterates through them and renders each one with the _user.html.erb partial (inferring
-    the name of the partial from the name of the class). Bsically as if the code ahs a user.each do loop -->
+    <!--Here Rails infers that @artists is a list of artist objects; moreover, when called with a collection of artists,
+    Rails automatically iterates through them and renders each one with the _artist.html.erb partial (inferring
+    the name of the partial from the name of the class). Bsically as if the code ahs a artist.each do loop -->
     <ul class="artists">
       <%= render @artists %>
     </ul>

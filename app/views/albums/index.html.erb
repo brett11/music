@@ -1,17 +1,15 @@
 <% provide(:title, 'All albums') %>
 <h1>All albums</h1>
 <div class ="row">
-  <div class ="col-md-8 col-md-offset-2">
+  <div class ="col-md-12">
 
-    <%= will_paginate %>
-
-    <!--Here Rails infers that @users is a list of User objects; moreover, when called with a collection of users,
-    Rails automatically iterates through them and renders each one with the _user.html.erb partial (inferring
-    the name of the partial from the name of the class). Basically as if the code has a user.each do loop -->
+    <!--Here Rails infers that @albums is a list of album objects; moreover, when called with a collection of albums,
+    Rails automatically iterates through them and renders each one with the _album.html.erb partial (inferring
+    the name of the partial from the name of the class). Basically as if the code has a album.each do loop -->
     <ul class="albums">
       <%= render @albums %>
     </ul>
 
-    <%= will_paginate %>
   </div>
+  <%= will_paginate %>
 </div>
