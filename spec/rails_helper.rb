@@ -1,7 +1,8 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'spec_helper'
+# require spec_helper was here but now is moved below environment line per sergiopantoja https://github.com/email-spec/email-spec/issues/187
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
+require 'spec_helper'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
@@ -12,6 +13,16 @@ require 'capybara/rspec'
 #http://stackoverflow.com/questions/22715519/rspec-error-uninitialized-constant-factorygirl-name-error
 #http://stackoverflow.com/questions/25648456/i-cant-seem-to-add-config-include-factorygirlsyntaxmethods-to-my-rspec-co/25649064#25649064
 require 'factory_girl_rails'
+
+#http://stackoverflow.com/questions/17837882/how-to-examine-rspec-variables-with-pry-debugger
+require 'pry'
+
+#moved the below three methods from the spec_helper because rspec wasn't working
+#http://stackoverflow.com/questions/29183573/rspec-email-spec-issue
+require "action_mailer"
+#http://www.rubydoc.info/gems/email_spec/2.1.1
+require "email_spec"
+require "email_spec/rspec"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are

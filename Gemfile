@@ -27,6 +27,8 @@ group :development, :test do
   gem 'sqlite3', '1.3.12'
   gem 'byebug',  '9.0.0', platform: :mri
   gem 'rspec-rails', '~> 3.6'
+  gem 'email_spec', '~> 2.1', '>= 2.1.1'
+  gem 'pry-rails', '~> 0.3.6'
 end
 
 group :development do

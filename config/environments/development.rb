@@ -59,3 +59,9 @@ Rails.application.configure do
   #BF note: https://github.com/thoughtbot/paperclip/blob/master/README.md#installation
   Paperclip.options[:command_path] = "/usr/local/bin/"
 end
+
+# #http://pryrepl.org/
+# silence_warnings do
+#   require 'pry'
+#   IRB = Pry
+# end
