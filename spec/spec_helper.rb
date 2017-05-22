@@ -110,3 +110,14 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+#### helper methods by BF ####
+# http://stackoverflow.com/questions/10121835/how-do-i-simulate-a-login-with-rspec
+# def login_as_admin
+#   login(:admin)
+# end
+#
+# def login_as_user(user)
+#
+# end
+
