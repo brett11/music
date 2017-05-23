@@ -151,8 +151,9 @@ input{
 }
 
 .artist_div{
-  display: inline-flex;
+  display: inline-flGIT ex;
   width: 200px;
+  margin: auto;
 }
 
 .artist_div + .artist_div{
@@ -202,6 +203,7 @@ input{
 .album_div{
   display: inline-flex;
   width: 200px;
+  margin: auto;
 
 }
 
