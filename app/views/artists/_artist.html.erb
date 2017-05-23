@@ -1,7 +1,11 @@
-<div class="col" style="display: inline-block">
+<div class="col artist_div">
   <div>
-    <%= image_tag artist.avatar.url(:thumb) %>
-    <%= link_to artist.name_stage, artist_path(artist) %>
+    <figure>
+      <%= image_tag artist.avatar.url(:square) %>
+      <figcaption>
+        <%= link_to artist.name_stage, artist_path(artist) %>
+      </figcaption>
+    </figure>
   </div>
   <br>
 </div>

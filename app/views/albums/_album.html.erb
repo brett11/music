@@ -1,9 +1,10 @@
-<div class="col" style="display: inline-block">
-  <div id="album_link">
-
-    <% if album.album_cover.present? %>
-        <%= image_tag album.album_cover.url(:thumb) %>
-    <% end %>
-    <%= link_to linkAlbumGenerator(album), album_path(album) %>
+<div class="col album_div">
+  <div>
+    <figure style="float: top">
+        <%= image_tag album.album_cover.url(:square) %>
+        <figcaption>
+          <%= link_to linkAlbumGenerator(album), album_path(album) %>
+        </figcaption>
+      </figure>
   </div>
 </div>

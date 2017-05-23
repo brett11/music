@@ -142,6 +142,21 @@ input{
   //font-size: 1vw;
 }
 
+// https://internetingishard.com/html-and-css/flexbox/
+.artists_containter {
+  display: flex;
+  align-items: top;
+}
+
+.artist_div{
+  display: inline-flex;
+  width: 200px;
+}
+
+.album_div + .album_div{
+  margin-left: 15px;
+}
+
 #artist_name{
   font-size: 2em;
 }
@@ -174,6 +189,22 @@ input{
   //font-size: 1.2em;
 }
 
+// https://internetingishard.com/html-and-css/flexbox/
+.albums_containter {
+  display: flex;
+  align-items: top;
+}
+
+.album_div{
+  display: inline-flex;
+  width: 200px;
+}
+
+//https://stackoverflow.com/questions/8184958/add-space-between-html-elements-only-using-css
+.album_div + .album_div{
+  margin-left: 15px;
+}
+
 .album_info_first_line{
 
 }
@@ -204,12 +235,32 @@ input{
   display: table;
 }
 
+/* figures */
+//figure {
+//  display:table;
+//}
+figure figcaption {
+  text-align: center;
+}
+//figure img {
+//  display:table-cell;
+//  float: left;
+//}
 
 /* ul margin top */
 
 ul {
   margin-top: 15px;
 }
+
+
+
+
+/*container */
+
+//.container {
+//  display: flex;
+//}
 
 /* centered lists
 
