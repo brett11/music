@@ -1,7 +1,7 @@
 <div class="col album_div">
   <div>
     <figure style="float: top">
-        <%= image_tag album.album_cover.url(:square) %>
+        <%= link_to(image_tag(album.album_cover.url(:square)), album_path(album)) %>
         <figcaption>
           <%= link_to linkAlbumGenerator(album), album_path(album) %>
         </figcaption>

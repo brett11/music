@@ -1,7 +1,7 @@
 <div class="col artist_div">
   <div>
     <figure>
-      <%= image_tag artist.avatar.url(:square) %>
+      <%= link_to(image_tag(artist.avatar.url(:square)), artist_path(artist)) %>
       <figcaption>
         <%= link_to artist.name_stage, artist_path(artist) %>
       </figcaption>
