@@ -152,13 +152,14 @@ input{
 
 .artist_div{
   display: inline-flex;
-  width: 200px;
-  margin: auto;
+  justify-content: center;
+  //width: 100%;
+  //margin: auto;
 }
 
-.artist_div + .artist_div{
-  margin-left: 15px;
-}
+//.artist_div + .artist_div{
+//  margin-left: 15px;
+//}
 
 #artist_name{
   font-size: 2em;
@@ -196,15 +197,15 @@ input{
 .albums_container {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: start;
   flex-wrap: wrap;
 }
 
 .album_div{
   display: inline-flex;
-  width: 200px;
-  margin: auto;
+  justify-content: center;
 
+  //width: 200px;
 }
 
 //https://stackoverflow.com/questions/8184958/add-space-between-html-elements-only-using-css
@@ -243,11 +244,22 @@ input{
 }
 
 /* figures */
-//figure {
-//  display:table;
+figure {
+  max-width: 100%;
+}
+
+figure img {
+  display: flex;
+  max-width: 100%
+}
+//
+//figure figcaption {
+//  text-align: center;
+//
 //}
-figure figcaption {
-  text-align: center;
+//
+figcaption {
+  max-width: 200px;
 }
 //figure img {
 //  display:table-cell;
@@ -260,7 +272,9 @@ ul {
   margin-top: 15px;
 }
 
-
+.artists_albums{
+  display: flex;
+}
 
 
 /*container */
