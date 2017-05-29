@@ -169,8 +169,11 @@ input{
 
 }
 
-.artist_albums{
-
+.artists_albums{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 /* concerts */
@@ -271,11 +274,6 @@ figcaption {
 ul {
   margin-top: 15px;
 }
-
-.artists_albums{
-  display: flex;
-}
-
 
 /*container */
 
