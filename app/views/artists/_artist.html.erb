@@ -1,11 +1,13 @@
-<div class="col artist_div">
-  <div>
-    <figure>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-2 artist_div">
+  <div class="row">
+    <div class="col justify-content-center">
+      <figure>
       <%= link_to(image_tag(artist.avatar.url(:square)), artist_path(artist)) %>
       <figcaption>
         <%= link_to artist.name_stage, artist_path(artist) %>
       </figcaption>
     </figure>
-  </div>
+    </div><!--col-->
+  </div><!--row-->
   <br>
-</div>
+</div><!--col-->

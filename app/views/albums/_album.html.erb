@@ -1,10 +1,13 @@
-<div class="col album_div">
-  <div>
-    <figure style="float: top">
+<div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 album_div">
+  <div class="row">
+    <div class="col justify-content-center">
+      <figure>
         <%= link_to(image_tag(album.album_cover.url(:square)), album_path(album)) %>
         <figcaption>
           <%= link_to linkAlbumGenerator(album), album_path(album) %>
         </figcaption>
       </figure>
-  </div>
-</div>
+    </div><!--col-->
+  </div><!--row-->
+  <br>
+</div><!--col-->
