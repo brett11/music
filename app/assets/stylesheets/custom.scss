@@ -52,11 +52,18 @@ header {
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
+
   /* & is reference to parent logo. this is nested writing per 5.2.2 of Ruby on Rails Tutorial */
   &:hover {
     color: #fff;
     text-decoration: none;
   }
+}
+
+// https://stackoverflow.com/questions/19844561/bootstrap-3-vertically-center-navigation-links-when-logo-increasing-the-height
+//can't flexbox this I don't think because by default from the bootstrap sass gem, it's a float
+.navbar-default a {
+  line-height: 35px;
 }
 
 /* typography */
@@ -144,10 +151,10 @@ input{
 }
 
 // https://internetingishard.com/html-and-css/flexbox/
-.artists_containter {
+.artists_container {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: start;
   flex-wrap: wrap;
 }
 
@@ -173,7 +180,7 @@ input{
 .artists_albums{
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: start;
   flex-wrap: wrap;
 }
 
@@ -275,6 +282,31 @@ figcaption {
 ul {
   margin-top: 15px;
 }
+
+.pagination_list{
+  margin-bottom: 15px;
+}
+
+aside{
+  display: flex;
+  justify-content: center;
+}
+
+h3{
+  text-align: center;
+}
+
+//.concerts{
+//  margin-bottom: 60px;
+//}
+
+//.concert_list_item{
+//  justify-content: center;
+//}
+
+//#navbar_container{
+//  align-content: center;
+//}
 
 /*container */
 
