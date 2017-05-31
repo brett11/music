@@ -1,20 +1,22 @@
 <%= provide(:title, @artist.name_stage) %>
 <div class="row">
-  <aside class = "col-md-4">
+  <aside class = "col-xs-12 col-sm-12 col-md-3">
     <section class="artist_info">
 
       <%= image_tag @artist.avatar.url(:medium) %>
 
+      <div id="artist_name_and_edit" class="row">
+        <h1><%= @artist.name_stage %></h1>
+        <% if logged_in? && current_user.admin? %>
+            <p><%= link_to "Edit Artist Info", edit_artist_path(@artist) %></p>
+            <br>
+        <% end %>
+      </div>
+
     </section>
   </aside>
-  <div class="col-md-8">
-    <div id="artist_name_and_edit" class="row">
-      <h1><%= @artist.name_stage %></h1>
-      <% if logged_in? && current_user.admin? %>
-          <p><%= link_to "Edit Artist Info", edit_artist_path(@artist) %></p>
-          <br>
-      <% end %>
-    </div>
+  <div class="col-md-9">
+
 
     <div class="row">
       <div class="col" style="padding: 15px;">
