@@ -296,6 +296,18 @@ h3{
   text-align: center;
 }
 
+// https://stackoverflow.com/questions/18777235/center-content-in-responsive-bootstrap-navbar
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+}
+
+
 //.concerts{
 //  margin-bottom: 60px;
 //}
