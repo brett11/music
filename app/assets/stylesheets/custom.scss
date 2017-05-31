@@ -297,18 +297,22 @@ h3{
 }
 
 // https://stackoverflow.com/questions/18777235/center-content-in-responsive-bootstrap-navbar
-.navbar .navbar-nav {
+.navbar .navbar-nav .dropdown-menu {
   display: inline-block;
   float: none;
   vertical-align: top;
 }
 
-.navbar .navbar-collapse {
+.navbar .navbar-collapse .dropdown-menu {
   text-align: center;
 }
 
 #menuContent{
   font-size: 1.2em;
+}
+
+.dropdown-menu{
+  font-size: 1.0em;
 }
 
 
