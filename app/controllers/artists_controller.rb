@@ -5,11 +5,12 @@ class ArtistsController < ApplicationController
 
   def show
     @artist_concerts = @artist.concerts.where('dateandtime > ?', DateTime.now).order("dateandtime ASC").paginate(page: params[:page])
+
   end
 
   def index
     @artists=Artist.paginate(page: params[:page])
-    store_location
+
   end
 
   def edit

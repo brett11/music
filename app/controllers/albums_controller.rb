@@ -4,12 +4,11 @@ class AlbumsController < ApplicationController
   before_action :admin_user, only: [:edit, :update, :destroy]
 
   def show
-
   end
 
   def index
     @albums = Album.paginate(page: params[:page]).order("release_date DESC")
-    store_location
+
   end
 
   def edit
