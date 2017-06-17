@@ -1,13 +1,20 @@
 <% provide(:title, 'All users') %>
 
+<div class="add_artist" style="margin-left: 60px;">
+  <%= button_to "Add new artist", new_artist_path, method: 'get', id: "new_artist_link", remote: true %>
+</div>
+
 <h1>All artists</h1>
-<div class ="row artists_container pagination_list">
+<div class ="row artists_container pagination_list" id="all_artists">
 
   <!--Here Rails infers that @artists is a list of artist objects; moreover, when called with a collection of artists,
   Rails automatically iterates through them and renders each one with the _artist.html.erb partial (inferring
   the name of the partial from the name of the class). Bsically as if the code ahs a artist.each do loop -->
   <%= render @artists %>
 
-</div>
-<%= will_paginate %>
 
+  <%= will_paginate %>
+
+  <% # http://railscasts.com/episodes/136-jquery-ajax-revised?autoplay=true %>
+
+</div>

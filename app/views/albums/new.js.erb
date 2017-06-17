@@ -1,0 +1,6 @@
+$('#new_album_link').hide().after('<%= j render("form_ajax") %>')
+
+$('body').on('click', '#close_form_button', function () {
+    $('#new_album').remove();
+    $('#new_album_link').show();
+});

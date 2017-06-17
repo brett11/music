@@ -21,6 +21,6 @@ RSpec.describe "SignUp" do
     expect(last_email).to deliver_to(user_params[:email])
     expect(last_email).to have_subject(/Account activation/)
     expect(last_email).to have_body_text(/Hi #{user_params[:name_first]}/)
-    binding.pry
+    #binding.pry
   end
 end

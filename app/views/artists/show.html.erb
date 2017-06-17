@@ -23,6 +23,11 @@
         <div class="row">
           <h3>Albums</h3>
         </div>
+
+        <div class="add_album" style="margin-left: 60px;">
+          <%= button_to "Add new album", new_album_path, method: 'get', id: "new_album_link", remote: true %>
+        </div>
+
         <div class="artists_albums row" style="padding: 15px;">
           <%= render(partial: 'albums/album', collection: @artist.albums.order("release_date DESC")) %>
         </div>
