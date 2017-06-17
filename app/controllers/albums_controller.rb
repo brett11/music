@@ -1,4 +1,4 @@
-require 'pry'
+# require 'pry'
 
 class AlbumsController < ApplicationController
   before_action :set_album, only:[:show, :edit, :update, :destroy]
