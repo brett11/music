@@ -2,6 +2,9 @@ require_relative 'boot'
 
 require 'rails/all'
 
+#https://stackoverflow.com/questions/24319353/ruby-form-using-ajax-with-remote-true-gives-actioncontrollerinvalidauthentici
+#config.action_view.embed_authenticity_token_in_remote_forms = true
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

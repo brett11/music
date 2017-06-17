@@ -3,14 +3,32 @@ class ArtistsController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
 
-  def show
-    @artist_concerts = @artist.concerts.where('dateandtime > ?', DateTime.now).order("dateandtime ASC").paginate(page: params[:page])
-
-  end
-
   def index
     @artists=Artist.paginate(page: params[:page])
+  end
 
+  def show
+    @artist_concerts = @artist.concerts.where('dateandtime > ?', DateTime.now).order("dateandtime ASC").paginate(page: params[:page])
+  end
+
+  def new
+    @artist = Artist.new
+  end
+
+  def create
+    @artist = Artist.new(artist_params)
+    respond_to do |format|
+      format.html do
+        if @artist.save
+          flash[:success] = "Artist successfully created."
+          redirect_to artists_url
+        else
+          flash[:info] = "Please try again."
+          render 'new'
+        end
+      end
+      format.js
+    end
   end
 
   def edit

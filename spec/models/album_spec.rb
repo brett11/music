@@ -1,7 +1,9 @@
 require 'rails_helper'
+require 'pry'
 
 RSpec.describe Album, type: :model do
   let(:album) { build(:album) }
+
 
   it "is valid with valid attributes" do
     expect(album).to be_valid
@@ -28,5 +30,14 @@ RSpec.describe Album, type: :model do
     artist_array = []
     album = build(:album, artists: artist_array)
     expect(album).to_not be_valid
+  end
+
+  it "is valid with a newly created artist" do
+    artist2 = create(:artist, name_stage: "Kevin Morby")
+    album.artists.clear
+    album.artists << artist2
+    expect(album).to be_valid
+    expect(album.errors).to be_empty
+    #binding.pry
   end
 end

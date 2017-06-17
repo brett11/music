@@ -1,0 +1,6 @@
+$('#new_artist_link').hide().after('<%= j render("form_ajax") %>')
+
+$('body').on('click', '#close_form_button', function () {
+    $('#new_artist').remove();
+    $('#new_artist_link').show();
+});

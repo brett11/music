@@ -22,6 +22,7 @@ gem 'aws-sdk',              '~> 2.3'
 gem "figaro"
 gem 'client_side_validations', '~> 9.3'
 gem 'sendgrid', '~> 1.2', '>= 1.2.4'
+gem 'remotipart', '~> 1.3', '>= 1.3.1'
 
 group :development, :test do
   gem 'sqlite3', '1.3.12'
@@ -29,6 +30,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6'
   gem 'email_spec', '~> 2.1', '>= 2.1.1'
   gem 'pry-rails', '~> 0.3.6'
+  gem 'pry-byebug', '~> 3.4', '>= 3.4.2'
 end
 
 group :development do
