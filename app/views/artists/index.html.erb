@@ -1,8 +1,8 @@
 <% provide(:title, 'All users') %>
 
-<div class="add_artist" style="margin-left: 60px;">
-  <%= button_to "Add new artist", new_artist_path, method: 'get', id: "new_artist_link", remote: true %>
-</div>
+    <div class="add_artist">
+      <%= button_to "Add new artist", new_artist_path, method: 'get', id: "new_artist_link", remote: true %>
+    </div>
 
 <h1>All artists</h1>
 <div class ="row artists_container pagination_list" id="all_artists">
