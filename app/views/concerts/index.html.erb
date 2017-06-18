@@ -1,5 +1,10 @@
 <% provide(:title, 'Upcoming Concerts') %>
-<div class="row pagination_list">
+
+<div class="add_album">
+  <%= button_to "Add new concert", new_concert_path, method: 'get', id: "new_concert_link", remote: true %>
+</div>
+
+<div class="row pagination_list" id="upcoming_concerts">
   <h1>Upcoming Concerts</h1>
 
 

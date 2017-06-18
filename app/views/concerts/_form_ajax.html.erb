@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+  <%= form_for @concert,  validate: true, html: { multipart: true }, remote: true, authenticity_token: true do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <fieldset>
+        <legend>Add new concert:</legend>
+        <% #:name_first, :name_last, :name_stage, :avatar %>
+
+        <div class="field">
+          <%= f.label 'Artist(s):' %>
+          <%# https://stackoverflow.com/questions/8907867/can-someone-explain-collection-select-to-me-in-clear-simple-terms %>
+          <%# With regards to using form_for, again in very simple terms, for all tags that come within the form_for, eg. f.text_field, you dont need to supply the first (object) parameter. This is taken from the form_for syntax. %>
+          <%= f.collection_select(:artist_ids, Artist.all, :id, :name_stage, {prompt: false, include_hidden: false}, { multiple: true }) %>
+        </div>
+
+        <div class="field">
+          <%= f.label :venue_id, 'Venue:' %>
+          <%= f.collection_select(:venue_id, Venue.all, :id, :name, {prompt: false, include_hidden: false}, { multiple: false }) %>
+        </div>
+
+        <div class="field">
+          <%= f.label :dateandtime, 'Date and time:' %>
+          <%= f.datetime_select :dateandtime %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit buttonTitle(yield(:buttonTitle)), class: "btn btn-primary" %>
+        </div>
+
+        <button id="close_form_button" type="button" class="btn btn-warning" style="width:100%;">Close Form</button>
+
+      </fieldset>
+  <% end %>
+
+  </div>
+</div>

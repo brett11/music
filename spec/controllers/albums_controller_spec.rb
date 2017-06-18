@@ -3,6 +3,7 @@ require 'pry'
 
 RSpec.describe AlbumsController, type: :controller do
   describe "POST create" do
+    # TODO refactor --below examples contain duplication
     it "redirects to albums_url upon successful album creation and shows flash" do
       new_album_params = FactoryGirl.attributes_for(:album)
       #because of how factories work, the "new_album_params" have an artists attribute. Need to delete and replace
