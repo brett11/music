@@ -35,6 +35,11 @@
     </div>
     <div class="artist_upcoming_shows row">
       <h3>Upcoming shows</h3>
+
+      <div class="add_album">
+        <%= button_to "Add new concert", new_concert_path, method: 'get', id: "new_concert_link", remote: true %>
+      </div>
+
       <%= render 'shared/artist_concerts' %>
     </div>
 
