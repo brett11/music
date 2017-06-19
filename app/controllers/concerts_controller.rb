@@ -16,7 +16,8 @@ class ConcertsController < ApplicationController
   def create
     # album params artist returns artist id only per pry byebug
     #binding.pry
-    @concert = Concert.new(concert_params_dateandtime_only)
+    #rails 4 testing pg 134 --it is best to create method that calls third party method, if you are planning to stub in a test, as we are in the create failure test
+    @concert = Concert.new_from_controller(concert_params_dateandtime_only)
     @concert.venue = Venue.find(concert_params[:venue_id])
     @artist_ids = concert_params[:artist_ids]
     @artist_ids.each do |artist_id|
