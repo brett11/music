@@ -4,7 +4,7 @@ class ArtistsController < ApplicationController
   before_action :admin_user, only: [:edit, :update, :destroy]
 
   def index
-    @artists=Artist.paginate(page: params[:page])
+    @artists=Artist.order("id ASC").paginate(page: params[:page])
   end
 
   def show
