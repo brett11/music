@@ -25,7 +25,7 @@
         </div>
 
         <div class="add_album">
-          <%= button_to "Add new album", new_album_path, method: 'get', id: "new_album_link", remote: true %>
+          <%= button_to "Add new album", new_album_path, method: 'get', id: "new_album_link", params: { artist_id: @artist.id}, remote: true %>
         </div>
 
         <div class="artists_albums row" style="padding: 15px;">
@@ -37,7 +37,8 @@
       <h3>Upcoming shows</h3>
 
       <div class="add_album">
-        <%= button_to "Add new concert", new_concert_path, method: 'get', id: "new_concert_link", remote: true %>
+        <% # https://stackoverflow.com/questions/12360148/rails-link-to-or-button-to-post-request-with-parameters -- rails 5+ %>
+        <%= button_to "Add new concert", new_concert_path, method: 'get', id: "new_concert_link", params: { artist_id: @artist.id}, remote: true %>
       </div>
 
       <%= render 'shared/artist_concerts' %>

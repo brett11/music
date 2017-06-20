@@ -1,2 +1,23 @@
-<h1>Venues#index</h1>
-<p>Find me in app/views/venues/index.html.erb</p>
+<% provide(:title, 'Upcoming Concerts') %>
+
+<div class="add_venue">
+  <%= button_to "Add new venue", new_venue_path, method: 'get', id: "new_venue_link", remote: true %>
+</div>
+
+<div class="row pagination_list" id="all_venues">
+  <h1>Venues</h1>
+
+
+  <%= will_paginate %>
+
+  <!--Here Rails infers that @users is a list of User objects; moreover, when called with a collection of users,
+  Rails automatically iterates through them and renders each one with the _user.html.erb partial (inferring
+  the name of the partial from the name of the class). Bsically as if the code ahs a user.each do loop -->
+  <ul class="venues">
+    <%= render @venues %>
+  </ul>
+</div>
+<div class="row">
+  <%= will_paginate %>
+</div>
+
