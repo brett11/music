@@ -30,6 +30,12 @@ module ApplicationHelper
         linkTitle += full_city_name(concert.venue.city)
     end
 
+    def venueLinkTitleGenerator(venue)
+        linkTitle = ""
+        linkTitle += venue.name + ": "
+        linkTitle += venue.city.full_name
+    end
+
     def linkTitleGeneratorLessName(concert)
       linkTitle = ""
       linkTitle += concert.dateandtime.strftime("%m/%d/%Y") + ": "

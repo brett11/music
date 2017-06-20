@@ -1,2 +1,25 @@
-<h1>Venues#show</h1>
-<p>Find me in app/views/venues/show.html.erb</p>
+<%= provide(:title, @venue.name ) %>
+<div class="row">
+  <aside class = "col-md-4">
+    <section class="venue_info_picture">
+
+    </section>
+  </aside>
+  <div class="col-md-8">
+
+    <div class="venue_info_first_line">
+      <%= @venue.name %>
+    </div>
+
+    <div class="venue_info_second_line">
+      <%= @venue.city.full_name %>
+    </div>
+
+    <div class="add_concert">
+      <%= button_to "Add new concert", new_concert_path, method: 'get', id: "new_concert_link", params: { venue_id: @venue.id}, remote: true %>
+    </div>
+
+    <br/>
+    <p><%= link_to "<-- Back", :back %></p>
+  </div>
+</div>

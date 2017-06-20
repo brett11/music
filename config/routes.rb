@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'venues/show'
-
-  get 'venues/index'
-
   get 'cities/show'
 
   get 'cities/index'
@@ -25,8 +21,9 @@ Rails.application.routes.draw do
   resources :artists
   resources :concerts
   resources :albums
-
   resources :users
+  resources :venues, only: [:new, :create, :edit, :update, :index, :show]
+
   get  '/signup', to: 'users#new'
   get  '/login', to: 'sessions#new'
   post  '/login', to: 'sessions#create'

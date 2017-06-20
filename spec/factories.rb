@@ -20,7 +20,7 @@ FactoryGirl.define do
 
   factory :city do
     name "New York City"
-    country
+    country { FactoryGirl.create(:country) }
   end
 
   factory :concert do
@@ -45,7 +45,7 @@ FactoryGirl.define do
 
   factory :venue do
     name "The Venue"
-    city
+    city { FactoryGirl.create(:city) }
   end
 
   factory :paperclip_attachment_album do
