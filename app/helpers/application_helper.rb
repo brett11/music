@@ -57,5 +57,12 @@ module ApplicationHelper
         end
     end
 
+    def sortable(current_route, column, title = nil)
+        title ||= column.titleize
+        css_class = column == sort_column ? "current #{sort_direction}" : nil
+        direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+        button_to title, "#{current_route}", { method: :get, params: {sort: column, direction: direction}, class: css_class}
+    end
+
 
 end
