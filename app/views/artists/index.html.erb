@@ -1,10 +1,22 @@
-<% provide(:title, 'All users') %>
+<% provide(:title, 'All artists') %>
 
     <div class="add_artist">
       <%= button_to "Add new artist", new_artist_path, method: 'get', id: "new_artist_link", remote: true %>
     </div>
 
 <h1>All artists</h1>
+
+<div class="row">
+  <div class="col-12 sort_alphabetically">
+    <%= sortable(request.url, "name_stage", "Sort alphabetically") %>
+  </div>
+  <div class="col-12 sort_by_id">
+    <% #https://stackoverflow.com/questions/12360148/rails-link-to-or-button-to-post-request-with-parameters %>
+    <%# button_to "Sort by ID", "/artists", method: :get, params: { sort: "id", direction: "asc" } %>
+    <%= sortable(request.url, "id", "Sort by ID") %>
+  </div>
+</div>
+
 <div class ="row artists_container pagination_list" id="all_artists">
 
   <!--Here Rails infers that @artists is a list of artist objects; moreover, when called with a collection of artists,

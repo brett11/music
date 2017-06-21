@@ -5,8 +5,11 @@ class AlbumsController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
   before_action :admin_user, only: [:edit, :update, :destroy]
 
+  #http://railscasts.com/episodes/228-sortable-table-columns?view=comments
+  helper_method :sort_column, :sort_direction
+
   def index
-    @albums = Album.paginate(page: params[:page]).order("release_date DESC")
+    @albums = Album.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
 
   end
 
@@ -64,8 +67,20 @@ class AlbumsController < ApplicationController
     params.require(:album).permit(:name, :release_date, :album_cover, artist_ids: [] )
   end
 
+  def sort_params
+    params.permit(:sort, :direction)
+  end
+
   def album_params_less_artist
     params.require(:album).permit(:name, :release_date, :album_cover)
+  end
+
+  def sort_column
+    Album.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(sort_params[:direction]) ? sort_params[:direction] : "asc"
   end
 
 end
