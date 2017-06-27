@@ -23,18 +23,14 @@
 // });
 
 $(document).on('turbolinks:load', function() {
-    var url = "http://localhost:3000/artists"
-    $(".button_to").on("submit", function () {
+    // https://stackoverflow.com/questions/22281918/rails-turbolinks-break-submit-remote-form
+    $(document).on("submit","#sort_alphabetically form",function () {
         $.ajax({
-            url: url,
+            url: this.action ,
             cache: true,
             type: 'GET',
-            data: { "sort": "name_stage",
-                    "sort_table": "Artist",
-                    "direction": "asc",
-                    "page": 1
-            },
-            dataType: 'html',
+            data: $(this).serialize(),
+            dataType: 'script',
             success: function(data, success) {
                 console.log("success", arguments);
                 console.log("data", typeof data, data); // Verify the response
@@ -50,3 +46,25 @@ $(document).on('turbolinks:load', function() {
     });
 });
 
+$(document).on('turbolinks:load', function() {
+    $(document).on("submit", "#sort_by_id form", function () {
+        $.ajax({
+            url: this.action ,
+            cache: true,
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'script',
+            success: function(data, success) {
+                console.log("success", arguments);
+                console.log("data", typeof data, data); // Verify the response
+            },
+            error: function(jqxhr, textStatus, error) {
+                console.log("error", arguments);
+            },
+            complete: function(jqxhr, textStatus) {
+                console.log("complete", arguments);
+            }
+        });
+        return false;
+    });
+});

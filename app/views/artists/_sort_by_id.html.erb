@@ -1,0 +1,3 @@
+<% #https://stackoverflow.com/questions/12360148/rails-link-to-or-button-to-post-request-with-parameters %>
+<%# button_to "Sort by ID", "/artists", method: :get, params: { sort: "id", direction: "asc" } %>
+<%= sortable(request.url, "id", "Artist", "Sort by ID") %>
