@@ -17,3 +17,36 @@
 //= require turbolinks
 //= require rails.validations
 //= require_tree .
+
+// $.ajaxSetup({
+//     cache: true
+// });
+
+$(document).on('turbolinks:load', function() {
+    var url = "http://localhost:3000/artists"
+    $(".button_to").on("submit", function () {
+        $.ajax({
+            url: url,
+            cache: true,
+            type: 'GET',
+            data: { "sort": "name_stage",
+                    "sort_table": "Artist",
+                    "direction": "asc",
+                    "page": 1
+            },
+            dataType: 'html',
+            success: function(data, success) {
+                console.log("success", arguments);
+                console.log("data", typeof data, data); // Verify the response
+            },
+            error: function(jqxhr, textStatus, error) {
+                console.log("error", arguments);
+            },
+            complete: function(jqxhr, textStatus) {
+                console.log("complete", arguments);
+            }
+        });
+        return false;
+    });
+});
+
