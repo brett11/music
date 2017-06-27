@@ -11,4 +11,13 @@ class Artist < ApplicationRecord
   validates :name_first, length: { maximum: 45 }
   validates :name_last, length: { maximum: 45 }
   validates :name_stage, presence: true, length: { maximum: 45 }
+
+  def self.search(entry)
+    if entry
+      self.where('name_stage LIKE ?', "%#{entry}%")
+    else
+      # https://stackoverflow.com/questions/18198963/with-rails-4-model-scoped-is-deprecated-but-model-all-cant-replace-it
+      self.where(nil)
+    end
+  end
 end

@@ -7,8 +7,14 @@ class ArtistsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   #http://railscasts.com/episodes/228-sortable-table-columns?view=comments
+  #http://railscasts.com/episodes/240-search-sort-paginate-with-ajax?autoplay=true
   def index
-    @artists=Artist.order(sort_column + " " + sort_direction).paginate(page: params[:page])
+    # binding.pry
+    @artists=Artist.search(sort_params[:search]).order(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end
   end
 
   def show
@@ -55,15 +61,21 @@ class ArtistsController < ApplicationController
   end
 
   def sort_params
-    params.permit(:sort, :direction)
+    params.permit(:sort_table, :sort, :direction, :page, :search, :utf8)
   end
 
   def set_artist
     @artist = Artist.find(params[:id])
   end
 
-  def sort_column
-    Artist.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+  def sort_column(sort_table)
+    if sort_table == "Artist"
+      Artist.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+    end
+  end
+
+  def sort_table
+    sort_params[:sort_table] ||= "Artist"
   end
 
   def sort_direction

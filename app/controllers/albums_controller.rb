@@ -9,8 +9,12 @@ class AlbumsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @albums = Album.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
-
+    if sort_params[:sort_table] == "Artist"
+      @albums = sort_by_artist
+    else
+    # binding.pry
+    @albums = sort
+    end
   end
 
   def show
@@ -68,19 +72,45 @@ class AlbumsController < ApplicationController
   end
 
   def sort_params
-    params.permit(:sort, :direction)
+    params.permit(:sort_table, :sort, :direction, :page)
   end
 
   def album_params_less_artist
     params.require(:album).permit(:name, :release_date, :album_cover)
   end
 
-  def sort_column
-    Album.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+  def sort_column(sort_table)
+    if sort_table == "Album"
+      Album.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+    elsif sort_table == "Artist"
+      Artist.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+    end
+  end
+
+  def sort_table
+    sort_params[:sort_table] ||= "Album"
   end
 
   def sort_direction
     %w[asc desc].include?(sort_params[:direction]) ? sort_params[:direction] : "asc"
   end
 
+  def sort
+    Album.paginate(page: sort_params[:page]).order(sort_column(sort_table) + " " + sort_direction)
+  end
+
+  #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
+  def sort_by_artist
+    Album.includes(:artists).order("artists." + sort_column(sort_table) + " #{sort_direction}")
+      .paginate( page: params[:page] )
+  end
+
+  #added by BF
+  # def sort_column_table
+  #   if sort_params[:sort] == "artist"
+  #     "Artist"
+  #   else
+  #     "Album"
+  #   end
+  # end
 end
