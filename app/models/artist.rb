@@ -14,7 +14,7 @@ class Artist < ApplicationRecord
 
   def self.search(entry)
     if entry
-      self.where('name_stage LIKE ?', "%#{entry}%")
+      self.where('name_stage ILIKE ?', "%#{entry}%")
     else
       # https://stackoverflow.com/questions/18198963/with-rails-4-model-scoped-is-deprecated-but-model-all-cant-replace-it
       self.where(nil)
