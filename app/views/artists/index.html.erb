@@ -10,8 +10,7 @@
 
 <div class="row" id="artists_search_wrapper_div">
   <%= form_tag artists_path, :method => 'get', :id => "artists_search" do %>
-      <%= hidden_field_tag :direction, params[:direction]%>
-      <%= hidden_field_tag :sort, params[:sort]%>
+      <%= render 'search_hidden_fields' %>
       <div class="col-12">
       <div class="row">
       <div class="col-sm-5 col-sm-offset-2" style="display: flex; align-items: end;" >
@@ -25,25 +24,9 @@
   <% end %>
 </div>
 
-<div class="row">
-  <div class="col-12" id="sort_alphabetically">
-    <%= render 'sort_alphabetically' %>
-  </div>
-  <div class="col-12" id="sort_by_id">
-    <%= render 'sort_by_id' %>
-  </div>
+<div id="all_artists_with_sort">
+  <%= render partial: 'artists' %>
 </div>
 
-<div class ="row artists_container pagination_list" id="all_artists">
+<%= will_paginate %>
 
-  <!--Here Rails infers that @artists is a list of artist objects; moreover, when called with a collection of artists,
-  Rails automatically iterates through them and renders each one with the _artist.html.erb partial (inferring
-  the name of the partial from the name of the class). Bsically as if the code ahs a artist.each do loop -->
-  <%= render @artists %>
-
-
-  <%= will_paginate %>
-
-  <% # http://railscasts.com/episodes/136-jquery-ajax-revised?autoplay=true %>
-
-</div>
