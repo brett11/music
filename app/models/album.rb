@@ -10,4 +10,13 @@ class Album < ApplicationRecord
   validates :name, presence: true, length: { maximum: 100 }
   validates :release_date, presence: true
   validates :artists, presence: true
+
+  def self.search(entry)
+    if entry
+      self.where('name ILIKE ?', "%#{entry}%")
+    else
+      # https://stackoverflow.com/questions/18198963/with-rails-4-model-scoped-is-deprecated-but-model-all-cant-replace-it
+      self.where(nil)
+    end
+  end
 end

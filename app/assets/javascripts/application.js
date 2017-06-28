@@ -24,7 +24,8 @@
 
 $(document).on('turbolinks:load', function() {
     // https://stackoverflow.com/questions/22281918/rails-turbolinks-break-submit-remote-form
-    $(document).on("submit","#sort_alphabetically form",function () {
+    // artists index sort alphabetically
+    $(document).on("submit","#sort_alphabetically form", function () {
         $.ajax({
             url: this.action ,
             cache: true,
@@ -45,6 +46,7 @@ $(document).on('turbolinks:load', function() {
         return false;
     });
 
+    // artists index sort by id
     $(document).on("submit", "#sort_by_id form", function () {
         $.ajax({
             url: this.action ,
@@ -66,9 +68,84 @@ $(document).on('turbolinks:load', function() {
         return false;
     });
 
+    // artists search
     $("#artists_search input").keyup(function() {
+        // debugger;
         $.get($("#artists_search").attr("action"), $("#artists_search").serialize(), null, "script");
         return false;
     });
+
+    // albums index sort by release date
+    $(document).on("submit","#sort_release_date form", function () {
+        $.ajax({
+            url: this.action ,
+            cache: true,
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'script',
+            success: function(data, success) {
+                console.log("success", arguments);
+                console.log("data", typeof data, data); // Verify the response
+            },
+            error: function(jqxhr, textStatus, error) {
+                console.log("error", arguments);
+            },
+            complete: function(jqxhr, textStatus) {
+                console.log("complete", arguments);
+            }
+        });
+        return false;
+    });
+
+    // albums index sort alphabetically
+    $(document).on("submit","#sort_alphabetically_album form", function () {
+        $.ajax({
+            url: this.action ,
+            cache: true,
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'script',
+            success: function(data, success) {
+                console.log("success", arguments);
+                console.log("data", typeof data, data); // Verify the response
+            },
+            error: function(jqxhr, textStatus, error) {
+                console.log("error", arguments);
+            },
+            complete: function(jqxhr, textStatus) {
+                console.log("complete", arguments);
+            }
+        });
+        return false;
+    });
+
+    // albums index sort alphabetically
+    $(document).on("submit","#sort_alphabetically_by_artist form", function () {
+        $.ajax({
+            url: this.action ,
+            cache: true,
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'script',
+            success: function(data, success) {
+                console.log("success", arguments);
+                console.log("data", typeof data, data); // Verify the response
+            },
+            error: function(jqxhr, textStatus, error) {
+                console.log("error", arguments);
+            },
+            complete: function(jqxhr, textStatus) {
+                console.log("complete", arguments);
+            }
+        });
+        return false;
+    });
+
+    $(".pagination a").on("click", function() {
+        $.getScript(this.href);
+        return false;
+    });
+
+    //$("#sort_alphabetically_album form").css("border", "3px solid red");
 
 });
