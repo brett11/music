@@ -7,14 +7,32 @@
 <h1>All albums</h1>
 
 <div class="row">
-  <div class="col-12 sort_by_id">
-    <%= sortable(request.url, "release_date", "Album", "Sort by release date") %>
+  <%= hidden_field_tag :direction, params[:direction]%>
+  <%= hidden_field_tag :sort, params[:sort]%>
+
+  <%= form_tag albums_path, :method => 'get', :id => "albums_search" do %>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-sm-5 col-sm-offset-2" style="display: flex; align-items: end;" >
+            <%= text_field_tag :search, params[:search] %>
+          </div>
+          <div class="col-sm-3">
+            <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="col-12" id="sort_release_date">
+    <%= render 'sort_release_date' %>
   </div>
-  <div class="col-12 sort_alphabetically">
-    <%= sortable(request.url, "name", "Album", "Sort alphabetically (albums)") %>
+  <div class="col-12" id="sort_alphabetically_album">
+    <%= render 'sort_alphabetically_album' %>
   </div>
-  <div class="col-12 sort_alphabetically_by_artist">
-    <%= sortable(request.url, "name_stage", "Artist", "Sort alphabetically (artist)") %>
+  <div class="col-12" id="sort_alphabetically_by_artist">
+    <%= render 'sort_alphabetically_by_artist' %>
   </div>
 </div>
 

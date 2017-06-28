@@ -9,6 +9,7 @@ class AlbumsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
+    # sometimes sort albums based on artist
     if sort_params[:sort_table] == "Artist"
       @albums = sort_by_artist
     else
@@ -72,7 +73,7 @@ class AlbumsController < ApplicationController
   end
 
   def sort_params
-    params.permit(:sort_table, :sort, :direction, :page)
+    params.permit(:sort_table, :sort, :direction, :page, :search, :utf8)
   end
 
   def album_params_less_artist
@@ -96,12 +97,12 @@ class AlbumsController < ApplicationController
   end
 
   def sort
-    Album.paginate(page: sort_params[:page]).order(sort_column(sort_table) + " " + sort_direction)
+    Album.search(sort_params[:search]).order(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
   end
 
   #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
   def sort_by_artist
-    Album.includes(:artists).order("artists." + sort_column(sort_table) + " #{sort_direction}")
+    Album.search(sort_params[:search]).includes(:artists).order("artists." + sort_column(sort_table) + " #{sort_direction}")
       .paginate( page: params[:page] )
   end
 
