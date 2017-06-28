@@ -44,9 +44,7 @@ $(document).on('turbolinks:load', function() {
         });
         return false;
     });
-});
 
-$(document).on('turbolinks:load', function() {
     $(document).on("submit", "#sort_by_id form", function () {
         $.ajax({
             url: this.action ,
@@ -67,4 +65,10 @@ $(document).on('turbolinks:load', function() {
         });
         return false;
     });
+
+    $("#artists_search input").keyup(function() {
+        $.get($("#artists_search").attr("action"), $("#artists_search").serialize(), null, "script");
+        return false;
+    });
+
 });
