@@ -24,6 +24,7 @@ gem 'client_side_validations', '~> 9.3'
 gem 'sendgrid', '~> 1.2', '>= 1.2.4'
 gem 'remotipart', '~> 1.3', '>= 1.3.1'
 gem 'pg_search', '~> 1.0', '>= 1.0.5'
+gem 'underscore-rails', '~> 1.8', '>= 1.8.3'
 
 group :development, :test do
   gem 'sqlite3', '1.3.12'

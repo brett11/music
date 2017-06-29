@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.remotipart
+//= require underscore
 //= require bootstrap
 //= require turbolinks
 //= require rails.validations
@@ -76,7 +77,8 @@ $(document).on('turbolinks:load', function() {
     // });
 
     // artists search full ajax version
-    $(document).on("keyup","#artists_search input", function () {
+    // used debounce to reduce amount of ajax calls made while typing
+    $(document).on("keyup","#artists_search input", _.debounce(function () {
         $.ajax({
             url: $("#artists_search").attr("action"),
             cache: true,
@@ -95,10 +97,10 @@ $(document).on('turbolinks:load', function() {
             }
         });
         return false;
-    });
+    }, 200));
 
     // albums index sort by release date
-    $(document).on("submit","#sort_release_date form", function () {
+    $(document).on("submit","#sort_release_date form", _.debounce(function () {
         $.ajax({
             url: this.action ,
             cache: true,
@@ -117,7 +119,7 @@ $(document).on('turbolinks:load', function() {
             }
         });
         return false;
-    });
+    }, 200));
 
     // albums index sort alphabetically
     $(document).on("submit","#sort_alphabetically_album form", function () {
