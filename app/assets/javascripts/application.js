@@ -100,7 +100,7 @@ $(document).on('turbolinks:load', function() {
     }, 200));
 
     // albums index sort by release date
-    $(document).on("submit","#sort_release_date form", _.debounce(function () {
+    $(document).on("submit","#sort_release_date form", function () {
         $.ajax({
             url: this.action ,
             cache: true,
@@ -119,7 +119,7 @@ $(document).on('turbolinks:load', function() {
             }
         });
         return false;
-    }, 200));
+    });
 
     // albums index sort alphabetically
     $(document).on("submit","#sort_alphabetically_album form", function () {
@@ -172,7 +172,7 @@ $(document).on('turbolinks:load', function() {
     // });
 
     // albums search full ajax version
-    $(document).on("keyup","#albums_search input", function () {
+    $(document).on("keyup","#albums_search input", _.debounce(function () {
         $.ajax({
             url: $("#albums_search").attr("action") ,
             cache: true,
@@ -191,7 +191,7 @@ $(document).on('turbolinks:load', function() {
             }
         });
         return false;
-    });
+    }, 200));
 
     // $(".pagination a").on("click", function() {
     //     $.getScript(this.href);
