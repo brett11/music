@@ -12,9 +12,18 @@ class Artist < ApplicationRecord
   validates :name_last, length: { maximum: 45 }
   validates :name_stage, presence: true, length: { maximum: 45 }
 
+  # http://railscasts.com/episodes/343-full-text-search-in-postgresql?view=asciicast
+  include PgSearch
+  pg_search_scope :text_search, against: :name_stage,
+                  using: {tsearch: { prefix: true } },
+                  ignoring: :accents
+
+
   def self.search(entry)
-    if entry
-      self.where('name_stage ILIKE ?', "%#{entry}%")
+    if entry.present?
+      text_search(entry)
+      # superseded
+      # self.where('name_stage ILIKE ?', "%#{entry}%")
     else
       # https://stackoverflow.com/questions/18198963/with-rails-4-model-scoped-is-deprecated-but-model-all-cant-replace-it
       self.where(nil)

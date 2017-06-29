@@ -68,10 +68,32 @@ $(document).on('turbolinks:load', function() {
         return false;
     });
 
-    // artists search
-    $("#artists_search input").keyup(function() {
-        // debugger;
-        $.get($("#artists_search").attr("action"), $("#artists_search").serialize(), null, "script");
+    // artists search-- replaced with below because needed cache:true option so wouldn't get unpermitted parameter of "_"
+    // $("#artists_search input").keyup(function() {
+    //     // debugger;
+    //     $.get($("#artists_search").attr("action"), $("#artists_search").serialize(), null, "script");
+    //     return false;
+    // });
+
+    // artists search full ajax version
+    $(document).on("keyup","#artists_search input", function () {
+        $.ajax({
+            url: $("#artists_search").attr("action"),
+            cache: true,
+            type: 'GET',
+            data: $("#artists_search").serialize(),
+            dataType: 'script',
+            success: function(data, success) {
+                console.log("success", arguments);
+                console.log("data", typeof data, data); // Verify the response
+            },
+            error: function(jqxhr, textStatus, error) {
+                console.log("error", arguments);
+            },
+            complete: function(jqxhr, textStatus) {
+                console.log("complete", arguments);
+            }
+        });
         return false;
     });
 
@@ -141,9 +163,31 @@ $(document).on('turbolinks:load', function() {
         return false;
     });
 
-    // albums search
-    $("#albums_search input").keyup(function() {
-        $.get($("#albums_search").attr("action"), $("#albums_search").serialize(), null, "script");
+    // // albums search -- replaced with below because needed cache:true option so wouldn't get unpermitted parameter of "_"
+    // $("#albums_search input").keyup(function() {
+    //     $.get($("#albums_search").attr("action"), $("#albums_search").serialize(), null, "script");
+    //     return false;
+    // });
+
+    // albums search full ajax version
+    $(document).on("keyup","#albums_search input", function () {
+        $.ajax({
+            url: $("#albums_search").attr("action") ,
+            cache: true,
+            type: 'GET',
+            data: $("#albums_search").serialize(),
+            dataType: 'script',
+            success: function(data, success) {
+                console.log("success", arguments);
+                console.log("data", typeof data, data); // Verify the response
+            },
+            error: function(jqxhr, textStatus, error) {
+                console.log("error", arguments);
+            },
+            complete: function(jqxhr, textStatus) {
+                console.log("complete", arguments);
+            }
+        });
         return false;
     });
 
