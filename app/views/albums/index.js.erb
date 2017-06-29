@@ -1,7 +1,4 @@
-$("#all_albums").html("<%= j render @albums %>");
+$("#all_albums_with_sort").html("<%= j render partial: 'albums' %>");
 
-$('#sort_release_date').html("<%= j render 'sort_release_date' %>");
+$("#search_hidden_fields").html("<%= j render partial: 'search_hidden_fields' %>");
 
-$('#sort_alphabetically_album').html("<%= j render 'sort_alphabetically_album' %>");
-
-$('#sort_alphabetically_by_artist').html("<%= j render 'sort_alphabetically_by_artist' %>");

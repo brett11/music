@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-12" id="sort_release_date">
+    <%= sortable(request.url, "release_date", "Album", "Sort by release date") %>
+  </div>
+  <div class="col-12" id="sort_alphabetically_album">
+    <%= sortable(request.url, "name", "Album", "Sort alphabetically (albums)") %>
+  </div>
+  <div class="col-12" id="sort_alphabetically_by_artist">
+    <%= sortable(request.url, "name_stage", "Artist", "Sort alphabetically (artist)") %>
+  </div>
+</div>
+
+<div class ="row albums_container pagination_list" id="all_albums">
+
+  <!--Here Rails infers that @albums is a list of album objects; moreover, when called with a collection of albums,
+  Rails automatically iterates through them and renders each one with the _album.html.erb partial (inferring
+  the name of the partial from the name of the class). Basically as if the code has a album.each do loop -->
+  <%= render @albums %>
+
+</div>

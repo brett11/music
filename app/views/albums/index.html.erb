@@ -7,10 +7,8 @@
 <h1>All albums</h1>
 
 <div class="row">
-  <%= hidden_field_tag :direction, params[:direction]%>
-  <%= hidden_field_tag :sort, params[:sort]%>
-
   <%= form_tag albums_path, :method => 'get', :id => "albums_search" do %>
+      <%= render 'search_hidden_fields' %>
       <div class="col-12">
         <div class="row">
           <div class="col-sm-5 col-sm-offset-2" style="display: flex; align-items: end;" >
@@ -24,24 +22,8 @@
   <% end %>
 </div>
 
-<div class="row">
-  <div class="col-12" id="sort_release_date">
-    <%= render 'sort_release_date' %>
-  </div>
-  <div class="col-12" id="sort_alphabetically_album">
-    <%= render 'sort_alphabetically_album' %>
-  </div>
-  <div class="col-12" id="sort_alphabetically_by_artist">
-    <%= render 'sort_alphabetically_by_artist' %>
-  </div>
+<div id="all_albums_with_sort">
+  <%= render partial: 'albums' %>
 </div>
 
-<div class ="row albums_container pagination_list" id="all_albums">
-
-  <!--Here Rails infers that @albums is a list of album objects; moreover, when called with a collection of albums,
-  Rails automatically iterates through them and renders each one with the _album.html.erb partial (inferring
-  the name of the partial from the name of the class). Basically as if the code has a album.each do loop -->
-  <%= render @albums %>
-
-</div>
 <%= will_paginate %>

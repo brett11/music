@@ -32,16 +32,16 @@ $(document).on('turbolinks:load', function() {
             type: 'GET',
             data: $(this).serialize(),
             dataType: 'script',
-            success: function(data, success) {
-                console.log("success", arguments);
-                console.log("data", typeof data, data); // Verify the response
-            },
-            error: function(jqxhr, textStatus, error) {
-                console.log("error", arguments);
-            },
-            complete: function(jqxhr, textStatus) {
-                console.log("complete", arguments);
-            }
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
         });
         return false;
     });
@@ -54,16 +54,16 @@ $(document).on('turbolinks:load', function() {
             type: 'GET',
             data: $(this).serialize(),
             dataType: 'script',
-            success: function(data, success) {
-                console.log("success", arguments);
-                console.log("data", typeof data, data); // Verify the response
-            },
-            error: function(jqxhr, textStatus, error) {
-                console.log("error", arguments);
-            },
-            complete: function(jqxhr, textStatus) {
-                console.log("complete", arguments);
-            }
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
         });
         return false;
     });
@@ -141,10 +141,16 @@ $(document).on('turbolinks:load', function() {
         return false;
     });
 
-    $(".pagination a").on("click", function() {
-        $.getScript(this.href);
+    // albums search
+    $("#albums_search input").keyup(function() {
+        $.get($("#albums_search").attr("action"), $("#albums_search").serialize(), null, "script");
         return false;
     });
+
+    // $(".pagination a").on("click", function() {
+    //     $.getScript(this.href);
+    //     return false;
+    // });
 
     //$("#sort_alphabetically_album form").css("border", "3px solid red");
 
