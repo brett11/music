@@ -96,13 +96,14 @@ class AlbumsController < ApplicationController
     %w[asc desc].include?(sort_params[:direction]) ? sort_params[:direction] : "asc"
   end
 
+  #reorder because https://stackoverflow.com/questions/14286207/how-to-remove-ranking-of-query-results
   def sort
-    Album.search(sort_params[:search]).order(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+    Album.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
   end
 
   #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
   def sort_by_artist
-    Album.search(sort_params[:search]).includes(:artists).order("artists." + sort_column(sort_table) + " #{sort_direction}")
+    Album.search(sort_params[:search]).includes(:artists).reorder("artists." + sort_column(sort_table) + " #{sort_direction}")
       .paginate( page: params[:page] )
   end
 
