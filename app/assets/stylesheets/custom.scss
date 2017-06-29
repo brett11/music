@@ -330,6 +330,23 @@ h3{
   font-size: 1.0em;
 }
 
+// sorting
+
+input.current {
+  padding-right: 20px;
+  background-repeat: no-repeat;
+  background-position: 58% 15%;
+  background-color: lightgreen;
+}
+
+input.current.asc {
+  background-image: url(/assets/up_arrow.gif);
+}
+
+input.current.desc {
+  background-image: url(/assets/down_arrow.gif);
+}
+
 //.concerts{
 //  margin-bottom: 60px;
 //}
