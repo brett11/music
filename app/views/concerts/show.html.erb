@@ -18,7 +18,7 @@
     </div>
     <div class = "concert_info_second_line">
       <% if @concert.venue.name != 'na' %>
-        <%= @concert.venue.name %>
+        <%= link_to(@concert.venue.name, venue_path(@concert.venue)) %>
       <% end %>
     </div>
     <div class="concert_info_second_line">
