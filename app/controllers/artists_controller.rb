@@ -10,7 +10,6 @@ class ArtistsController < ApplicationController
   #http://railscasts.com/episodes/240-search-sort-paginate-with-ajax?autoplay=true
   #reorder because https://stackoverflow.com/questions/14286207/how-to-remove-ranking-of-query-results
   def index
-    # binding.pry
     @artists=Artist.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
     # respond_to do |format|
     #   format.html
@@ -76,7 +75,11 @@ class ArtistsController < ApplicationController
   end
 
   def sort_table
-    sort_params[:sort_table] ||= "Artist"
+    if sort_params[:sort_table].present?
+      sort_params[:sort_table]
+    else
+    "Artist"
+    end
   end
 
   def sort_direction
