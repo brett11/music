@@ -79,6 +79,7 @@ $(document).on('turbolinks:load', function() {
     // artists search full ajax version
     // used debounce to reduce amount of ajax calls made while typing
     $(document).on("keyup","#artists_search input", _.debounce(function () {
+        debugger;
         $.ajax({
             url: $("#artists_search").attr("action"),
             cache: true,
