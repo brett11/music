@@ -92,9 +92,10 @@ class VenuesController < ApplicationController
   # end
 
   #https://stackoverflow.com/questions/19616611/rails-order-by-association-field Gary S. Weaver's comment
-  def sort_by_city
-    Venue.search(sort_params[:search]).includes(:city).merge(City.order(sort_column(sort_table) + " #{sort_direction}"))
-      .paginate( page: params[:page] )
-  end
+  # below doesn't work because sort_column result is name, which is interpreted as venue name. Specifying cities.name results in error
+  # def sort_by_city
+  #   Venue.search(sort_params[:search]).joins(:city).merge(City.reorder(sort_column(sort_table) + " #{sort_direction}"))
+  #     .paginate( page: params[:page] )
+  # end
 
 end

@@ -106,8 +106,14 @@ class AlbumsController < ApplicationController
     end
 
     #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
+    # superseded by below
+    # def sort_by_artist
+    #   Album.search(sort_params[:search]).includes(:artists).reorder("artists." + sort_column(sort_table) + " #{sort_direction}")
+    #     .paginate( page: params[:page] )
+    # end
+
     def sort_by_artist
-      Album.search(sort_params[:search]).includes(:artists).reorder("artists." + sort_column(sort_table) + " #{sort_direction}")
+      Album.search(sort_params[:search]).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
         .paginate( page: params[:page] )
     end
 
