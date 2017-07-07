@@ -1,0 +1,17 @@
+bob:
+  name_last: Smith
+  name_first: Bob
+  email: bob@bar.com
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  admin: false
+  activated: true
+  activated_at: <%= Time.zone.now.to_datetime %>
+
+anne:
+  name_last: Jackson
+  name_first: Anne
+  email: anne@aol.com
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  admin: true
+  activated: true
+  activated_at: <%= Time.zone.now.to_datetime %>
