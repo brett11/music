@@ -82,9 +82,9 @@ class AlbumsController < ApplicationController
 
     def sort_column(sort_table)
       if sort_table == "Album"
-        Album.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+        Album.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "name"
       elsif sort_table == "Artist"
-        Artist.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+        Artist.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "name_stage"
       end
     end
 
