@@ -1,10 +1,12 @@
 <% provide(:title, 'All artists') %>
 
-<div class="row">
-  <div class="col-12 add_artist">
-      <%= button_to "Add new artist", new_artist_path, method: 'get', id: "new_artist_link", remote: true %>
+<% if logged_in? && current_user.admin? %>
+    <div class="row">
+      <div class="col-12 add_artist">
+        <%= button_to "Add new artist", new_artist_path, method: 'get', id: "new_artist_link", remote: true %>
+      </div>
     </div>
-</div>
+<% end %>
 
 <h1>All artists</h1>
 

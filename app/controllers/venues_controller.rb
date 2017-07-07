@@ -1,11 +1,21 @@
+require 'pry'
+
 class VenuesController < ApplicationController
   before_action :set_venue, only:[:show, :edit, :update, :destroy]
 
-  def show
-  end
+  #http://railscasts.com/episodes/228-sortable-table-columns?view=comments
+  helper_method :sort_column, :sort_direction, :sort_table
 
   def index
-    @venues = Venue.paginate(page: params[:page]).order(id: :desc)
+    if sort_params[:sort_table] == "City"
+      @venues = sort_by_city
+    else
+      # binding.pry
+      @venues = sort
+    end
+  end
+
+  def show
   end
 
   def new
@@ -44,5 +54,40 @@ class VenuesController < ApplicationController
 
   def set_venue
     @venue= Venue.find(params[:id])
+  end
+
+  def sort_params
+    params.permit(:sort_table, :sort, :direction, :page, :search, :utf8)
+  end
+
+  def sort_table
+    if sort_params[:sort_table].present?
+      sort_params[:sort_table]
+    else
+      "Venue"
+    end
+  end
+
+  def sort_direction
+    %w[asc desc].include?(sort_params[:direction]) ? sort_params[:direction] : "asc"
+  end
+
+  def sort_column(sort_table)
+    if sort_table == "Venue"
+      Venue.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "name"
+    elsif sort_table == "City"
+      City.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "name"
+    end
+  end
+
+  def sort
+    Venue.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+  end
+
+  #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
+  #https://apidock.com/rails/ActiveRecord/QueryMethods/order, "User.order('name DESC, email')" example
+  def sort_by_city
+    Venue.search(sort_params[:search]).includes(:city).reorder("\"cities\"." + "\"" + sort_column(sort_table) + "\"" + " #{sort_direction}")
+      .paginate( page: params[:page] )
   end
 end

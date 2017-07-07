@@ -1,8 +1,10 @@
 <% provide(:title, 'All albums') %>
 
-<div class="add_album">
-  <%= button_to "Add new album", new_album_path, method: 'get', id: "new_album_link", remote: true %>
-</div>
+<% if logged_in? && current_user.admin? %>
+    <div class="add_album">
+      <%= button_to "Add new album", new_album_path, method: 'get', id: "new_album_link", remote: true %>
+    </div>
+<% end %>
 
 <h1>All albums</h1>
 

@@ -1,12 +1,22 @@
 class ConcertsController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
 
+  #http://railscasts.com/episodes/228-sortable-table-columns?view=comments
+  helper_method :sort_column, :sort_direction, :sort_table
+
   def show
     @concert = Concert.find(params[:id])
   end
 
   def index
-    @concerts = Concert.paginate(page: params[:page]).where('dateandtime > ?', DateTime.now).order("dateandtime ASC")
+    #@concerts = Concert.paginate(page: params[:page]).where('dateandtime > ?', DateTime.now).order("dateandtime ASC")
+    # sometimes sort albums based on artist
+    if sort_params[:sort_table] == "Artist"
+      @concerts = sort_by_artist
+    else
+      # binding.pry
+      @concerts = sort
+    end
   end
 
   def new
@@ -41,12 +51,48 @@ class ConcertsController < ApplicationController
 
   private
 
-  def concert_params
-    params.require(:concert).permit(:dateandtime, :venue_id, artist_ids: [] )
-  end
+    def concert_params
+      params.require(:concert).permit(:dateandtime, :venue_id, artist_ids: [] )
+    end
 
-  def concert_params_dateandtime_only
-    params.require(:concert).permit(:dateandtime)
-  end
+    def concert_params_dateandtime_only
+      params.require(:concert).permit(:dateandtime)
+    end
+
+    def sort_params
+      params.permit(:sort_table, :sort, :direction, :page, :search, :utf8)
+    end
+
+    def sort_table
+      if sort_params[:sort_table].present?
+        sort_params[:sort_table]
+      else
+        "Concert"
+      end
+    end
+
+    def sort_direction
+      %w[asc desc].include?(sort_params[:direction]) ? sort_params[:direction] : "asc"
+    end
+
+    def sort_column(sort_table)
+      if sort_table == "Concert"
+        Concert.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+      elsif sort_table == "Artist"
+        Artist.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+      end
+    end
+
+    def sort
+      # Concert.paginate(page: params[:page]).where('dateandtime > ?', DateTime.now).order("dateandtime ASC")
+      Concert.search(sort_params[:search]).where('dateandtime > ?', DateTime.now).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+    end
+
+    #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
+    #https://apidock.com/rails/ActiveRecord/QueryMethods/order, "User.order('name DESC, email')" example
+    def sort_by_artist
+      Concert.search(sort_params[:search]).includes(:artists).reorder("\"artists\"." + "\"" + sort_column(sort_table) + "\"" + " #{sort_direction}")
+        .paginate( page: params[:page] )
+    end
 
 end
