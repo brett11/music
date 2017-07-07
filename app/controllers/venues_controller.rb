@@ -86,8 +86,15 @@ class VenuesController < ApplicationController
 
   #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
   #https://apidock.com/rails/ActiveRecord/QueryMethods/order, "User.order('name DESC, email')" example
+  # def sort_by_city
+  #   Venue.search(sort_params[:search]).includes(:city).reorder("\"cities\"." + "\"" + sort_column(sort_table) + "\"" + " #{sort_direction}")
+  #     .paginate( page: params[:page] )
+  # end
+
+  #https://stackoverflow.com/questions/19616611/rails-order-by-association-field Gary S. Weaver's comment
   def sort_by_city
-    Venue.search(sort_params[:search]).includes(:city).reorder("\"cities\"." + "\"" + sort_column(sort_table) + "\"" + " #{sort_direction}")
+    Venue.search(sort_params[:search]).includes(:city).merge(City.order(sort_column(sort_table) + " #{sort_direction}"))
       .paginate( page: params[:page] )
   end
+
 end

@@ -1,3 +1,5 @@
+require 'pry'
+
 class ConcertsController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
 
@@ -79,19 +81,24 @@ class ConcertsController < ApplicationController
       if sort_table == "Concert"
         Concert.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
       elsif sort_table == "Artist"
-        Artist.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+        Artist.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "name_stage"
       end
     end
 
     def sort
       # Concert.paginate(page: params[:page]).where('dateandtime > ?', DateTime.now).order("dateandtime ASC")
+      # binding.pry
       Concert.search(sort_params[:search]).where('dateandtime > ?', DateTime.now).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
     end
 
     #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
     #https://apidock.com/rails/ActiveRecord/QueryMethods/order, "User.order('name DESC, email')" example
+    # def sort_by_artist
+    #   Concert.search(sort_params[:search]).includes(:artists).reorder("\"artists\"." + "\"" + sort_column(sort_table) + "\"" + " #{sort_direction}")
+    #     .paginate( page: params[:page] )
+    #https://stackoverflow.com/questions/19616611/rails-order-by-association-field Gary S. Weaver's comment
     def sort_by_artist
-      Concert.search(sort_params[:search]).includes(:artists).reorder("\"artists\"." + "\"" + sort_column(sort_table) + "\"" + " #{sort_direction}")
+      Concert.search(sort_params[:search]).where('dateandtime > ?', DateTime.now).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
         .paginate( page: params[:page] )
     end
 
