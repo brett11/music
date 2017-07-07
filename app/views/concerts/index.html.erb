@@ -1,23 +1,47 @@
 <% provide(:title, 'Upcoming Concerts') %>
 
-<div class="add_album">
-  <%= button_to "Add new concert", new_concert_path, method: 'get', id: "new_concert_link", remote: true %>
-</div>
+<% if logged_in? && current_user.admin? %>
+    <div class="add_album">
+      <%= button_to "Add new concert", new_concert_path, method: 'get', id: "new_concert_link", remote: true %>
+    </div>
+<% end %>
 
-<div class="row pagination_list" id="upcoming_concerts">
+<div id="upcoming_concerts">
   <h1>Upcoming Concerts</h1>
 
+  <div class="row">
+    <%= form_tag concerts_path, :method => 'get', :id => "concerts_search" do %>
+        <div id="search_hidden_fields">
+          <%= render 'search_hidden_fields' %>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-sm-5 col-sm-offset-2" style="display: flex; align-items: end;" >
+              <%= text_field_tag :search, params[:search] %>
+            </div>
+            <div class="col-sm-3">
+              <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
 
-  <%= will_paginate %>
+  <div class="pagination_list row">
+    <%= will_paginate %>
+  </div>
 
-  <!--Here Rails infers that @users is a list of User objects; moreover, when called with a collection of users,
-  Rails automatically iterates through them and renders each one with the _user.html.erb partial (inferring
-  the name of the partial from the name of the class). Bsically as if the code ahs a user.each do loop -->
-  <ul class="concerts">
-    <%= render @concerts %>
-  </ul>
+  <div id="all_concerts_with_sort">
+    <%= render partial: 'concerts' %>
+  </div>
+
+  <div class="row">
+    <%= will_paginate %>
+  </div>
+
 </div>
-<div class="row">
-  <%= will_paginate %>
-</div>
+
+
+
+
 
