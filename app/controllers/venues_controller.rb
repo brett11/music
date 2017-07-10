@@ -1,4 +1,4 @@
-require 'pry'
+#require 'pry'
 
 class VenuesController < ApplicationController
   before_action :set_venue, only:[:show, :edit, :update, :destroy]

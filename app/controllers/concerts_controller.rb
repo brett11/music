@@ -1,4 +1,4 @@
-require 'pry'
+#require 'pry'
 
 class ConcertsController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
