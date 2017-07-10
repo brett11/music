@@ -30,7 +30,8 @@ RSpec.describe "albums" do
     #note that default of aritsts index is to be sorted alphabetically.
     expect(@channel_orange.name).to appear_before(@for_emma.name)
     expect(@for_emma.name).to appear_before(@the_joshua_tree.name)
-    click_button "Sort alphabetically (albums)"
+    page.find('input[value="Sort alphabetically (albums)"]').click
+    # click_button "Sort alphabetically (albums)"
     #since sort_alphabetically reverses itself, the following should be in reverse alphabetical order
     expect(@the_joshua_tree.name).to appear_before(@for_emma.name)
     expect(@for_emma.name).to appear_before(@channel_orange.name)
@@ -44,6 +45,7 @@ RSpec.describe "albums" do
     expect(@the_joshua_tree.name).to appear_before(@for_emma.name)
     expect(@for_emma.name).to appear_before(@channel_orange.name)
     page.find('input[value="Sort by release date"]').click
+    sleep(2)
     # click_button "Sort by release date"
     #should be most recent to least recent
     expect(@channel_orange.name).to appear_before(@for_emma.name)

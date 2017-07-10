@@ -17,12 +17,12 @@ FactoryGirl.define do
   # https://stackoverflow.com/questions/3294824/how-do-i-use-factory-girl-to-generate-a-paperclip-attachment
   #https://stackoverflow.com/questions/20197474/rspec-controller-test-error-paperclipadapterregistrynohandlererror-no-h
   factory :artist do
-    name_stage "The Band"
-    avatar { Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/TheBand.jpg", 'image/jpeg') }
+    name_stage "U2"
+    avatar { Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/U2.jpg", 'image/jpeg') }
   end
 
   factory :city do
-    name "New York City"
+    name "Chicago"
     state { FactoryGirl.create(:state) }
     country { FactoryGirl.create(:country) }
   end

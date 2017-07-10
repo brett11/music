@@ -1,9 +1,9 @@
 # require 'pry'
 
 class AlbumsController < ApplicationController
-  before_action :set_album, only:[:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:edit, :update, :destroy]
-  before_action :admin_user, only: [:edit, :update, :destroy]
+  before_action :set_album, only:[:show, :edit, :update]
+  before_action :logged_in_user, only: [:edit, :update]
+  before_action :admin_user, only: [:new, :create, :edit, :update]
 
   #http://railscasts.com/episodes/228-sortable-table-columns?view=comments
   helper_method :sort_column, :sort_direction, :sort_table

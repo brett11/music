@@ -1,4 +1,4 @@
-<div class ="col-sm-12 col-md-8 col-md-offset-2 venue_list_item">
+<div class ="col-sm-12 col-md-8 col-md-offset-2 venue_list_item" id="<%=venue.name.parameterize.underscore + "_" + venue.city.name.parameterize.underscore%>">
   <div id="venue_link">
     <li>
       <%= link_to venueLinkTitleGenerator(venue), venue_path(venue) %>
