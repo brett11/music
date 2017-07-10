@@ -5,6 +5,12 @@ FactoryGirl.define do
     password "foobar"
     password_confirmation "foobar"
     sequence(:email) { |n| "user#{n}@example.com" }
+    activated 1
+    activated_at { 1.week.ago }
+
+    factory :user_admin do
+      admin true
+    end
   end
 
   factory :album do

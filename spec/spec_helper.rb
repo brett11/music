@@ -60,6 +60,9 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
+  #https://stackoverflow.com/questions/10121835/how-do-i-simulate-a-login-with-rspec. Bruno Peres
+  #config.include SpecTestHelpers, :type => :controller
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
