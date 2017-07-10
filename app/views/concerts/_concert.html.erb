@@ -1,4 +1,4 @@
-<div class ="col-sm-12 col-md-8 col-md-offset-2 concert_list_item">
+<div class ="col-sm-12 col-md-8 col-md-offset-2 concert_list_item" id="<%=concert.artists[0].name_stage.parameterize.underscore + "_" + concert.venue.name.parameterize.underscore + "_" + concert.dateandtime.strftime("%Y%m%d") %>">
   <div id="concert_link">
     <li>
       <%= link_to linkTitleGenerator(concert), concert_path(concert) %>
