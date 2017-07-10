@@ -6,6 +6,10 @@ RSpec.describe AlbumsController, type: :controller do
     let(:new_album_params) { FactoryGirl.attributes_for(:album) }
 
     before(:example) do
+      login_admin
+    end
+
+    before(:example) do
       #because of how factories work, the "new_album_params" has an artists attribute. Need to delete and replace
       #with artist_ids, as this is how the params will be coming in through the view
       artist_ids = []

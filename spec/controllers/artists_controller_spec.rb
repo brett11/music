@@ -3,6 +3,11 @@ require 'pry'
 
 RSpec.describe ArtistsController, type: :controller do
   describe "POST create" do
+
+    before(:example) do
+      login_admin
+    end
+
     it "redirects to artists_url upon successful artist creation and shows flash" do
       new_artist_params = FactoryGirl.attributes_for(:artist)
       post :create, params: {artist: new_artist_params}

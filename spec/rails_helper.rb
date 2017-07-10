@@ -24,6 +24,9 @@ require "action_mailer"
 require "email_spec"
 require "email_spec/rspec"
 
+#https://stackoverflow.com/questions/10121835/how-do-i-simulate-a-login-with-rspec
+require_relative "../spec/support/spec_test_helper"
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -72,4 +75,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include SpecTestHelpers
 end
