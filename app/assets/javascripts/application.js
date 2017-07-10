@@ -199,5 +199,9 @@ $(document).on('turbolinks:load', function() {
     // });
 
     //$("#sort_alphabetically_album form").css("border", "3px solid red");
+    //https://stackoverflow.com/questions/31876393/using-nth-child-non-recursive
+    // the below selects any div who is a direct descendant of #all_artists which is the first
+    // child of its parent(which is #all_artists)
+    //$("#all_artists > div:nth-child(1)").css("border", "3px solid red");
 
 });
