@@ -23,6 +23,7 @@ FactoryGirl.define do
 
   factory :city do
     name "New York City"
+    state { FactoryGirl.create(:state) }
     country { FactoryGirl.create(:country) }
   end
 
@@ -44,6 +45,7 @@ FactoryGirl.define do
 
   factory :state do
     name "State"
+    abbreviation 'ST'
   end
 
   factory :venue do

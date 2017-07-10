@@ -79,7 +79,7 @@ class ConcertsController < ApplicationController
 
     def sort_column(sort_table)
       if sort_table == "Concert"
-        Concert.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "id"
+        Concert.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "dateandtime"
       elsif sort_table == "Artist"
         Artist.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "name_stage"
       end
