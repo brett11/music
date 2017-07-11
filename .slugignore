@@ -1,4 +1,5 @@
 # https://devcenter.heroku.com/articles/slug-compiler#ignoring-files-with-slugignore
+# https://robots.thoughtbot.com/how-to-reduce-a-large-heroku-compiled-slug-size
 *.psd
 *.pdf
 /test
