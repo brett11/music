@@ -1,0 +1,5 @@
+# https://devcenter.heroku.com/articles/slug-compiler#ignoring-files-with-slugignore
+*.psd
+*.pdf
+/test
+/spec
