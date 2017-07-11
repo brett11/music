@@ -1,8 +1,7 @@
 # require 'pry'
 
 class AlbumsController < ApplicationController
-  before_action :set_album, only:[:show, :edit, :update]
-  before_action :logged_in_user, only: [:edit, :update]
+  # before_action :set_album, only:[:show, :edit, :update]
   before_action :admin_user, only: [:new, :create, :edit, :update]
 
   #http://railscasts.com/episodes/228-sortable-table-columns?view=comments
@@ -19,6 +18,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
+    @album = Album.find(params[:id])
   end
 
 
@@ -51,6 +51,7 @@ class AlbumsController < ApplicationController
   end
 
   def edit
+    @album = Album.find(params[:id])
   end
 
   def update
@@ -64,9 +65,9 @@ class AlbumsController < ApplicationController
   end
 
   private
-    def set_album
-      @album = Album.find(params[:id])
-    end
+    # def set_album
+    #   @album = Album.find(params[:id])
+    # end
 
     def album_params
       params.require(:album).permit(:name, :release_date, :album_cover, artist_ids: [] )

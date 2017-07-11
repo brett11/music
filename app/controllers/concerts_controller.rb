@@ -1,7 +1,7 @@
 #require 'pry'
 
 class ConcertsController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :admin_user, only: [:new, :create, :edit, :update]
 
   #http://railscasts.com/episodes/228-sortable-table-columns?view=comments
   helper_method :sort_column, :sort_direction, :sort_table
@@ -48,6 +48,20 @@ class ConcertsController < ApplicationController
         end
       end
       format.js
+    end
+  end
+
+  def edit
+    @concert = Concert.find(params[:id])
+  end
+
+  def update
+    @concert = Concert.find(params[:id])
+    if @concert.update_attributes(concert_params)
+      flash[:success] = "Concert info successfully updated"
+      redirect_to @concert
+    else
+      render 'edit'
     end
   end
 

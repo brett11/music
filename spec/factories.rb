@@ -37,7 +37,7 @@ FactoryGirl.define do
     venue {FactoryGirl.create(:venue)}
     #http://stackoverflow.com/questions/1484374/how-to-create-has-and-belongs-to-many-associations-in-factory-girl
     artists {[FactoryGirl.create(:artist)]}
-    dateandtime { DateTime.now }
+    dateandtime { 6.months.from_now }
   end
 
   factory :country do

@@ -1,7 +1,8 @@
 #require 'pry'
 
 class VenuesController < ApplicationController
-  before_action :set_venue, only:[:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:new, :create, :edit, :update]
+  # before_action :set_venue, only:[:show, :edit, :update]
 
   #http://railscasts.com/episodes/228-sortable-table-columns?view=comments
   helper_method :sort_column, :sort_direction, :sort_table
@@ -16,6 +17,7 @@ class VenuesController < ApplicationController
   end
 
   def show
+    @venue= Venue.find(params[:id])
   end
 
   def new
@@ -40,6 +42,20 @@ class VenuesController < ApplicationController
         end
       end
       format.js
+    end
+  end
+
+  def edit
+    @venue = Venue.find(params[:id])
+  end
+
+  def update
+    @venue = Venue.find(params[:id])
+    if @venue.update_attributes(venue_params)
+      flash[:success] = "Venue info successfully updated"
+      redirect_to @venue
+    else
+      render 'edit'
     end
   end
 
