@@ -1,6 +1,4 @@
 class ArtistsController < ApplicationController
-  before_action :set_artist, only:[:show, :edit, :update]
-  before_action :logged_in_user, only: [:edit, :update]
   before_action :admin_user, only: [:new, :create, :edit, :update]
 
   #http://railscasts.com/episodes/228-sortable-table-columns?view=comments
@@ -18,6 +16,7 @@ class ArtistsController < ApplicationController
   end
 
   def show
+    @artist = Artist.find(params[:id])
     @artist_concerts = @artist.concerts.where('dateandtime > ?', DateTime.now).order("dateandtime ASC").paginate(page: params[:page])
   end
 
@@ -42,6 +41,7 @@ class ArtistsController < ApplicationController
   end
 
   def edit
+    @artist = Artist.find(params[:id])
   end
 
   def update
@@ -63,10 +63,10 @@ class ArtistsController < ApplicationController
     def sort_params
       params.permit(:sort_table, :sort, :direction, :page, :search, :utf8)
     end
-
-    def set_artist
-      @artist = Artist.find(params[:id])
-    end
+    # not used as before callback, because would like to test that variable is or isn't set based on admin or not
+    # def set_artist
+    #   @artist = Artist.find(params[:id])
+    # end
 
     def sort_column(sort_table)
       if sort_table == "Artist"

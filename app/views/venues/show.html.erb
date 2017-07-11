@@ -4,6 +4,7 @@
     <section class="venue_info">
       <div id="venue_name_and_edit" class="row">
         <h1><%= @venue.name %></h1>
+        <h2><%= @venue.city.full_name %></h2>
         <% if logged_in? && current_user.admin? %>
             <p><%= link_to "Edit Venue Info", edit_venue_path(@venue), style: "padding: 15px;" %></p>
             <br>
@@ -12,13 +13,6 @@
     </section>
   </aside>
   <div class="col-md-8">
-
-    <div class="venue_info_first_line">
-    </div>
-
-    <div class="venue_info_second_line">
-      <%= @venue.city.full_name %>
-    </div>
 
     <div class="row">
       <div class="col" style="padding: 15px;">
@@ -35,7 +29,6 @@
         </div>
       </div>
     </div>
-
     <br/>
     <p><%= link_to "<-- Back", :back %></p>
   </div>

@@ -1,2 +1,31 @@
-<h1>Venues#edit</h1>
-<p>Find me in app/views/venues/edit.html.erb</p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <%= form_for(@venue, { validate: true } ) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        <fieldset>
+          <legend>Edit venue info:</legend>
+          <% #:name, :city_id(foreign key) %>
+
+          <div class="field">
+            <%= f.label :name, 'Venue name:' %>
+            <%= f.text_field :name %>
+          </div>
+
+          <div class="field">
+            <%= f.label 'City:' %>
+            <%# https://stackoverflow.com/questions/8907867/can-someone-explain-collection-select-to-me-in-clear-simple-terms %>
+            <%# With regards to using form_for, again in very simple terms, for all tags that come within the form_for, eg. f.text_field, you dont need to supply the first (object) parameter. This is taken from the form_for syntax. %>
+            <%= f.collection_select(:city_id, City.order(name: :asc), :id, :full_name, {prompt: false, include_hidden: false}, { multiple: false }) %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Submit", class: "btn btn-primary" %>
+          </div>
+
+        </fieldset>
+    <% end %>
+
+  </div>
+</div>

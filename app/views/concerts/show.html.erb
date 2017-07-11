@@ -25,6 +25,10 @@
       <%= full_city_name(@concert.venue.city) %>
     </div>
     <br/>
+    <% if logged_in? && current_user.admin? %>
+        <p><%= link_to "Edit Concert Info", edit_concert_path(@concert) %></p>
+        <br>
+    <% end %>
     <p><%= link_to "<-- Back", :back %></p>
   </div>
 </div>

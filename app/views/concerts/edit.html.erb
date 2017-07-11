@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <%= form_for(@concert, { validate: true } ) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        <fieldset>
+          <legend>Edit concert details:</legend>
+          <% #:name_first, :name_last, :name_stage, :avatar %>
+
+          <div class="field">
+            <%= f.label 'Artist(s):' %>
+            <%# https://stackoverflow.com/questions/8907867/can-someone-explain-collection-select-to-me-in-clear-simple-terms %>
+            <%# With regards to using form_for, again in very simple terms, for all tags that come within the form_for, eg. f.text_field, you dont need to supply the first (object) parameter. This is taken from the form_for syntax. %>
+            <%= f.collection_select(:artist_ids, Artist.order(name_stage: :asc), :id, :name_stage, {prompt: false, include_hidden: false }, { multiple: true }) %>
+          </div>
+
+          <div class="field">
+            <%= f.label :venue_id, 'Venue:' %>
+            <%= f.collection_select(:venue_id, Venue.order(name: :asc), :id, :name, {prompt: false, include_hidden: false}, { multiple: false }) %>
+          </div>
+
+          <div class="field">
+            <%= f.label :dateandtime, 'Date and time:' %>
+            <%= f.datetime_select :dateandtime %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Submit", class: "btn btn-primary" %>
+          </div>
+
+        </fieldset>
+    <% end %>
+
+  </div>
+</div>
