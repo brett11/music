@@ -2,5 +2,8 @@
 # https://robots.thoughtbot.com/how-to-reduce-a-large-heroku-compiled-slug-size
 *.psd
 *.pdf
+/public/system/albums
+/public/system/artists
+/public/system/users
 /test
 /spec
