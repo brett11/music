@@ -2,12 +2,17 @@
   <div class="row">
     <div class="col justify-content-center">
       <figure>
-      <%= link_to(image_tag(artist.avatar.url(:square)), artist_path(artist)) %>
-      <figcaption>
-        <%= link_to artist.name_stage, artist_path(artist) %>
-      </figcaption>
-    </figure>
+        <figcaption>
+          <%= link_to artist.name_stage, artist_path(artist) %>
+        </figcaption>
+        <%= link_to(image_tag(artist.avatar.url(:square)), artist_path(artist)) %>
+        <% if logged_in? %>
+            <%= render partial: 'artists/follow_form', locals: { artist: artist } %>
+        <% end %>
+        <br/>
+      </figure>
     </div><!--col-->
   </div><!--row-->
   <br>
 </div><!--col-->
+

@@ -14,7 +14,12 @@ Rails.application.routes.draw do
   post  '/login', to: 'sessions#create'
   delete  '/logout', to: 'sessions#destroy'
 
-  resources :artists, except: :destroy
+  ##http://guides.rubyonrails.org/routing.html 2.10.2
+  resources :artists, except: :destroy do
+    collection do
+      get 'myfavartists'
+    end
+  end
   resources :concerts, except: :destroy
   resources :albums, except: :destroy
   resources :venues,except: :destroy

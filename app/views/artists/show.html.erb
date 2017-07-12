@@ -7,7 +7,7 @@
 
       <div id="artist_name_and_edit" class="row">
         <h1 style="margin-bottom: 0px;"><%= @artist.name_stage %></h1>
-        <%= render 'follow_form' if logged_in? %>
+        <%= render partial: 'follow_form', locals: {artist: @artist} if logged_in? %>
         <% if logged_in? && current_user.admin? %>
             <br>
             <p><%= link_to "Edit Artist Info", edit_artist_path(@artist), style: "padding: 15px;" %></p>
