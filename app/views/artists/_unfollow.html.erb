@@ -1,4 +1,4 @@
-<%= form_for(current_user.fanships.find_by(artist_id: @artist.id),
+<%= form_for(current_user.fanships.find_by(artist_id: artist.id),
              html: { method: :delete }) do |f| %>
     <%= f.submit "Unfollow", class: "btn" %>
 <% end %>

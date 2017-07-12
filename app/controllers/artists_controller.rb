@@ -55,6 +55,11 @@ class ArtistsController < ApplicationController
     end
   end
 
+  #http://guides.rubyonrails.org/routing.html 2.10.2
+  def myfavartists
+    @artists=current_user.following.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+  end
+
   private
 
     def artist_params
