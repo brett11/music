@@ -1,18 +1,26 @@
 <%= provide(:title, @user.name_first ) %>
 <div class="row">
-  <aside class = "col-md-4">
+  <aside class="col-md-3">
     <section class="user_info">
       <%= image_tag @user.profile_pic.url(:medium) %>
+      <br/>
+      <%= @user.name_first %>
+      <%= @user.name_last %>
+      <br/>
+      <%= render 'shared/fanship_stats' %>
+      <div>
+        <%= link_to "<-- Back", :back %>
+      </div>
     </section>
   </aside>
-  <div class="col-md-8">
-    <p>
-      <%= @user.email %>
-    </p>
-    <%= @user.name_first %>
-    <%= @user.name_last %>
-    <br/>
-    <br/>
-    <p><%= link_to "<-- Back to all users", users_path %></p>
+  <div class="col-md-9">
+    <h3>Following</h3>
+    <% if @artists.any? %>
+        <ul class="artists follow">
+          <%= render @artists %>
+        </ul>
+        <%= will_paginate @artists %>
+    <% end %>
   </div>
 </div>
+

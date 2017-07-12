@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_and_belongs_to_many :artists
+  has_many :fanships, dependent: :destroy
+  has_many :following, through: :fanships, source: :artist
   before_save :downcase_email
   before_save :titlecase_names
   before_create :create_activation_digest
@@ -86,5 +87,17 @@ class User < ApplicationRecord
     digest = self.send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  def follow(artist)
+    following << artist
+  end
+
+  def unfollow(artist)
+    following.delete(artist)
+  end
+
+  def following?(artist)
+    following.include?(artist)
   end
 end

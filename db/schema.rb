@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629125231) do
+ActiveRecord::Schema.define(version: 20170711212625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,16 @@ ActiveRecord::Schema.define(version: 20170629125231) do
   create_table "countries", id: :bigserial, force: :cascade do |t|
     t.string "name", limit: 45, null: false
     t.index ["id"], name: "idx_24858_id_country_unique", unique: true, using: :btree
+  end
+
+  create_table "fanships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "artist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_fanships_on_artist_id", using: :btree
+    t.index ["user_id", "artist_id"], name: "index_fanships_on_user_id_and_artist_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_fanships_on_user_id", using: :btree
   end
 
   create_table "songs", id: :bigserial, force: :cascade do |t|

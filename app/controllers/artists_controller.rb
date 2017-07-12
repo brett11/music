@@ -18,6 +18,7 @@ class ArtistsController < ApplicationController
   def show
     @artist = Artist.find(params[:id])
     @artist_concerts = @artist.concerts.where('dateandtime > ?', DateTime.now).order("dateandtime ASC").paginate(page: params[:page])
+
   end
 
   def new
