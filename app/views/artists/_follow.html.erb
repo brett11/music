@@ -1,0 +1,5 @@
+<%# Rails tutorial chapter 14 %>
+<%= form_for(current_user.fanships.build) do |f| %>
+    <div><%= hidden_field_tag :artist_id, @artist.id %></div>
+    <%= f.submit "Follow", class: "btn btn-primary" %>
+<% end %>

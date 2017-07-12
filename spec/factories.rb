@@ -59,6 +59,11 @@ FactoryGirl.define do
     city { FactoryGirl.create(:city) }
   end
 
+  factory :fanship do
+    user { FactoryGirl.create(:user).id }
+    artist { FactoryGirl.create(:artist).id }
+  end
+
   factory :paperclip_attachment_album do
     album_cover_file_name { 'test.jpg' }
     album_cover_content_type { 'image/jpeg' }

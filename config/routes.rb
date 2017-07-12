@@ -17,10 +17,14 @@ Rails.application.routes.draw do
   resources :artists, except: :destroy
   resources :concerts, except: :destroy
   resources :albums, except: :destroy
-  resources :users, except: :destroy
   resources :venues,except: :destroy
-
+  resources :users, except: :destroy do
+    member do
+      get :following
+    end
+  end
 
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :fanships,       only: [:create, :destroy]
 end

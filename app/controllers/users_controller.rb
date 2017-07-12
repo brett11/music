@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only:[:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :admin_user, only: :destroy
+  before_action :logged_in_user, only: [:index, :show, :edit, :update]
+  before_action :admin_user
 
   def show
+    @user = User.find(params[:id])
+    @artists = @user.following.paginate(page: params[:page])
   end
 
   def index
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
@@ -38,7 +40,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
+  def following
+    @user = User.find(params[:id])
+    @artists = @user.following.paginate(page: params[:page])
+    render 'show_follow'
   end
 
   private

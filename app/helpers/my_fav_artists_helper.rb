@@ -1,0 +1,2 @@
+module MyFavArtistsHelper
+end

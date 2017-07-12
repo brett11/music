@@ -1,0 +1,2 @@
+class MyFavArtistsController < ApplicationController
+end

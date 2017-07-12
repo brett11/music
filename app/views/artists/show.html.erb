@@ -6,18 +6,17 @@
       <%= image_tag @artist.avatar.url(:medium) %>
 
       <div id="artist_name_and_edit" class="row">
-        <h1><%= @artist.name_stage %></h1>
+        <h1 style="margin-bottom: 0px;"><%= @artist.name_stage %></h1>
+        <%= render 'follow_form' if logged_in? %>
         <% if logged_in? && current_user.admin? %>
-            <p><%= link_to "Edit Artist Info", edit_artist_path(@artist), style: "padding: 15px;" %></p>
             <br>
+            <p><%= link_to "Edit Artist Info", edit_artist_path(@artist), style: "padding: 15px;" %></p>
         <% end %>
       </div>
 
     </section>
   </aside>
   <div class="col-md-9">
-
-
     <div class="row">
       <div class="col" style="padding: 15px;">
         <div class="row">

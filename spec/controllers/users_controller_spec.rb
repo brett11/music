@@ -47,5 +47,16 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe "GET following" do
+    let(:artist) { FactoryGirl.create(:artist) }
+    describe "when not logged in" do
+      it "doesn't work" do
+        get following_user_path(user)
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
+
+
 
 end
