@@ -55,7 +55,8 @@ class User < ApplicationRecord
   def create_reset_digest
     self.reset_token = User.new_token
     #update_attribute updates the database. we can't use here because user not yet saved in database
-    self.reset_digest = User.digest(reset_token)
+    update_attribute(:reset_digest, User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
   end
 
   #Sends activation email.
@@ -87,6 +88,10 @@ class User < ApplicationRecord
     digest = self.send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
   end
 
   def follow(artist)

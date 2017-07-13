@@ -2,12 +2,12 @@ require 'rails_helper'
 require 'pry'
 
 RSpec.describe AlbumsController, type: :controller do
+  #below needed so that @albums will be assigned within controller to something, be non-nil, and pass GET index works be_present test
   before(:example) do
     @album = FactoryGirl.create(:album)
   end
 
   describe "GET index" do
-    #below needed so that @albums will be assigned within controller to something, be non-nil, and pass GET index works be_present test
     it "works" do
       get :index
       expect(response).to have_http_status(:success)

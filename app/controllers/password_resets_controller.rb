@@ -1,5 +1,7 @@
+require 'pry'
+
 class PasswordResetsController < ApplicationController
-  before_action :get_user, only: [:edit,:update]
+  before_action :get_user, only: [:edit, :update]
   before_action :valid_user, only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
 
@@ -20,6 +22,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
+
   end
 
   def update
@@ -40,8 +43,6 @@ class PasswordResetsController < ApplicationController
     def user_params
         params.require(:user).permit(:password, :password_confirmation)
     end
-
-    #Before filters
 
     def get_user
       @user = User.find_by(email: params[:email])

@@ -24,8 +24,13 @@ require "action_mailer"
 require "email_spec"
 require "email_spec/rspec"
 
+#rails 4 test prescriptions pg 267 & https://github.com/teampoltergeist/poltergeist
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+
 #https://stackoverflow.com/questions/10121835/how-do-i-simulate-a-login-with-rspec
-require_relative "../spec/support/spec_test_helper"
+require_relative "../spec/support/controller_test_helper"
+require_relative "../spec/support/feature_test_helper"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -76,5 +81,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  config.include SpecTestHelpers
+  config.include ControllerTestHelpers, type: :controller
+  config.include FeatureTestHelpers, type: :feature
 end

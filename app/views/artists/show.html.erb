@@ -10,7 +10,7 @@
         <%= render partial: 'follow_form', locals: {artist: @artist} if logged_in? %>
         <% if logged_in? && current_user.admin? %>
             <br>
-            <p><%= link_to "Edit Artist Info", edit_artist_path(@artist), style: "padding: 15px;" %></p>
+            <p><%= link_to "Edit artist info", edit_artist_path(@artist), style: "padding: 15px;" %></p>
         <% end %>
       </div>
 

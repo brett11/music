@@ -33,6 +33,7 @@ group :development, :test do
   gem 'email_spec', '~> 2.1', '>= 2.1.1'
   gem 'pry-rails', '~> 0.3.6'
   gem 'pry-byebug', '~> 3.4', '>= 3.4.2'
+  gem 'poltergeist'
 end
 
 group :development do
@@ -44,7 +45,7 @@ end
 
 group :test do
   gem 'factory_girl_rails', '~> 4.8'
-  gem 'capybara', '~> 2.14'
+  gem 'capybara', '~> 2.14', '>= 2.14.4'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'rails-controller-testing', '0.1.1'
   gem 'minitest-reporters',       '1.1.9'
