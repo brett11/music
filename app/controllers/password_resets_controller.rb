@@ -1,5 +1,3 @@
-require 'pry'
-
 class PasswordResetsController < ApplicationController
   before_action :get_user, only: [:edit, :update]
   before_action :valid_user, only: [:edit, :update]
