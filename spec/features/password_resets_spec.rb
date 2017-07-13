@@ -4,7 +4,7 @@ RSpec.describe "PasswordResets" do
   it "emails user when requesting password reset" do
     user = create(:user)
     visit login_path
-    click_link "password"
+    click_link "forgot password"
     fill_in "Email", with: user.email
     click_button "Submit"
     #http://stackoverflow.com/questions/5228371/how-to-get-current-path-with-query-string-using-capybara
