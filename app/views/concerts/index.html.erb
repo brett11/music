@@ -1,7 +1,7 @@
 <% provide(:title, 'Upcoming Concerts') %>
 
 <% if logged_in? && current_user.admin? %>
-    <div class="add_album">
+    <div class="add_concert">
       <%= button_to "Add new concert", new_concert_path, method: 'get', id: "new_concert_link", remote: true %>
     </div>
 <% end %>

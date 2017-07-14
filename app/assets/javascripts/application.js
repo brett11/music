@@ -272,4 +272,49 @@ $(document).on('turbolinks:load', function() {
         return false;
     }, 200));
 
+    // venues index sort alphabetically by name
+    $(document).on("submit","#sort_venue_by_name form", function () {
+        $.ajax({
+            url: this.action ,
+            cache: true,
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'script',
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
+        });
+        return false;
+    });
+
+    // venues search full ajax version
+    // used debounce to reduce amount of ajax calls made while typing
+    $(document).on("keyup","#venues_search input", _.debounce(function () {
+        $.ajax({
+            url: $("#venues_search").attr("action"),
+            cache: true,
+            type: 'GET',
+            data: $("#venues_search").serialize(),
+            dataType: 'script',
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
+        });
+        return false;
+    }, 200));
+
 });
