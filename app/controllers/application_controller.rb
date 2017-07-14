@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
-  include AlbumsHelper
-  include ArtistsHelper
-  include ConcertsHelper
-  include VenuesHelper
+  # include AlbumsHelper
+  # include ArtistsHelper
+  # include ConcertsHelper
+  # include VenuesHelper
 
   protect_from_forgery with: :exception
 

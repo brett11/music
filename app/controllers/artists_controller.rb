@@ -67,7 +67,7 @@ class ArtistsController < ApplicationController
     end
 
     def sort_params
-      params.permit(:sort_table, :sort, :direction, :page, :search, :utf8)
+      params.permit(:sort_table, :sort, :direction, :page, :search, :utf8, :sort_favs)
     end
     # not used as before callback, because would like to test that variable is or isn't set based on admin or not
     # def set_artist
@@ -91,5 +91,14 @@ class ArtistsController < ApplicationController
     def sort_direction
       %w[asc desc].include?(sort_params[:direction]) ? sort_params[:direction] : "asc"
     end
+
+    # TODO: figure out how to sort using MyFavArtists checkbox
+    # def sort_favs?
+    #   if sort_params[:sort_favs].present?
+    #     sort_params[:sort_favs]
+    #   else
+    #     false
+    #   end
+    # end
 
 end

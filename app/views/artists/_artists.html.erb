@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-12" id="sort_alphabetically">
-    <%= sortable(request.url, "name_stage", "Artist", "Sort alphabetically") %>
+    <%= sortable_artist(request.url, "name_stage", "Artist", "Sort alphabetically") %>
   </div>
   <% if logged_in? && current_user.admin? %>
       <div class="col-12" id="sort_by_id">
         <%# https://stackoverflow.com/questions/12360148/rails-link-to-or-button-to-post-request-with-parameters %>
         <%# button_to "Sort by ID", "/artists", method: :get, params: { sort: "id", direction: "asc" } %>
-        <%= sortable(request.url, "id", "Artist", "Sort by ID") %>
+        <%= sortable_artist(request.url, "id", "Artist", "Sort by ID") %>
       </div>
   <% end %>
 </div>

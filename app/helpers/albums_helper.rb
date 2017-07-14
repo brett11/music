@@ -1,5 +1,5 @@
 module AlbumsHelper
-  def sortable(current_route, column, column_table = "Album", title = nil)
+  def sortable_album(current_route, column, column_table = "Album", title = nil)
     # binding.pry
     title ||= column.titleize
     css_class = column == sort_column(column_table) && column_table == sort_table ? "current #{sort_direction}" : nil
