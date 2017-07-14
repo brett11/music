@@ -29,4 +29,8 @@ class Artist < ApplicationRecord
       self.where(nil)
     end
   end
+
+  def to_id
+    name_stage.parameterize.underscore
+  end
 end

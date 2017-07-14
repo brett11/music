@@ -12,8 +12,12 @@ class AlbumsController < ApplicationController
     if sort_params[:sort_table] == "Artist"
       @albums = sort_by_artist
     else
-    # binding.pry
-    @albums = sort
+      # binding.pry
+      @albums = sort
+    end
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

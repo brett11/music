@@ -19,6 +19,10 @@ class ConcertsController < ApplicationController
       # binding.pry
       @concerts = sort
     end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
