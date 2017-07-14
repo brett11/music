@@ -25,6 +25,7 @@ gem 'remotipart', '~> 1.3', '>= 1.3.1'
 gem 'pg_search', '~> 1.0', '>= 1.0.5'
 gem 'underscore-rails', '~> 1.8', '>= 1.8.3'
 gem 'pg',   '0.18.4'
+gem 'simple_form', '~> 3.5'
 
 group :development, :test do
   gem 'sqlite3', '1.3.12'

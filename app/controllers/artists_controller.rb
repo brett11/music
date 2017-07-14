@@ -8,7 +8,17 @@ class ArtistsController < ApplicationController
   #http://railscasts.com/episodes/240-search-sort-paginate-with-ajax?autoplay=true
   #reorder because https://stackoverflow.com/questions/14286207/how-to-remove-ranking-of-query-results
   def index
-    @artists=Artist.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+    #need below for checkbox that is needed for filtering myfavs
+    @artist_for_form = Artist.new
+
+    if sort_favs?
+      @artists=current_user.following.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+    else
+      @artists=Artist.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+    end
+
+
+
     respond_to do |format|
       format.html
       format.js
@@ -93,12 +103,12 @@ class ArtistsController < ApplicationController
     end
 
     # TODO: figure out how to sort using MyFavArtists checkbox
-    # def sort_favs?
-    #   if sort_params[:sort_favs].present?
-    #     sort_params[:sort_favs]
-    #   else
-    #     false
-    #   end
-    # end
+    def sort_favs?
+      if sort_params[:sort_favs].present?
+        sort_params[:sort_favs]
+      else
+        false
+      end
+    end
 
 end

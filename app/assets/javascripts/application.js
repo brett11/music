@@ -317,4 +317,17 @@ $(document).on('turbolinks:load', function() {
         return false;
     }, 200));
 
+    // https://stackoverflow.com/questions/6878757/how-to-listen-to-when-a-checkbox-is-checked-in-jquery/6878786
+    $('input[name="artist[my_favs]"]:checkbox').change(
+        function(){
+            if ($(this).is(':checked')) {
+                $('#sort_alphabetically form input[name="sort_favs"]').val('true');
+                $('#sort_by_id form input[name="sort_favs"]').val('true');
+            }
+            else {
+                $('#sort_alphabetically form input[name="sort_favs"]').val('false');
+                $('#sort_by_id form input[name="sort_favs"]').val('false');
+            }
+        });
+
 });
