@@ -9,10 +9,10 @@ class ArtistsController < ApplicationController
   #reorder because https://stackoverflow.com/questions/14286207/how-to-remove-ranking-of-query-results
   def index
     @artists=Artist.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
-    # respond_to do |format|
-    #   format.html
-    #   format.js
-    # end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show

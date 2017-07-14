@@ -1,0 +1,3 @@
+$("#<%=@artist.to_id%> #follow_form").html("<%= j(render partial: 'artists/unfollow', locals: {artist: @artist}) %> ");
+<%# TODO: figure out how to have below update only if on user profile page %>
+$("#following").html('<%= current_user.following.count %>');
