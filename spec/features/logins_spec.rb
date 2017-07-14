@@ -15,7 +15,7 @@ RSpec.feature "Logins", type: :feature do
     end
   end
 
-  it "logs in admin and shows edit artist(only admin can see this)" do
+  it "logs in admin and shows edit artist info link (only admin should be able to see this)" do
     artist = FactoryGirl.create(:artist)
     visit artist_path(artist)
     expect(page).to_not have_content("Edit artist info")

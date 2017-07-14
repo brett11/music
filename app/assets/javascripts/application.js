@@ -204,4 +204,72 @@ $(document).on('turbolinks:load', function() {
     // child of its parent(which is #all_artists)
     //$("#all_artists > div:nth-child(1)").css("border", "3px solid red");
 
+    // concerts index sort alphabetically
+    $(document).on("submit","#sort_concert_by_date form", function () {
+        $.ajax({
+            url: this.action ,
+            cache: true,
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'script',
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
+        });
+        return false;
+    });
+
+
+    // concerts index sort alphabetically
+    $(document).on("submit","#sort_concert_alphabetically_by_artist form", function () {
+        $.ajax({
+            url: this.action ,
+            cache: true,
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'script',
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
+        });
+        return false;
+    });
+
+    // concerts search full ajax version
+    // used debounce to reduce amount of ajax calls made while typing
+    $(document).on("keyup","#concerts_search input", _.debounce(function () {
+        $.ajax({
+            url: $("#concerts_search").attr("action"),
+            cache: true,
+            type: 'GET',
+            data: $("#concerts_search").serialize(),
+            dataType: 'script',
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
+        });
+        return false;
+    }, 200));
+
 });
