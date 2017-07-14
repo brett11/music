@@ -28,6 +28,12 @@
   <% end %>
 </div>
 
+<div class="col-md-2 col-md-offset-5" id="sort_my_favs">
+  <%= simple_form_for(@artist_for_form, html: { class: 'form-horizontal' }) do |f| %>
+      <%= f.input :my_favs, :as => :boolean, input_html: {checked: false} %>
+  <% end %>
+</div>
+
 <div id="all_artists_with_sort">
   <%= render partial: 'artists' %>
 </div>
