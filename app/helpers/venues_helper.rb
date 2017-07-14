@@ -1,5 +1,5 @@
 module VenuesHelper
-  def sortable(current_route, column, column_table = "Venue", title = nil)
+  def sortable_venue(current_route, column, column_table = "Venue", title = nil)
     # binding.pry
     title ||= column.titleize
     css_class = column == sort_column(column_table) && column_table == sort_table ? "current #{sort_direction}" : nil

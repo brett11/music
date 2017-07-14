@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-12" id="sort_concert_by_date">
-    <%= sortable(request.url, "dateandtime", "Concert", "Sort by date") %>
+    <%= sortable_concert(request.url, "dateandtime", "Concert", "Sort by date") %>
   </div>
   <div class="col-12" id="sort_concert_alphabetically_by_artist">
-    <%= sortable(request.url, "name_stage", "Artist", "Sort alphabetically (artist)") %>
+    <%= sortable_concert(request.url, "name_stage", "Artist", "Sort alphabetically (artist)") %>
   </div>
 </div>
 
