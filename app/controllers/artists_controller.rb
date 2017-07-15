@@ -104,8 +104,9 @@ class ArtistsController < ApplicationController
 
     # TODO: figure out how to sort using MyFavArtists checkbox
     def sort_favs?
-      if sort_params[:sort_favs].present?
-        sort_params[:sort_favs]
+      #in below, we need to make sure that method returns a boolean and not a string, as "false" as string evaluates to true
+      if sort_params[:sort_favs].present? && sort_params[:sort_favs] == "true"
+        true
       else
         false
       end
