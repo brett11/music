@@ -391,4 +391,28 @@ $(document).on('turbolinks:load', function() {
         return false;
     }, 200));
 
+    // pagination
+    // railscast 240
+    $(document).on("click", ".pagination a", function () {
+        $.ajax({
+            url: this.href ,
+            cache: true,
+            type: 'GET',
+            // not needed because action only contains href, which is all we need
+            // data: $(this).serialize(),
+            dataType: 'script',
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
+        });
+        return false;
+    });
+
 });
