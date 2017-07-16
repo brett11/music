@@ -10,27 +10,37 @@
 
 <h1>Artists</h1>
 
+<div class="row" id="artists_sort_favs_wrapper_div">
+  <%= form_tag artists_path, :method => 'get', :id => "my_favs_sort" do %>
+      <div id="sort_favs_hidden_fields">
+        <%= render 'sort_favs_hidden_fields' %>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-sm-5 col-sm-offset-2 checkbox-inline">
+            <%= check_box_tag :sort_favs, true, params[:sort_favs] %>
+            <%= label_tag :sort_favs %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+
 <div class="row" id="artists_search_wrapper_div">
   <%= form_tag artists_path, :method => 'get', :id => "artists_search" do %>
       <div id="search_hidden_fields">
         <%= render 'search_hidden_fields' %>
       </div>
       <div class="col-12">
-      <div class="row">
-      <div class="col-sm-5 col-sm-offset-2" style="display: flex; align-items: end;" >
-          <%= text_field_tag :search, params[:search] %>
-        </div>
-        <div class="col-sm-3">
-          <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
+        <div class="row">
+          <div class="col-sm-5 col-sm-offset-2" style="display: flex; align-items: end;" >
+            <%= text_field_tag :search, params[:search] %>
+          </div>
+          <div class="col-sm-3">
+            <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
+          </div>
         </div>
       </div>
-      </div>
-  <% end %>
-</div>
-
-<div class="col-md-2 col-md-offset-5" id="sort_my_favs">
-  <%= simple_form_for(@artist_for_form, html: { class: 'form-horizontal' }) do |f| %>
-      <%= f.input :my_favs, :as => :boolean, input_html: {checked: false} %>
   <% end %>
 </div>
 

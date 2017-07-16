@@ -99,6 +99,28 @@ $(document).on('turbolinks:load', function() {
         return false;
     }, 200));
 
+    // artists sort by my_favs full ajax version
+    $(document).on("change","#my_favs_sort input:checkbox", function() {
+        $.ajax({
+            url: $("#my_favs_sort").attr("action"),
+            cache: true,
+            type: 'GET',
+            data: $("#my_favs_sort").serialize(),
+            dataType: 'script',
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
+        });
+        return false;
+    });
+
     // albums index sort by release date
     $(document).on("submit","#sort_release_date form", function () {
         $.ajax({
@@ -318,7 +340,7 @@ $(document).on('turbolinks:load', function() {
     }, 200));
 
     // https://stackoverflow.com/questions/6878757/how-to-listen-to-when-a-checkbox-is-checked-in-jquery/6878786
-    $('input[name="artist[my_favs]"]:checkbox').change(
+    $('input[name="sort_favs"]:checkbox').change(
         function(){
             if ($(this).is(':checked')) {
                 $('#sort_alphabetically form input[name="sort_favs"]').val('true');
