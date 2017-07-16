@@ -100,7 +100,6 @@ class ArtistsController < ApplicationController
       %w[asc desc].include?(sort_params[:direction]) ? sort_params[:direction] : "asc"
     end
 
-    # TODO: figure out how to sort using MyFavArtists checkbox
     def sort_favs?
       #in below, we need to make sure that method returns a boolean and not a string, as "false" as string evaluates to true
       if sort_params[:sort_favs].present? && sort_params[:sort_favs] == "true"

@@ -2,4 +2,4 @@ $("#all_artists_with_sort").html("<%= j render partial: 'artists' %>");
 
 <%# this needs to be included so that the search hiddden fields are updated when sorting changes %>
 <%# in http://railscasts.com/episodes/240-search-sort-paginate-with-ajax?view=asciicast they move it into search form, but I thought this was better %>
-$("#search_hidden_fields").html("<%= j render partial: 'search_hidden_fields' %>");
+$("#search_hidden_fields").html("<%= j render partial: 'shared/search_hidden_fields' %>");
