@@ -9,12 +9,23 @@ class AlbumsController < ApplicationController
 
   def index
     # sometimes sort albums based on artist
-    if sort_params[:sort_table] == "Artist"
-      @albums = sort_by_artist
+    # binding.pry
+    if sort_favs?
+      if sort_params[:sort_table] == "Artist"
+        @albums = sort_my_favs_by_artist
+      else
+        # binding.pry
+        @albums = sort_my_favs
+      end
     else
-      # binding.pry
-      @albums = sort
+      if sort_params[:sort_table] == "Artist"
+        @albums = sort_by_artist
+      else
+        # binding.pry
+        @albums = sort
+      end
     end
+
     respond_to do |format|
       format.html
       format.js
@@ -78,7 +89,7 @@ class AlbumsController < ApplicationController
     end
 
     def sort_params
-      params.permit(:sort_table, :sort, :direction, :page, :search, :utf8)
+      params.permit(:sort_table, :sort, :direction, :page, :search, :utf8, :sort_favs)
     end
 
     def album_params_less_artist
@@ -105,6 +116,15 @@ class AlbumsController < ApplicationController
       %w[asc desc].include?(sort_params[:direction]) ? sort_params[:direction] : "asc"
     end
 
+    def sort_favs?
+      #in below, we need to make sure that method returns a boolean and not a string, as "false" as string evaluates to true
+      if sort_params[:sort_favs].present? && sort_params[:sort_favs] == "true"
+        true
+      else
+        false
+      end
+    end
+
     #reorder because https://stackoverflow.com/questions/14286207/how-to-remove-ranking-of-query-results
     def sort
       Album.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
@@ -119,6 +139,20 @@ class AlbumsController < ApplicationController
 
     def sort_by_artist
       Album.search(sort_params[:search]).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
+        .paginate( page: params[:page] )
+    end
+
+
+  # TODO: fix current_user.following.albums
+  def sort_my_favs
+    #Album.search(sort_params[:search]).merge().reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+    Album.search(sort_params[:search]).joins(:artists).merge(current_user.following).merge(Album.reorder(sort_column(sort_table) + " #{sort_direction}"))
+      .paginate( page: params[:page] )
+    end
+
+  # TODO: fix current_user.following.albums
+    def sort_my_favs_by_artist
+      Album.search(sort_params[:search]).joins(:artists).merge(current_user.following).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
         .paginate( page: params[:page] )
     end
 
