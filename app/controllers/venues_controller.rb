@@ -6,12 +6,8 @@ class VenuesController < ApplicationController
   helper_method :sort_column, :sort_direction, :sort_table
 
   def index
-    if sort_params[:sort_table] == "City"
-      @venues = sort_by_city
-    else
-      # binding.pry
-      @venues = sort
-    end
+    @venues = sort
+
     respond_to do |format|
       format.html
       format.js
@@ -101,6 +97,7 @@ class VenuesController < ApplicationController
   def sort
     Venue.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
   end
+
 
   #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
   #https://apidock.com/rails/ActiveRecord/QueryMethods/order, "User.order('name DESC, email')" example
