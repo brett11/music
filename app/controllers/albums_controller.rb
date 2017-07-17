@@ -1,5 +1,3 @@
-# require 'pry'
-
 class AlbumsController < ApplicationController
   # before_action :set_album, only:[:show, :edit, :update]
   before_action :admin_user, only: [:new, :create, :edit, :update]

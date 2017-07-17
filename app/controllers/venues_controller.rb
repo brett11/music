@@ -1,5 +1,3 @@
-#require 'pry'
-
 class VenuesController < ApplicationController
   before_action :admin_user, only: [:new, :create, :edit, :update]
   # before_action :set_venue, only:[:show, :edit, :update]

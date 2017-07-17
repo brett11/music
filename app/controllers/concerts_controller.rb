@@ -1,5 +1,3 @@
-#require 'pry'
-
 class ConcertsController < ApplicationController
   before_action :admin_user, only: [:new, :create, :edit, :update]
 
@@ -13,12 +11,21 @@ class ConcertsController < ApplicationController
   def index
     #@concerts = Concert.paginate(page: params[:page]).where('dateandtime > ?', DateTime.now).order("dateandtime ASC")
     # sometimes sort albums based on artist
-    if sort_params[:sort_table] == "Artist"
-      @concerts = sort_by_artist
+    if sort_favs?
+      if sort_params[:sort_table] == "Artist"
+        @concerts = sort_my_favs_by_artist
+      else
+        @concerts = sort_my_favs
+      end
     else
-      # binding.pry
-      @concerts = sort
+      if sort_params[:sort_table] == "Artist"
+        @concerts = sort_by_artist
+      else
+        # binding.pry
+        @concerts = sort
+      end
     end
+
     respond_to do |format|
       format.html
       format.js
@@ -80,7 +87,7 @@ class ConcertsController < ApplicationController
     end
 
     def sort_params
-      params.permit(:sort_table, :sort, :direction, :page, :search, :utf8)
+      params.permit(:sort_table, :sort, :direction, :page, :search, :utf8, :sort_favs)
     end
 
     def sort_table
@@ -103,6 +110,15 @@ class ConcertsController < ApplicationController
       end
     end
 
+    def sort_favs?
+      #in below, we need to make sure that method returns a boolean and not a string, as "false" as string evaluates to true
+      if sort_params[:sort_favs].present? && sort_params[:sort_favs] == "true"
+        true
+      else
+        false
+      end
+    end
+
     def sort
       # Concert.paginate(page: params[:page]).where('dateandtime > ?', DateTime.now).order("dateandtime ASC")
       # binding.pry
@@ -117,6 +133,15 @@ class ConcertsController < ApplicationController
     #https://stackoverflow.com/questions/19616611/rails-order-by-association-field Gary S. Weaver's comment
     def sort_by_artist
       Concert.search(sort_params[:search]).where('dateandtime > ?', DateTime.now).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
+        .paginate( page: params[:page] )
+    end
+
+    def sort_my_favs
+      Concert.search(sort_params[:search]).where('dateandtime > ?', DateTime.now).joins(:artists).merge(current_user.following).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: params[:page])
+    end
+
+    def sort_my_favs_by_artist
+      Concert.search(sort_params[:search]).where('dateandtime > ?', DateTime.now).joins(:artists).merge(current_user.following).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
         .paginate( page: params[:page] )
     end
 
