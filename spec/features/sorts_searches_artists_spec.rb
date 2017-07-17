@@ -13,33 +13,62 @@ RSpec.describe "artists" do
     @bon_iver = FactoryGirl.create(:artist, name_stage: "Bon Iver", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/BonIver.jpg", 'image/jpeg') )
   end
 
+  describe "if not logged in" do
+    it "sorts alphabetically" do
+      visit artists_path
+      #http://stackoverflow.com/questions/5228371/how-to-get-current-path-with-query-string-using-capybara
+      # binding.pry
+      expect(page).to have_selector("#frank_ocean")
+      expect(page).to have_selector("#u2")
+      expect(page).to have_selector("#bon_iver")
+      # expect(page).to have_selector("div#all_artists div:nth-child(1)", content: @date1.content)
+      #note that default of aritsts index is to be sorted alphabetically.
+      expect(@bon_iver.name_stage).to appear_before(@frank_ocean.name_stage)
+      expect(@frank_ocean.name_stage).to appear_before(@u2.name_stage)
+      click_button "Sort alphabetically"
+      #since sort_alphabetically reverses itself, the following should be in reverse alphabetical order
+      expect(@u2.name_stage).to appear_before(@frank_ocean.name_stage)
+      expect(@frank_ocean.name_stage).to appear_before(@bon_iver.name_stage)
+    end
 
-  it "sorts by date" do
-    visit artists_path
-    #http://stackoverflow.com/questions/5228371/how-to-get-current-path-with-query-string-using-capybara
-    # binding.pry
-    expect(page).to have_selector("#frank_ocean")
-    expect(page).to have_selector("#u2")
-    expect(page).to have_selector("#bon_iver")
-    # expect(page).to have_selector("div#all_artists div:nth-child(1)", content: @date1.content)
-    #note that default of aritsts index is to be sorted alphabetically.
-    expect(@bon_iver.name_stage).to appear_before(@frank_ocean.name_stage)
-    expect(@frank_ocean.name_stage).to appear_before(@u2.name_stage)
-    click_button "Sort alphabetically"
-    #since sort_alphabetically reverses itself, the following should be in reverse alphabetical order
-    expect(@u2.name_stage).to appear_before(@frank_ocean.name_stage)
-    expect(@frank_ocean.name_stage).to appear_before(@bon_iver.name_stage)
+    it "searches" do
+      visit artists_path
+      expect(page).to have_selector("#frank_ocean")
+      expect(page).to have_selector("#u2")
+      expect(page).to have_selector("#bon_iver")
+      fill_in "search", with: "frank"
+      click_button "Search"
+      expect(page).to have_selector("#frank_ocean")
+      expect(page).to_not have_selector("#u2")
+      expect(page).to_not have_selector("#bon_iver")
+    end
   end
 
-  it "searches" do
-    visit artists_path
-    expect(page).to have_selector("#frank_ocean")
-    expect(page).to have_selector("#u2")
-    expect(page).to have_selector("#bon_iver")
-    fill_in "search", with: "frank"
-    click_button "Search"
-    expect(page).to have_selector("#frank_ocean")
-    expect(page).to_not have_selector("#u2")
-    expect(page).to_not have_selector("#bon_iver")
-  end
+  # need to add javascript integration tools
+  # describe "if logged in" do
+  #   let(:user) { FactoryGirl.create(:user) }
+  #
+  #   before(:example) do
+  #     login(user)
+  #   end
+  #
+  #   it "sorts by favs" do
+  #     visit artists_path
+  #     #http://stackoverflow.com/questions/5228371/how-to-get-current-path-with-query-string-using-capybara
+  #     # binding.pry
+  #     expect(page).to have_selector("#frank_ocean")
+  #     expect(page).to have_selector("#u2")
+  #     expect(page).to have_selector("#bon_iver")
+  #     # expect(page).to have_selector("div#all_artists div:nth-child(1)", content: @date1.content)
+  #     #note that default of aritsts index is to be sorted alphabetically.
+  #     expect(@bon_iver.name_stage).to appear_before(@frank_ocean.name_stage)
+  #     expect(@frank_ocean.name_stage).to appear_before(@u2.name_stage)
+  #     page.find('#bon_iver form.new_fanship > input[value="Follow"]').click
+  #     check 'sort_favs'
+  #     #since sort_alphabetically reverses itself, the following should be in reverse alphabetical order
+  #     expect(page).to have_selector("#bon_iver")
+  #     expect(page).to_not have_selector("#frank_ocean")
+  #     expect(page).to_not have_selector("#u2")
+  #   end
+  # end
 end
