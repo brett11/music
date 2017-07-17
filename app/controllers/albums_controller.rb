@@ -9,14 +9,14 @@ class AlbumsController < ApplicationController
     # sometimes sort albums based on artist
     # binding.pry
     if sort_favs?
-      if sort_params[:sort_table] == "Artist"
+      if params[:sort_table] == "Artist"
         @albums = sort_my_favs_by_artist
       else
         # binding.pry
         @albums = sort_my_favs
       end
     else
-      if sort_params[:sort_table] == "Artist"
+      if params[:sort_table] == "Artist"
         @albums = sort_by_artist
       else
         # binding.pry
@@ -86,9 +86,10 @@ class AlbumsController < ApplicationController
       params.require(:album).permit(:name, :release_date, :album_cover, artist_ids: [] )
     end
 
-    def sort_params
-      params.permit(:sort_table, :sort, :direction, :page, :search, :utf8, :sort_favs)
-    end
+  # below not needed. no mass assignment used when sorting
+  # def sort_params
+  #   params.permit(:sort_table, :sort, :direction, :page, :search, :utf8, :sort_favs)
+  # end
 
     def album_params_less_artist
       params.require(:album).permit(:name, :release_date, :album_cover)
@@ -96,27 +97,27 @@ class AlbumsController < ApplicationController
 
     def sort_column(sort_table)
       if sort_table == "Album"
-        Album.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "name"
+        Album.column_names.include?(params[:sort]) ? params[:sort] : "name"
       elsif sort_table == "Artist"
-        Artist.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "name_stage"
+        Artist.column_names.include?(params[:sort]) ? params[:sort] : "name_stage"
       end
     end
 
     def sort_table
-      if sort_params[:sort_table].present?
-        sort_params[:sort_table]
+      if params[:sort_table].present?
+        params[:sort_table]
       else
         "Album"
       end
     end
 
     def sort_direction
-      %w[asc desc].include?(sort_params[:direction]) ? sort_params[:direction] : "asc"
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
     def sort_favs?
       #in below, we need to make sure that method returns a boolean and not a string, as "false" as string evaluates to true
-      if sort_params[:sort_favs].present? && sort_params[:sort_favs] == "true"
+      if params[:sort_favs].present? && params[:sort_favs] == "true"
         true
       else
         false
@@ -125,38 +126,38 @@ class AlbumsController < ApplicationController
 
     #reorder because https://stackoverflow.com/questions/14286207/how-to-remove-ranking-of-query-results
     def sort
-      Album.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+      Album.search(params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: params[:page])
     end
 
     #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
     # superseded by below
     # def sort_by_artist
-    #   Album.search(sort_params[:search]).includes(:artists).reorder("artists." + sort_column(sort_table) + " #{sort_direction}")
+    #   Album.search(params[:search]).includes(:artists).reorder("artists." + sort_column(sort_table) + " #{sort_direction}")
     #     .paginate( page: params[:page] )
     # end
 
     def sort_by_artist
-      Album.search(sort_params[:search]).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
+      Album.search(params[:search]).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
         .paginate( page: params[:page] )
     end
 
 
   # TODO: fix current_user.following.albums
   def sort_my_favs
-    #Album.search(sort_params[:search]).merge().reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
-    Album.search(sort_params[:search]).joins(:artists).merge(current_user.following).merge(Album.reorder(sort_column(sort_table) + " #{sort_direction}"))
+    #Album.search(params[:search]).merge().reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: params[:page])
+    Album.search(params[:search]).joins(:artists).merge(current_user.following).merge(Album.reorder(sort_column(sort_table) + " #{sort_direction}"))
       .paginate( page: params[:page] )
     end
 
   # TODO: fix current_user.following.albums
     def sort_my_favs_by_artist
-      Album.search(sort_params[:search]).joins(:artists).merge(current_user.following).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
+      Album.search(params[:search]).joins(:artists).merge(current_user.following).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
         .paginate( page: params[:page] )
     end
 
   #added by BF
   # def sort_column_table
-  #   if sort_params[:sort] == "artist"
+  #   if params[:sort] == "artist"
   #     "Artist"
   #   else
   #     "Album"

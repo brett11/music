@@ -70,46 +70,47 @@ class VenuesController < ApplicationController
     @venue= Venue.find(params[:id])
   end
 
-  def sort_params
-    params.permit(:sort_table, :sort, :direction, :page, :search, :utf8)
-  end
+  # below not necessary because no mass assignment used in sorting
+  # def sort_params
+  #   params.permit(:sort_table, :sort, :direction, :page, :search, :utf8)
+  # end
 
   def sort_table
-    if sort_params[:sort_table].present?
-      sort_params[:sort_table]
+    if params[:sort_table].present?
+      params[:sort_table]
     else
       "Venue"
     end
   end
 
   def sort_direction
-    %w[asc desc].include?(sort_params[:direction]) ? sort_params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   def sort_column(sort_table)
     if sort_table == "Venue"
-      Venue.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "name"
+      Venue.column_names.include?(params[:sort]) ? params[:sort] : "name"
     elsif sort_table == "City"
-      City.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "name"
+      City.column_names.include?(params[:sort]) ? params[:sort] : "name"
     end
   end
 
   def sort
-    Venue.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+    Venue.search(params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: params[:page])
   end
 
 
   #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
   #https://apidock.com/rails/ActiveRecord/QueryMethods/order, "User.order('name DESC, email')" example
   # def sort_by_city
-  #   Venue.search(sort_params[:search]).includes(:city).reorder("\"cities\"." + "\"" + sort_column(sort_table) + "\"" + " #{sort_direction}")
+  #   Venue.search(params[:search]).includes(:city).reorder("\"cities\"." + "\"" + sort_column(sort_table) + "\"" + " #{sort_direction}")
   #     .paginate( page: params[:page] )
   # end
 
   #https://stackoverflow.com/questions/19616611/rails-order-by-association-field Gary S. Weaver's comment
   # below doesn't work because sort_column result is name, which is interpreted as venue name. Specifying cities.name results in error
   # def sort_by_city
-  #   Venue.search(sort_params[:search]).joins(:city).merge(City.reorder(sort_column(sort_table) + " #{sort_direction}"))
+  #   Venue.search(params[:search]).joins(:city).merge(City.reorder(sort_column(sort_table) + " #{sort_direction}"))
   #     .paginate( page: params[:page] )
   # end
 

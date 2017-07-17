@@ -10,9 +10,9 @@ class ArtistsController < ApplicationController
   def index
     # binding.pry
     if sort_favs?
-      @artists=current_user.following.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+      @artists=current_user.following.search(params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: params[:page])
     else
-      @artists=Artist.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+      @artists=Artist.search(params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: params[:page])
     end
 
 
@@ -65,7 +65,7 @@ class ArtistsController < ApplicationController
 
   #http://guides.rubyonrails.org/routing.html 2.10.2
   def myfavartists
-    @artists=current_user.following.search(sort_params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: sort_params[:page])
+    @artists=current_user.following.search(params[:search]).reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: params[:page])
   end
 
   private
@@ -74,9 +74,10 @@ class ArtistsController < ApplicationController
       params.require(:artist).permit(:name_first, :name_last, :name_stage, :avatar)
     end
 
-    def sort_params
-      params.permit(:sort_table, :sort, :direction, :page, :search, :utf8, :sort_favs)
-    end
+  # below not needed. no mass assignment used when sorting
+  # def sort_params
+    #   params.permit(:sort_table, :sort, :direction, :page, :search, :utf8, :sort_favs)
+    # end
     # not used as before callback, because would like to test that variable is or isn't set based on admin or not
     # def set_artist
     #   @artist = Artist.find(params[:id])
@@ -84,25 +85,25 @@ class ArtistsController < ApplicationController
 
     def sort_column(sort_table)
       if sort_table == "Artist"
-        Artist.column_names.include?(sort_params[:sort]) ? sort_params[:sort] : "name_stage"
+        Artist.column_names.include?(params[:sort]) ? params[:sort] : "name_stage"
       end
     end
 
     def sort_table
-      if sort_params[:sort_table].present?
-        sort_params[:sort_table]
+      if params[:sort_table].present?
+        params[:sort_table]
       else
       "Artist"
       end
     end
 
     def sort_direction
-      %w[asc desc].include?(sort_params[:direction]) ? sort_params[:direction] : "asc"
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
     def sort_favs?
       #in below, we need to make sure that method returns a boolean and not a string, as "false" as string evaluates to true
-      if sort_params[:sort_favs].present? && sort_params[:sort_favs] == "true"
+      if params[:sort_favs].present? && params[:sort_favs] == "true"
         true
       else
         false
