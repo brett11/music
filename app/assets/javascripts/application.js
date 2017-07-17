@@ -427,6 +427,40 @@ $(document).on('turbolinks:load', function() {
         return false;
     }, 200));
 
+    // venues sort update for favs or not
+    // https://stackoverflow.com/questions/6878757/how-to-listen-to-when-a-checkbox-is-checked-in-jquery/6878786
+    $('input[name="sort_favs"]:checkbox').change(
+        function(){
+            if ($(this).is(':checked')) {
+                $('#sort_venue_by_name form input[name="sort_favs"]').val('true');
+            }
+            else {
+                $('#sort_venue_by_name form input[name="sort_favs"]').val('false');
+            }
+        });
+
+    // venues sort by my_favs full ajax version
+    $(document).on("change","#my_favs_venues_sort input:checkbox", function() {
+        $.ajax({
+            url: $("#my_favs_venues_sort").attr("action"),
+            cache: true,
+            type: 'GET',
+            data: $("#my_favs_venues_sort").serialize(),
+            dataType: 'script',
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
+        });
+        return false;
+    });
+
     // pagination
     // railscast 240
     $(document).on("click", ".pagination a", function () {
