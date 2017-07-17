@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-12" id="sort_venue_by_name">
-    <%= sortable_venue(request.url, "name", "Venue", "Sort by venue name") %>
+    <%= sortable_venue(request.path, "name", "Venue", "Sort by venue name") %>
   </div>
   <% if false %>
       <div class="col-12" id="sort_venue_by_city_name">
-        <%= sortable_venue(request.url, "name", "City", "Sort by city name") %>
+        <%= sortable_venue(request.path, "name", "City", "Sort by city name") %>
       </div>
   <% end %>
 </div>

@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-12" id="sort_release_date">
-    <%= sortable_album(request.url, "release_date", "Album", "Sort by release date") %>
+    <%= sortable_album(request.path, "release_date", "Album", "Sort by release date") %>
   </div>
   <div class="col-12" id="sort_alphabetically_album">
-    <%= sortable_album(request.url, "name", "Album", "Sort alphabetically (albums)") %>
+    <%= sortable_album(request.path, "name", "Album", "Sort alphabetically (albums)") %>
   </div>
   <div class="col-12" id="sort_alphabetically_by_artist">
-    <%= sortable_album(request.url, "name_stage", "Artist", "Sort alphabetically (artist)") %>
+    <%= sortable_album(request.path, "name_stage", "Artist", "Sort alphabetically (artist)") %>
   </div>
 </div>
 
