@@ -92,11 +92,8 @@ class ConcertsController < ApplicationController
     # end
 
     def sort_table
-      if params[:sort_table].present?
-        params[:sort_table]
-      else
-        "Concert"
-      end
+      artist_album_array = %w(Artist Concert)
+      artist_album_array.include?(params[:sort_table]) ? params[:sort_table] : "Concert"
     end
 
     def sort_direction
@@ -133,7 +130,7 @@ class ConcertsController < ApplicationController
     #     .paginate( page: params[:page] )
     #https://stackoverflow.com/questions/19616611/rails-order-by-association-field Gary S. Weaver's comment
     def sort_by_artist
-      Concert.search(params[:search]).where('dateandtime > ?', DateTime.now).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
+      Concert.search(params[:search]).where('dateandtime > ?', DateTime.now).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + " " + sort_direction))
         .paginate( page: params[:page] )
     end
 
@@ -142,7 +139,7 @@ class ConcertsController < ApplicationController
     end
 
     def sort_my_favs_by_artist
-      Concert.search(params[:search]).where('dateandtime > ?', DateTime.now).joins(:artists).merge(current_user.following).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
+      Concert.search(params[:search]).where('dateandtime > ?', DateTime.now).joins(:artists).merge(current_user.following).merge(Artist.reorder(sort_column(sort_table) + " " + sort_direction))
         .paginate( page: params[:page] )
     end
 

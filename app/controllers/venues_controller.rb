@@ -75,24 +75,22 @@ class VenuesController < ApplicationController
   #   params.permit(:sort_table, :sort, :direction, :page, :search, :utf8)
   # end
 
+  #only option in venues index is to sort by venue name. sort_table should only be venues
   def sort_table
-    if params[:sort_table].present?
-      params[:sort_table]
-    else
       "Venue"
-    end
   end
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
+  # commented out if statement because currently venues index does not allow for sorting based on city, only venue table
   def sort_column(sort_table)
-    if sort_table == "Venue"
+    # if sort_table == "Venue"
       Venue.column_names.include?(params[:sort]) ? params[:sort] : "name"
-    elsif sort_table == "City"
-      City.column_names.include?(params[:sort]) ? params[:sort] : "name"
-    end
+    # elsif sort_table == "City"
+    #   City.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    # end
   end
 
   def sort

@@ -89,12 +89,9 @@ class ArtistsController < ApplicationController
       end
     end
 
+    # params[:sort_table] irrelevant here, because sort table should always be artist. no other options available in artists index page
     def sort_table
-      if params[:sort_table].present?
-        params[:sort_table]
-      else
       "Artist"
-      end
     end
 
     def sort_direction

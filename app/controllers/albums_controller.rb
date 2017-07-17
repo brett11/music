@@ -104,11 +104,8 @@ class AlbumsController < ApplicationController
     end
 
     def sort_table
-      if params[:sort_table].present?
-        params[:sort_table]
-      else
-        "Album"
-      end
+      artist_album_array = %w(Artist Album)
+      artist_album_array.include?(params[:sort_table]) ? params[:sort_table] : "Album"
     end
 
     def sort_direction
@@ -132,12 +129,12 @@ class AlbumsController < ApplicationController
     #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44
     # superseded by below
     # def sort_by_artist
-    #   Album.search(params[:search]).includes(:artists).reorder("artists." + sort_column(sort_table) + " #{sort_direction}")
+    #   Album.search(params[:search]).includes(:artists).reorder("artists." + sort_column(sort_table) + " " + sort_direction)
     #     .paginate( page: params[:page] )
     # end
 
     def sort_by_artist
-      Album.search(params[:search]).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
+      Album.search(params[:search]).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + " " + sort_direction))
         .paginate( page: params[:page] )
     end
 
@@ -145,13 +142,13 @@ class AlbumsController < ApplicationController
   # TODO: fix current_user.following.albums
   def sort_my_favs
     #Album.search(params[:search]).merge().reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: params[:page])
-    Album.search(params[:search]).joins(:artists).merge(current_user.following).merge(Album.reorder(sort_column(sort_table) + " #{sort_direction}"))
+    Album.search(params[:search]).joins(:artists).merge(current_user.following).merge(Album.reorder(sort_column(sort_table) + " " + sort_direction))
       .paginate( page: params[:page] )
     end
 
   # TODO: fix current_user.following.albums
     def sort_my_favs_by_artist
-      Album.search(params[:search]).joins(:artists).merge(current_user.following).merge(Artist.reorder(sort_column(sort_table) + " #{sort_direction}"))
+      Album.search(params[:search]).joins(:artists).merge(current_user.following).merge(Artist.reorder(sort_column(sort_table) + " " + sort_direction))
         .paginate( page: params[:page] )
     end
 

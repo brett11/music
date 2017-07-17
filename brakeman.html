@@ -1,0 +1,1860 @@
+<!DOCTYPE HTML SYSTEM>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Brakeman Report</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+    function toggle(context) {
+      var elem = document.getElementById(context);
+
+      if (elem.style.display != "block")
+        elem.style.display = "block";
+      else
+        elem.style.display = "none";
+
+      elem.parentNode.scrollIntoView();
+    }
+
+    $(document).ready(function() {
+      $('table').DataTable({
+        searching: false,
+        paging:    false,
+        info:      false
+      });
+    });
+  </script>
+  <style>
+    /* CSS style used for HTML reports */
+
+body {
+  font-family: sans-serif;
+  color: #161616;
+}
+
+a {
+  color: #161616;
+}
+
+p {
+  font-weight: bold;
+  font-size: 11pt;
+  color: #2D0200;
+ }
+
+ th {
+   background-color: #980905;
+   border-bottom: 5px solid #530200;
+   color: white;
+   font-size: 11pt;
+   padding: 1px 8px 1px 8px;
+ }
+
+ td {
+   border-bottom: 2px solid white;
+   font-family: monospace;
+   padding: 5px 8px 1px 8px;
+ }
+
+ table {
+   background-color: #FCF4D4;
+   border-collapse: collapse;
+ }
+
+ h1 {
+   color: #2D0200;
+   font-size: 14pt;
+ }
+
+ h2 {
+   color: #2D0200;
+   font-size: 12pt;
+ }
+
+ span.high-confidence {
+   font-weight:bold;
+   color: red;
+ }
+
+ span.med-confidence {
+ }
+
+ span.weak-confidence {
+   color:gray;
+ }
+
+ div.warning_message {
+   cursor: pointer;
+ }
+
+ div.warning_message:hover {
+   background-color: white;
+ }
+
+ table caption {
+   background-color: #FFE;
+   padding: 2px;
+ }
+
+ table.context {
+   margin-top: 5px;
+   margin-bottom: 5px;
+   border-left: 1px solid #90e960;
+   color: #212121;
+ }
+
+ tr.context {
+   background-color: white;
+ }
+
+ tr.first {
+   border-top: 1px solid #7ecc54;
+   padding-top: 2px;
+ }
+
+ tr.error {
+  background-color: #f4c1c1 !important
+ }
+
+ tr.near_error {
+  background-color: #f4d4d4 !important
+ }
+
+ tr.alt {
+   background-color: #e8f4d4;
+ }
+
+ td.context {
+   padding: 2px 10px 0px 6px;
+   border-bottom: none;
+ }
+
+ td.context_line {
+   padding: 2px 8px 0px 7px;
+   border-right: 1px solid #b3bda4;
+   border-bottom: none;
+   color: #6e7465;
+ }
+
+ pre.context {
+   margin-bottom: 1px;
+ }
+
+ .user_input {
+   background-color: #fcecab;
+ }
+
+ div.render_path {
+   display: none;
+   background-color: #ffe;
+   padding: 5px;
+   margin: 2px 0px 2px 0px;
+ }
+
+ div.template_name {
+   cursor: pointer;
+ }
+
+ div.template_name:hover {
+   background-color: white;
+ }
+
+  </style>
+</head>
+<body>
+
+<h1>Brakeman Report</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Application Path</th>
+      <th>Rails Version</th>
+      <th>Brakeman Version</th>
+      <th>Report Time</th>
+      <th>Checks Performed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/Users/Brett/Sites/music</td>
+      <td>5.0.1</td>
+      <td>3.7.0
+      <td>
+        2017-07-17 16:42:42 -0500<br><br>
+        1.731586 seconds
+      </td>
+      <td>BasicAuth, BasicAuthTimingAttack, ContentTag, CreateWith, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, DynamicFinders, EscapeFunction, Evaluation, Execute, FileAccess, FileDisclosure, FilterSkipping, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONEncoding, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, MimeTypeDoS, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NestedAttributesBypass, NumberToCurrency, QuoteTableName, Redirect, RegexDoS, Render, RenderDoS, RenderInline, ResponseSplitting, RouteDoS, SQL, SQLCVEs, SSLVerify, SafeBufferManipulation, SanitizeMethods, SelectTag, SelectVulnerability, Send, SendFile, SessionManipulation, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, StripTags, SymbolDoSCVE, TranslateBug, UnsafeReflection, ValidationRegex, WithoutProtection, XMLDoS, YAMLParsing</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2 id='summary'>Summary</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Scanned/Reported</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Controllers</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>Models</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>Templates</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <td>Errors</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Security Warnings</td>
+      <td>18 <span class='high-confidence'>(0)</span></td>
+    </tr>
+  
+    <tr>
+      <td>Ignored Warnings</td>
+      <td>0</td>
+    </tr>
+  
+  </tbody>
+</table>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Warning Type</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>Cross Site Scripting</td>
+      <td>2</td>
+    </tr>
+  
+    <tr>
+      <td>Dynamic Render Path</td>
+      <td>4</td>
+    </tr>
+  
+    <tr>
+      <td>SQL Injection</td>
+      <td>12</td>
+    </tr>
+  
+  </tbody>
+</table>
+<br>
+<h2>Security Warnings</h2>  
+<table>
+  <thead>
+    <tr>
+      <th>Confidence</th>
+      <th>Class</th>
+      <th>Method</th>
+      <th>Warning Type</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>AlbumsController</td>
+      <td>sort</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context1');toggle('message1');toggle('full_message1')" ><span id='message1' style='display:block' >Possible SQL injection near line 126: Album.search(params[:search]).reorder(((<span class="user_input">sort_column(sort_table)</span>...</span><span id='full_message1' style='display:none'>Possible SQL injection near line 126: Album.search(params[:search]).reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context1' class='context' style='display:none'><caption>app/controllers/albums_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>121</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>      end</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>122</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>124</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #reorder because https://stackoverflow.com/questions/14286207/how-to-remove-ranking-of-query-results</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>125</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def sort</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>126</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      Album.search(params[:search]).reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>127</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>129</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>130</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    # superseded by below</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>131</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    # def sort_by_artist</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>AlbumsController</td>
+      <td>sort_by_artist</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context2');toggle('message2');toggle('full_message2')" ><span id='message2' style='display:block' >Possible SQL injection near line 137: Artist.reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_directio...</span><span id='full_message2' style='display:none'>Possible SQL injection near line 137: Artist.reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context2' class='context' style='display:none'><caption>app/controllers/albums_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>132</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    #   Album.search(params[:search]).includes(:artists).reorder(&quot;artists.&quot; + sort_column(sort_table) + &quot; &quot; + sort_direction)</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>133</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #     .paginate( page: params[:page] )</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>134</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    # end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>136</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def sort_by_artist</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>137</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      Album.search(params[:search]).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + &quot; &quot; + sort_direction))</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>138</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        .paginate( page: params[:page] )</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>139</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>142</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  # TODO: fix current_user.following.albums</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>AlbumsController</td>
+      <td>sort_my_favs</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context3');toggle('message3');toggle('full_message3')" ><span id='message3' style='display:block' >Possible SQL injection near line 145: Album.reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction...</span><span id='full_message3' style='display:none'>Possible SQL injection near line 145: Album.reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context3' class='context' style='display:none'><caption>app/controllers/albums_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>142</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  # TODO: fix current_user.following.albums</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>143</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def sort_my_favs</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>144</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #Album.search(params[:search]).merge().reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>145</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    Album.search(params[:search]).joins(:artists).merge(current_user.following).merge(Album.reorder(sort_column(sort_table) + &quot; &quot; + sort_direction))</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>146</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      .paginate( page: params[:page] )</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>147</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>149</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  # TODO: fix current_user.following.albums</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>150</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def sort_my_favs_by_artist</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>AlbumsController</td>
+      <td>sort_my_favs_by_artist</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context4');toggle('message4');toggle('full_message4')" ><span id='message4' style='display:block' >Possible SQL injection near line 151: Artist.reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_directio...</span><span id='full_message4' style='display:none'>Possible SQL injection near line 151: Artist.reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context4' class='context' style='display:none'><caption>app/controllers/albums_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>146</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>      .paginate( page: params[:page] )</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>147</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>149</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  # TODO: fix current_user.following.albums</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>150</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def sort_my_favs_by_artist</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>151</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      Album.search(params[:search]).joins(:artists).merge(current_user.following).merge(Artist.reorder(sort_column(sort_table) + &quot; &quot; + sort_direction))</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>152</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        .paginate( page: params[:page] )</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>153</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>155</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  #added by BF</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>156</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  # def sort_column_table</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>ArtistsController</td>
+      <td>index</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context6');toggle('message6');toggle('full_message6')" ><span id='message6' style='display:block' >Possible SQL injection near line 15: Artist.search(params[:search]).reorder(((<span class="user_input">sort_column(sort_table)</span>...</span><span id='full_message6' style='display:none'>Possible SQL injection near line 15: Artist.search(params[:search]).reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context6' class='context' style='display:none'><caption>app/controllers/artists_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>10</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  def index</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>11</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    # binding.pry</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>12</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    if sort_favs?</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>13</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      @artists=current_user.following.search(params[:search]).reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>14</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    else</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>15</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      @artists=Artist.search(params[:search]).reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>16</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    respond_to do |format|</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>ConcertsController</td>
+      <td>sort</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context8');toggle('message8');toggle('full_message8')" ><span id='message8' style='display:block' >Possible SQL injection near line 123: Concert.search(params[:search]).where(&quot;dateandtime &gt; ?&quot;, DateTi...</span><span id='full_message8' style='display:none'>Possible SQL injection near line 123: Concert.search(params[:search]).where(&quot;dateandtime &gt; ?&quot;, DateTime.now).reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context8' class='context' style='display:none'><caption>app/controllers/concerts_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>118</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    end</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>120</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def sort</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>121</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      # Concert.paginate(page: params[:page]).where(&#39;dateandtime &gt; ?&#39;, DateTime.now).order(&quot;dateandtime ASC&quot;)</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>122</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      # binding.pry</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>123</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      Concert.search(params[:search]).where(&#39;dateandtime &gt; ?&#39;, DateTime.now).reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>124</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>126</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>127</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #https://apidock.com/rails/ActiveRecord/QueryMethods/order, &quot;User.order(&#39;name DESC, email&#39;)&quot; example</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>128</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    # def sort_by_artist</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>ConcertsController</td>
+      <td>sort_by_artist</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context9');toggle('message9');toggle('full_message9')" ><span id='message9' style='display:block' >Possible SQL injection near line 133: Artist.reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_directio...</span><span id='full_message9' style='display:none'>Possible SQL injection near line 133: Artist.reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context9' class='context' style='display:none'><caption>app/controllers/concerts_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>128</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    # def sort_by_artist</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>129</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #   Concert.search(params[:search]).includes(:artists).reorder(&quot;\&quot;artists\&quot;.&quot; + &quot;\&quot;&quot; + sort_column(sort_table) + &quot;\&quot;&quot; + &quot; #{sort_direction}&quot;)</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>130</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #     .paginate( page: params[:page] )</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>131</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    #https://stackoverflow.com/questions/19616611/rails-order-by-association-field Gary S. Weaver&#39;s comment</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>132</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def sort_by_artist</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>133</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      Concert.search(params[:search]).where(&#39;dateandtime &gt; ?&#39;, DateTime.now).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + &quot; &quot; + sort_direction))</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>134</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        .paginate( page: params[:page] )</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>135</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>137</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def sort_my_favs</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>138</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      Concert.search(params[:search]).where(&#39;dateandtime &gt; ?&#39;, DateTime.now).joins(:artists).merge(current_user.following).reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>ConcertsController</td>
+      <td>sort_my_favs</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context10');toggle('message10');toggle('full_message10')" ><span id='message10' style='display:block' >Possible SQL injection near line 138: Concert.search(params[:search]).where(&quot;dateandtime &gt; ?&quot;, DateTi...</span><span id='full_message10' style='display:none'>Possible SQL injection near line 138: Concert.search(params[:search]).where(&quot;dateandtime &gt; ?&quot;, DateTime.now).joins(:artists).merge(current_user.following).reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context10' class='context' style='display:none'><caption>app/controllers/concerts_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>133</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>      Concert.search(params[:search]).where(&#39;dateandtime &gt; ?&#39;, DateTime.now).joins(:artists).merge(Artist.reorder(sort_column(sort_table) + &quot; &quot; + sort_direction))</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>134</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        .paginate( page: params[:page] )</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>135</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>137</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def sort_my_favs</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>138</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      Concert.search(params[:search]).where(&#39;dateandtime &gt; ?&#39;, DateTime.now).joins(:artists).merge(current_user.following).reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>139</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>141</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def sort_my_favs_by_artist</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>142</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      Concert.search(params[:search]).where(&#39;dateandtime &gt; ?&#39;, DateTime.now).joins(:artists).merge(current_user.following).merge(Artist.reorder(sort_column(sort_table) + &quot; &quot; + sort_direction))</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>143</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        .paginate( page: params[:page] )</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>ConcertsController</td>
+      <td>sort_my_favs_by_artist</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context11');toggle('message11');toggle('full_message11')" ><span id='message11' style='display:block' >Possible SQL injection near line 142: Artist.reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_directio...</span><span id='full_message11' style='display:none'>Possible SQL injection near line 142: Artist.reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context11' class='context' style='display:none'><caption>app/controllers/concerts_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>137</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    def sort_my_favs</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>138</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      Concert.search(params[:search]).where(&#39;dateandtime &gt; ?&#39;, DateTime.now).joins(:artists).merge(current_user.following).reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>139</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>141</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def sort_my_favs_by_artist</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>142</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      Concert.search(params[:search]).where(&#39;dateandtime &gt; ?&#39;, DateTime.now).joins(:artists).merge(current_user.following).merge(Artist.reorder(sort_column(sort_table) + &quot; &quot; + sort_direction))</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>143</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        .paginate( page: params[:page] )</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>144</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>146</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>end</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='med-confidence'>Medium</span></td>
+      <td>VenuesController</td>
+      <td>sort</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context12');toggle('message12');toggle('full_message12')" ><span id='message12' style='display:block' >Possible SQL injection near line 97: Venue.search(params[:search]).reorder(((<span class="user_input">sort_column(sort_table)</span> ...</span><span id='full_message12' style='display:none'>Possible SQL injection near line 97: Venue.search(params[:search]).reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context12' class='context' style='display:none'><caption>app/controllers/venues_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>92</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    #   City.column_names.include?(params[:sort]) ? params[:sort] : &quot;name&quot;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>93</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    # end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>94</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>96</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def sort</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>97</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    Venue.search(params[:search]).reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>98</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>101</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  #http://railscasts.com/episodes/228-sortable-table-columns?view=comments nico44</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>102</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  #https://apidock.com/rails/ActiveRecord/QueryMethods/order, &quot;User.order(&#39;name DESC, email&#39;)&quot; example</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='weak-confidence'>Weak</span></td>
+      <td>ArtistsController</td>
+      <td>index</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context5');toggle('message5');toggle('full_message5')" ><span id='message5' style='display:block' >Possible SQL injection near line 13: current_user.following.search(params[:search]).reorder(((sort_co...</span><span id='full_message5' style='display:none'>Possible SQL injection near line 13: current_user.following.search(params[:search]).reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context5' class='context' style='display:none'><caption>app/controllers/artists_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>8</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  #http://railscasts.com/episodes/240-search-sort-paginate-with-ajax?autoplay=true</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>9</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  #reorder because https://stackoverflow.com/questions/14286207/how-to-remove-ranking-of-query-results</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>10</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def index</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>11</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    # binding.pry</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>12</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    if sort_favs?</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>13</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      @artists=current_user.following.search(params[:search]).reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>14</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    else</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>15</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      @artists=Artist.search(params[:search]).reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>16</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    end</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='weak-confidence'>Weak</span></td>
+      <td>ArtistsController</td>
+      <td>myfavartists</td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/sql_injection/">SQL Injection</a></td>
+      <td><div class='warning_message' onClick="toggle('context7');toggle('message7');toggle('full_message7')" ><span id='message7' style='display:block' >Possible SQL injection near line 68: current_user.following.search(params[:search]).reorder(((sort_co...</span><span id='full_message7' style='display:none'>Possible SQL injection near line 68: current_user.following.search(params[:search]).reorder(((<span class="user_input">sort_column(sort_table)</span> + &quot; &quot;) + sort_direction))</span><table id='context7' class='context' style='display:none'><caption>app/controllers/artists_controller.rb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>63</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    end</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>64</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>66</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  #http://guides.rubyonrails.org/routing.html 2.10.2</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>67</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  def myfavartists</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>68</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    @artists=current_user.following.search(params[:search]).reorder(sort_column(sort_table) + &quot; &quot; + sort_direction).paginate(page: params[:page])</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>69</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  end</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>71</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  private</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>73</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    def artist_params</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+  </tbody>
+</table>
+<p>View Warnings</p>
+<table>
+  <thead>
+    <tr>
+      <th>Confidence</th>
+      <th>Template</th>
+      <th>Warning Type</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td><span class='weak-confidence'>Weak</span></td>
+      <td>
+        
+          albums/show (AlbumsController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context13');toggle('message13');toggle('full_message13')" ><span id='message13' style='display:block' >Unescaped model attribute near line 24: <span class="user_input">Album.find(params[:id]).artists</span>.map do  link_to(artist.name_s...</span><span id='full_message13' style='display:none'>Unescaped model attribute near line 24: <span class="user_input">Album.find(params[:id]).artists</span>.map do  link_to(artist.name_stage, artist_path(artist))  end.join(&quot;, &quot;)</span><table id='context13' class='context' style='display:none'><caption>app/views/albums/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>19</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    &lt;% if logged_in? &amp;&amp; current_user.admin? %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;p&gt;&lt;%= link_to &quot;Edit Album Info&quot;, edit_album_path(@album) %&gt;&lt;/p&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>21</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;br&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;div class=&quot;album_info_second_line&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;%= @album.artists.map {|artist|</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          link_to(artist.name_stage, artist_path(artist))}.join(&#39;, &#39;).html_safe</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>26</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>              %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>27</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>28</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;div class=&quot;album_info_third_line&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>29</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      Release date:  &lt;%= @album.release_date %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='weak-confidence'>Weak</span></td>
+      <td>
+        
+          concerts/show (ConcertsController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/cross_site_scripting">Cross Site Scripting</a></td>
+      <td><div class='warning_message' onClick="toggle('context14');toggle('message14');toggle('full_message14')" ><span id='message14' style='display:block' >Unescaped model attribute near line 12: <span class="user_input">Concert.find(params[:id]).artists</span>.map do  link_to(artist.name...</span><span id='full_message14' style='display:none'>Unescaped model attribute near line 12: <span class="user_input">Concert.find(params[:id]).artists</span>.map do  link_to(artist.name_stage, artist_path(artist))  end.join(&quot;, &quot;)</span><table id='context14' class='context' style='display:none'><caption>app/views/concerts/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>8</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>    &lt;/section&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>9</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;/aside&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>10</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;div class=&quot;col-md-8&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>11</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;div class=&quot;concert_info_first_line&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>12</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;%= @concert.artists.map {|artist|</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>13</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        link_to(artist.name_stage, artist_path(artist))}.join(&#39;, &#39;).html_safe</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>14</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>15</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>16</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;div class=&quot;concert_info_second_line&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>17</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;%= @concert.dateandtime.strftime(&quot;%m/%d/%Y&quot;) %&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='weak-confidence'>Weak</span></td>
+      <td>
+        
+          <div class="template_name" onClick="toggle('callers2')" >
+            <div>
+              artists/_artists (Template:artists/index)
+            </div>
+            <div class="render_path" id="callers2" >
+              ArtistsController#index &rarr; Template:artists/index &rarr; artists/_artists
+            </div>
+          </div>
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/dynamic_render_path/">Dynamic Render Path</a></td>
+      <td><div class='warning_message' onClick="toggle('context15');toggle('message15');toggle('full_message15')" ><span id='message15' style='display:block' >Render path contains parameter value near line 21: render(action =&gt; (current_user.following.search(pa...</span><span id='full_message15' style='display:none'>Render path contains parameter value near line 21: render(action =&gt; (current_user.following.search(params[:search]).reorder(((sort_column(sort_table) + &quot; &quot;) + sort_direction)).paginate(:page =&gt; <span class="user_input">params[:page]</span>) or Artist.search(params[:search]).reorder(((sort_column(sort_table) + &quot; &quot;) + sort_direction)).paginate(:page =&gt; <span class="user_input">params[:page]</span>)), {})</span><table id='context15' class='context' style='display:none'><caption>app/views/artists/_artists.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>17</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  &lt;!--Here Rails infers that @artists is a list of artist objects; moreover, when called with a collection of artists,</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>18</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  Rails automatically iterates through them and renders each one with the _artist.html.erb partial (inferring</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>19</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  the name of the partial from the name of the class). Bsically as if the code ahs a artist.each do loop --&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>21</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;%= render @artists %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;% # http://railscasts.com/episodes/136-jquery-ajax-revised?autoplay=true %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>&lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='weak-confidence'>Weak</span></td>
+      <td>
+        
+          <div class="template_name" onClick="toggle('callers3')" >
+            <div>
+              shared/_artist_concerts (Template:artists/show)
+            </div>
+            <div class="render_path" id="callers3" >
+              ArtistsController#show &rarr; Template:artists/show &rarr; shared/_artist_concerts
+            </div>
+          </div>
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/dynamic_render_path/">Dynamic Render Path</a></td>
+      <td><div class='warning_message' onClick="toggle('context16');toggle('message16');toggle('full_message16')" ><span id='message16' style='display:block' >Render path contains parameter value near line 3: render(action =&gt; Artist.find(params[:id]).concerts....</span><span id='full_message16' style='display:none'>Render path contains parameter value near line 3: render(action =&gt; Artist.find(params[:id]).concerts.where(&quot;dateandtime &gt; ?&quot;, DateTime.now).order(&quot;dateandtime ASC&quot;).paginate(:page =&gt; <span class="user_input">params[:page]</span>), {})</span><table id='context16' class='context' style='display:none'><caption>app/views/shared/_artist_concerts.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>1</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>&lt;% if @artist_concerts.any? %&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>2</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;ul class=&quot;artist_concerts&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context error'>
+            <td class='context_line'>
+              <pre class='context'>3</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>      &lt;%= render @artist_concerts %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt near_error'>
+            <td class='context_line'>
+              <pre class='context'>4</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;/ul&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>5</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;%= will_paginate @artist_concerts %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>7</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% else %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>8</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;p&gt;No shows scheduled at this time.&lt;/p&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='weak-confidence'>Weak</span></td>
+      <td>
+        
+          users/show (UsersController#show)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/dynamic_render_path/">Dynamic Render Path</a></td>
+      <td><div class='warning_message' onClick="toggle('context17');toggle('message17');toggle('full_message17')" ><span id='message17' style='display:block' >Render path contains parameter value near line 20: render(action =&gt; User.find(params[:id]).following....</span><span id='full_message17' style='display:none'>Render path contains parameter value near line 20: render(action =&gt; User.find(params[:id]).following.paginate(:page =&gt; <span class="user_input">params[:page]</span>), {})</span><table id='context17' class='context' style='display:none'><caption>app/views/users/show.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>15</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  &lt;/aside&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>16</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;div class=&quot;col-md-9&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>17</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;h3&gt;Following&lt;/h3&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>18</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% if @artists.any? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>19</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;ul class=&quot;artists follow&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= render @artists %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>21</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;/ul&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;%= will_paginate @artists %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>23</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>24</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>25</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>&lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+    <tr>
+      <td><span class='weak-confidence'>Weak</span></td>
+      <td>
+        
+          users/show_follow (UsersController#following)
+        
+      </td>
+      <td><a rel="no-referrer" href="http://brakemanscanner.org/docs/warning_types/dynamic_render_path/">Dynamic Render Path</a></td>
+      <td><div class='warning_message' onClick="toggle('context18');toggle('message18');toggle('full_message18')" ><span id='message18' style='display:block' >Render path contains parameter value near line 17: render(action =&gt; User.find(params[:id]).following....</span><span id='full_message18' style='display:none'>Render path contains parameter value near line 17: render(action =&gt; User.find(params[:id]).following.paginate(:page =&gt; <span class="user_input">params[:page]</span>), {})</span><table id='context18' class='context' style='display:none'><caption>app/views/users/show_follow.html.erb</caption>      <thead style='display:none'>
+        <tr>
+          <th>line number</th>
+          <th>line content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='context first'>
+          <td class='context_line'>
+            <pre class='context'>12</pre>
+          </td>
+          <td class='context'>
+            <pre class='context'>  &lt;/aside&gt;</pre>
+          </td>
+        </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>13</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;div class=&quot;col-md-10&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>14</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;h3&gt;Following&lt;/h3&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>15</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% if @artists.any? %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>16</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;ul class=&quot;artists follow&quot;&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt error'>
+            <td class='context_line'>
+              <pre class='context'>17</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>          &lt;%= render @artists %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context near_error'>
+            <td class='context_line'>
+              <pre class='context'>18</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;/ul&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>19</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>        &lt;%= will_paginate @artists %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>20</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>    &lt;% end %&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context alt'>
+            <td class='context_line'>
+              <pre class='context'>21</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>  &lt;/div&gt;</pre>
+            </td>
+          </tr>
+          <tr class='context'>
+            <td class='context_line'>
+              <pre class='context'>22</pre>
+            </td>
+            <td class='context'>
+              <pre class='context'>&lt;/div&gt;</pre>
+            </td>
+          </tr>
+</tbody></table></div></td>
+    </tr>
+  
+  </tbody>
+</table>
+</body></html>
