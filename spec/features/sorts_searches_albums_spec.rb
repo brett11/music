@@ -95,7 +95,7 @@ RSpec.feature "SortsSearchesAlbums", type: :feature do
 
     end
 
-    it "sorts by favs", :js do
+    it "sorts by favs and alphabetically", :js do
       visit albums_path
       expect(page).to have_selector("#channel_orange")
       expect(page).to have_selector("#the_joshua_tree")
@@ -117,12 +117,67 @@ RSpec.feature "SortsSearchesAlbums", type: :feature do
       expect(page).to_not have_selector("#the_joshua_tree")
       click_button "Sort alphabetically (albums)"
       sleep(1)
-      #back to normal alphabetically order
+      #back to normal alphabetical order
       expect(@art_angels.name).to appear_before(@channel_orange.name)
       expect(@channel_orange.name).to appear_before(@for_emma.name)
       # sorted by favs and U2 not followed. make sure when click sort alphabetically that it doesn't reload non-fav artists
       expect(page).to_not have_selector("#the_joshua_tree")
     end
 
+    it "sorts by favs and alphabetically (artist)", :js do
+      visit albums_path
+      check 'sort_favs'
+      sleep(1)
+      click_button "Sort alphabetically (artist)"
+      sleep(1)
+      #default for sort albums by artist is reverse stage_name alphabetical order
+      expect(@art_angels.name).to appear_before(@channel_orange.name)
+      expect(@channel_orange.name).to appear_before(@for_emma.name)
+      # sorted by favs and U2 not followed
+      expect(page).to_not have_selector("#the_joshua_tree")
+      click_button "Sort alphabetically (artist)"
+      sleep(1)
+      #back to normal alphabetical order (by artist)
+      expect(@for_emma.name).to appear_before(@channel_orange.name)
+      expect(@channel_orange.name).to appear_before(@art_angels.name)
+      #u2 should not make a reappearance
+      expect(page).to_not have_selector("#the_joshua_tree")
+    end
+
+    it "sorts by release date", :js do
+      visit albums_path
+      check 'sort_favs'
+      sleep(1)
+      click_button "Sort by release date"
+      sleep(1)
+      #default for sort albums by release date is oldest first
+      expect(@for_emma.name).to appear_before(@channel_orange.name)
+      expect(@channel_orange.name).to appear_before(@art_angels.name)
+      # sorted by favs and U2 not followed
+      expect(page).to_not have_selector("#the_joshua_tree")
+      click_button "Sort by release date"
+      sleep(1)
+      #second time clicking sort_by_release_date should be newest first
+      expect(@art_angels.name).to appear_before(@channel_orange.name)
+      expect(@channel_orange.name).to appear_before(@for_emma.name)
+      #u2 should not make a reappearance
+      expect(page).to_not have_selector("#the_joshua_tree")
+    end
+
+    it "searches favs", :js, :pending do
+      visit albums_path
+      check 'sort_favs'
+      sleep(1)
+      #below because u2 not a fav
+      expect(page).to_not have_selector("#the_joshua_tree")
+      #below is skipped because it freezes up respec if ran, because of the pgsearch error when "my favorites"" is checked
+      # TODO: figure out how to search with my favs checked
+      skip
+      fill_in "search", with: "grim"
+      click_button "Search"
+      expect(page).to have_selector("#art_angels")
+      expect(page).to_not have_selector("#channel_orange")
+      expect(page).to_not have_selector("#for_emma_forever_ago")
+    end
   end
 end

@@ -115,9 +115,49 @@ RSpec.feature "SortsSearchesConcerts", type: :feature do
       sleep(1)
       click_button "Sort by date"
       sleep(1)
+      # should be least recent ot most recent
       expect(@grimes_concert_20180711.artists[0].name_stage).to appear_before(@frank_ocean_concert_20180710.artists[0].name_stage)
       expect(@frank_ocean_concert_20180710.artists[0].name_stage).to appear_before(@bon_iver_concert_20180708.artists[0].name_stage)
       expect(page).to_not have_selector("#u2_the_venue_20180709")
+      click_button "Sort by date"
+      sleep(1)
+      # should switch back to most recent being first
+      expect(@bon_iver_concert_20180708.artists[0].name_stage).to appear_before(@frank_ocean_concert_20180710.artists[0].name_stage)
+      expect(@frank_ocean_concert_20180710.artists[0].name_stage).to appear_before(@grimes_concert_20180711.artists[0].name_stage)
+      #u2 shouldn't make a reapperance
+      expect(page).to_not have_selector("#u2_the_venue_20180709")
+    end
+
+    it "sorts concerts alphabetically (artist)", :js do
+      visit concerts_path
+      check('sort_favs')
+      sleep(1)
+      click_button "Sort alphabetically (artist)"
+      sleep(1)
+      # should be reverse alphabetical order
+      expect(@grimes_concert_20180711.artists[0].name_stage).to appear_before(@frank_ocean_concert_20180710.artists[0].name_stage)
+      expect(@frank_ocean_concert_20180710.artists[0].name_stage).to appear_before(@bon_iver_concert_20180708.artists[0].name_stage)
+      click_button "Sort alphabetically (artist)"
+      sleep(1)
+      # should be normal alphabetical order
+      expect(@bon_iver_concert_20180708.artists[0].name_stage).to appear_before(@frank_ocean_concert_20180710.artists[0].name_stage)
+      expect(@frank_ocean_concert_20180710.artists[0].name_stage).to appear_before(@grimes_concert_20180711.artists[0].name_stage)
+    end
+
+    it "searches favs", :js, :pending do
+      visit concerts_path
+      check 'sort_favs'
+      sleep(1)
+      #below because u2 not a fav
+      expect(page).to_not have_selector("#u2_the_venue_20180709")
+      #below is skipped because it freezes up respec if ran, because of the pgsearch error when "my favorites"" is checked
+      # TODO: figure out how to search with my favs checked
+      skip
+      fill_in "search", with: "grim"
+      click_button "Search"
+      expect(page).to have_selector("#grimes_the_venue_20180711")
+      expect(page).to_not have_selector("#frank_ocean_the_venue_20180710")
+      expect(page).to_not have_selector("#bon_iver_the_venue_20180708")
     end
   end
 end

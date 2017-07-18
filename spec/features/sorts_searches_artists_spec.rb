@@ -87,5 +87,20 @@ RSpec.feature "SortsSearchesArtists", type: :feature do
       # sorted by favs and U2 not followed. make sure when click sort alphabetically that it doesn't reload non-fav artists
       expect(page).to_not have_selector("#u2")
     end
+
+    it "searches favs", :js do
+      visit artists_path
+      page.find('#grimes form.new_fanship > input[value="Follow"]').click
+      check 'sort_favs'
+      sleep(1)
+      #below because u2 not a fav
+      expect(page).to_not have_selector("#u2")
+      fill_in "search", with: "grim"
+      #especially need to sleep here because using debounce when searching to delay 200 ms
+      sleep(1)
+      expect(page).to have_selector("#grimes")
+      expect(page).to_not have_selector("#frank_ocean")
+      expect(page).to_not have_selector("#bon_iver")
+    end
   end
 end
