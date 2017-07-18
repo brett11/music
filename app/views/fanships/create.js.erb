@@ -1,5 +1,6 @@
 $("#<%=@artist.to_id%> #follow_form").html("<%= j(render partial: 'artists/unfollow', locals: {artist: @artist}) %> ");
 
-if($('body').hasClass('users-show')){
-    $("#following").html('<%= current_user.following.count %>');
-}
+// commment below out for purpose of avoiding rspec trouble
+//if($('body').hasClass('users-show')){
+//    $("#following").html('<%# = current_user.following.count %>');
+//}

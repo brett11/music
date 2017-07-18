@@ -79,7 +79,7 @@ RSpec.feature "SortsSearchesAlbums", type: :feature do
     end
   end
 
-  describe "if logged in" do
+  describe "if logged in", :js do
     let(:user) { FactoryGirl.create(:user) }
 
     before(:example) do

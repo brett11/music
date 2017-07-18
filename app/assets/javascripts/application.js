@@ -85,16 +85,16 @@ $(document).on('turbolinks:load', function() {
             type: 'GET',
             data: $("#artists_search").serialize(),
             dataType: 'script',
-            success: function(data, success) {
-                console.log("success", arguments);
-                console.log("data", typeof data, data); // Verify the response
-            },
-            error: function(jqxhr, textStatus, error) {
-                console.log("error", arguments);
-            },
-            complete: function(jqxhr, textStatus) {
-                console.log("complete", arguments);
-            }
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
         });
         return false;
     }, 200));
@@ -143,16 +143,16 @@ $(document).on('turbolinks:load', function() {
             type: 'GET',
             data: $(this).serialize(),
             dataType: 'script',
-            success: function(data, success) {
-                console.log("success", arguments);
-                console.log("data", typeof data, data); // Verify the response
-            },
-            error: function(jqxhr, textStatus, error) {
-                console.log("error", arguments);
-            },
-            complete: function(jqxhr, textStatus) {
-                console.log("complete", arguments);
-            }
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
         });
         return false;
     });
@@ -165,16 +165,16 @@ $(document).on('turbolinks:load', function() {
             type: 'GET',
             data: $(this).serialize(),
             dataType: 'script',
-            success: function(data, success) {
-                console.log("success", arguments);
-                console.log("data", typeof data, data); // Verify the response
-            },
-            error: function(jqxhr, textStatus, error) {
-                console.log("error", arguments);
-            },
-            complete: function(jqxhr, textStatus) {
-                console.log("complete", arguments);
-            }
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
         });
         return false;
     });
@@ -187,16 +187,16 @@ $(document).on('turbolinks:load', function() {
             type: 'GET',
             data: $(this).serialize(),
             dataType: 'script',
-            success: function(data, success) {
-                console.log("success", arguments);
-                console.log("data", typeof data, data); // Verify the response
-            },
-            error: function(jqxhr, textStatus, error) {
-                console.log("error", arguments);
-            },
-            complete: function(jqxhr, textStatus) {
-                console.log("complete", arguments);
-            }
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
         });
         return false;
     });
@@ -215,16 +215,16 @@ $(document).on('turbolinks:load', function() {
             type: 'GET',
             data: $("#albums_search").serialize(),
             dataType: 'script',
-            success: function(data, success) {
-                console.log("success", arguments);
-                console.log("data", typeof data, data); // Verify the response
-            },
-            error: function(jqxhr, textStatus, error) {
-                console.log("error", arguments);
-            },
-            complete: function(jqxhr, textStatus) {
-                console.log("complete", arguments);
-            }
+            // success: function(data, success) {
+            //     console.log("success", arguments);
+            //     console.log("data", typeof data, data); // Verify the response
+            // },
+            // error: function(jqxhr, textStatus, error) {
+            //     console.log("error", arguments);
+            // },
+            // complete: function(jqxhr, textStatus) {
+            //     console.log("complete", arguments);
+            // }
         });
         return false;
     }, 200));
