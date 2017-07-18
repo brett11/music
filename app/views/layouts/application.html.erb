@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body id="<%= @body_id %>">
 <%= render 'layouts/header' %>
 <div class="container-fluid">
   <% flash.each do |message_type, message| %>
