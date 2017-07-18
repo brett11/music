@@ -8,7 +8,8 @@ class User < ApplicationRecord
     thumb: '100x100>',
     square: '200x200',
     medium: '300x300>'
-  }
+  }, default_url: "/system/missing/:style/missing.png"
+
   validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   has_secure_password
   validates :name_first, presence: true, length: { maximum: 45 }

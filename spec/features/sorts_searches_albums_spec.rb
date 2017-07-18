@@ -2,7 +2,7 @@ require 'pry'
 require 'rails_helper'
 require_relative '../support/appear_before_matcher'
 
-RSpec.describe "albums" do
+RSpec.feature "SortsSearchesAlbums", type: :feature do
   #can't use below because lazily loaded and need our data right away for visit albums_path
   # let(:frank_ocean) { FactoryGirl.create(:artist, name_stage: "Frank Ocean", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/FrankOcean.jpg", 'image/jpeg') ) }
   # let(:u2) { FactoryGirl.create(:artist, name_stage: "U2", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/U2.jpg", 'image/jpeg') ) }

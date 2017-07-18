@@ -27,6 +27,7 @@ require "email_spec/rspec"
 #rails 4 test prescriptions pg 267 & https://github.com/teampoltergeist/poltergeist
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
+require_relative "../spec/support/share_db_connection"
 
 #https://stackoverflow.com/questions/10121835/how-do-i-simulate-a-login-with-rspec
 require_relative "../spec/support/controller_test_helper"

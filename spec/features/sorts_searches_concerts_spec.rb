@@ -2,7 +2,7 @@ require 'pry'
 require 'rails_helper'
 require_relative '../support/appear_before_matcher'
 
-RSpec.describe "concerts" do
+RSpec.feature "SortsSearchesConcerts", type: :feature do
   #can't use "let" stmts because lazily loaded and need our data right away for visit concerts_path
 
   before(:example) do
