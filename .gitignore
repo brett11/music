@@ -25,3 +25,6 @@
 
 # Ignore application configuration
 /config/application.yml
+
+# https://relishapp.com/rspec/rspec-core/docs/command-line/only-failures
+/spec/examples.txt

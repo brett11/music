@@ -1,4 +1,3 @@
-require 'pry'
 require 'rails_helper'
 require_relative '../support/appear_before_matcher'
 

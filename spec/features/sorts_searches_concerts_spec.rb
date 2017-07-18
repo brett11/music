@@ -1,4 +1,3 @@
-require 'pry'
 require 'rails_helper'
 require_relative '../support/appear_before_matcher'
 
@@ -27,6 +26,7 @@ RSpec.feature "SortsSearchesConcerts", type: :feature do
     expect(@u2_concert.artists[0].name_stage).to appear_before(@frank_ocean_concert.artists[0].name_stage)
     page.find('input[value="Sort by date"]').click
     #should be sorted by least recent to most recent
+    sleep(1)
     expect(@frank_ocean_concert.artists[0].name_stage).to appear_before(@u2_concert.artists[0].name_stage)
     expect(@u2_concert.artists[0].name_stage).to appear_before(@bon_iver_concert.artists[0].name_stage)
     # below is commented out, because second click on buttons mostly not working in capybara tests for some reason

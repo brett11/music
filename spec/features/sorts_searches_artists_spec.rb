@@ -1,4 +1,3 @@
-require 'pry'
 require 'rails_helper'
 require_relative '../support/appear_before_matcher'
 
@@ -26,6 +25,7 @@ RSpec.feature "SortsSearchesArtists", type: :feature do
       expect(@bon_iver.name_stage).to appear_before(@frank_ocean.name_stage)
       expect(@frank_ocean.name_stage).to appear_before(@u2.name_stage)
       click_button "Sort alphabetically"
+      sleep(2)
       #since sort_alphabetically reverses itself, the following should be in reverse alphabetical order
       expect(@u2.name_stage).to appear_before(@frank_ocean.name_stage)
       expect(@frank_ocean.name_stage).to appear_before(@bon_iver.name_stage)
@@ -60,7 +60,6 @@ RSpec.feature "SortsSearchesArtists", type: :feature do
       expect(page).to have_selector("#u2")
       expect(page).to have_selector("#bon_iver")
       expect(page).to have_selector("#grimes")
-      # expect(page).to have_selector("div#all_artists div:nth-child(1)", content: @date1.content)
       #note that default of aritsts index is to be sorted alphabetically.
       expect(@bon_iver.name_stage).to appear_before(@frank_ocean.name_stage)
       expect(@frank_ocean.name_stage).to appear_before(@u2.name_stage)
@@ -71,12 +70,21 @@ RSpec.feature "SortsSearchesArtists", type: :feature do
       sleep(2)
       #since sort_alphabetically reverses itself, the following should be in reverse alphabetical order
       click_button "Sort alphabetically"
-      sleep(2)
+      sleep(1)
+      # expect reverse order alphabetically
       expect(@grimes.name_stage).to appear_before(@frank_ocean.name_stage)
       expect(@frank_ocean.name_stage).to appear_before(@bon_iver.name_stage)
       expect(page).to have_selector("#bon_iver")
       expect(page).to have_selector("#frank_ocean")
       expect(page).to have_selector("#grimes")
+      # sorted by favs and U2 not followed
+      expect(page).to_not have_selector("#u2")
+      #back to normal alphabetically order
+      click_button "Sort alphabetically"
+      sleep(1)
+      expect(@bon_iver.name_stage).to appear_before(@frank_ocean.name_stage)
+      expect(@frank_ocean.name_stage).to appear_before(@grimes.name_stage)
+      # sorted by favs and U2 not followed. make sure when click sort alphabetically that it doesn't reload non-fav artists
       expect(page).to_not have_selector("#u2")
     end
   end

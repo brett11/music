@@ -1,7 +1,5 @@
 $("#<%=@artist.to_id%> #follow_form").html("<%= j(render partial: 'artists/unfollow', locals: {artist: @artist}) %> ");
 
-$(function(){
-    if($('body').hasClass('.users-show')){
-        $("#following").html('<%= current_user.following.count %>');
-    }
-});
+if($('body').hasClass('users-show')){
+    $("#following").html('<%= current_user.following.count %>');
+}

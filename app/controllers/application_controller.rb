@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   # include VenuesHelper
 
   protect_from_forgery with: :exception
-  before_action :create_body_id
+  before_action :create_body_class
 
   private
 
@@ -24,8 +24,8 @@ class ApplicationController < ActionController::Base
     end
 
   # https://stackoverflow.com/questions/4828477/dynamically-assigning-unique-ids-to-the-body-tag-of-pages-using-rails
-  def create_body_id
-    @body_id = "#{params[:controller]}-#{params[:action]}"
+  def create_body_class
+    @body_class = "#{params[:controller]}-#{params[:action]}"
   end
 
 
