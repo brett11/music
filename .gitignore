@@ -28,3 +28,9 @@
 
 # https://relishapp.com/rspec/rspec-core/docs/command-line/only-failures
 /spec/examples.txt
+
+# reduce size by excluding images
+/public/system/albums
+/public/system/artists
+/public/system/users
+/public/system/missing
