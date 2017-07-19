@@ -10,6 +10,10 @@
 
 <h1>Artists</h1>
 
+<% if !logged_in? %>
+  <%= render 'shared/login_reminder' %>
+<% end %>
+
 <% if logged_in? %>
   <div class="row" id="artists_sort_favs_wrapper_div">
     <%= form_tag artists_path, :method => 'get', :id => "my_favs_sort" do %>

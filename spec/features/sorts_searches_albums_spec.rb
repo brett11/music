@@ -165,6 +165,7 @@ RSpec.feature "SortsSearchesAlbums", type: :feature do
     end
 
     it "searches favs", :js, :pending do
+      pending("search needs to be implemented on albums index after find fix for it")
       visit albums_path
       check 'sort_favs'
       sleep(1)

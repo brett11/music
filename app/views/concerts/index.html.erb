@@ -9,6 +9,10 @@
 <div id="upcoming_concerts">
   <h1>Upcoming Concerts</h1>
 
+  <% if !logged_in? %>
+      <%= render 'shared/login_reminder' %>
+  <% end %>
+
   <% if logged_in? %>
       <div class="row" id="concerts_sort_favs_wrapper_div">
         <%= form_tag concerts_path, :method => 'get', :id => "my_favs_concerts_sort" do %>
@@ -27,7 +31,7 @@
       </div>
   <% end %>
 
-  <% if false %>
+  <% if !logged_in? %>
       <div class="row">
         <%= form_tag concerts_path, :method => 'get', :id => "concerts_search" do %>
             <div id="search_hidden_fields">
