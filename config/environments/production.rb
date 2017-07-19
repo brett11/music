@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # https://stackoverflow.com/questions/23180650/how-to-solve-error-missing-secret-key-base-for-production-environment-rai
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
