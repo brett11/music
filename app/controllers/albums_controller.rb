@@ -143,7 +143,7 @@ class AlbumsController < ApplicationController
   def sort_my_favs
     #Album.search(params[:search]).merge().reorder(sort_column(sort_table) + " " + sort_direction).paginate(page: params[:page])
     Album.search(params[:search]).joins(:artists).merge(current_user.following).merge(Album.reorder(sort_column(sort_table) + " " + sort_direction))
-      .paginate( page: params[:page] )
+      .paginate( page: params[:page] ).references(:fanships)
     end
 
   # TODO: fix current_user.following.albums
