@@ -9,7 +9,7 @@ default: &default
   encoding: unicode
   pool: 5
   username: <%= ENV["POSTGRES_USERNAME"] %>
-  password:
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
   host: localhost
 
 #got above socket by using this command: mysqladmin -u root -p variables | grep socket
