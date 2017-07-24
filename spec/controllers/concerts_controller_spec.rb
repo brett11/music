@@ -7,11 +7,35 @@ RSpec.describe ConcertsController, type: :controller do
   end
 
   describe "GET index" do
-    it "works" do
-      get :index
-      expect(response).to have_http_status(:success)
-      expect(response).to render_template(:index)
-      expect(assigns(:concerts)).to be_present
+    describe "before user login" do
+      it "works" do
+        get :index
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template(:index)
+        expect(assigns(:concerts)).to be_present
+      end
+    end
+
+    describe "after user login" do
+      before(:example) do
+        #below user has to be instance variable, otherwise does not save to test db before login and no id for user
+        @user = FactoryGirl.create(:user)
+        login(@user)
+      end
+
+      it "works" do
+        get :index
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template(:index)
+        expect(assigns(:concerts)).to be_present
+      end
+
+      it "works with sort params" do
+        get :index, params: { direction: "desc", page: "1", sort: "dateandtime", sort_table: "Concert" }
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template(:index)
+        expect(assigns(:concerts)).to be_present
+      end
     end
   end
 

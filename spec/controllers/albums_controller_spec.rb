@@ -8,13 +8,47 @@ RSpec.describe AlbumsController, type: :controller do
   end
 
   describe "GET index" do
-    it "works" do
-      get :index
-      expect(response).to have_http_status(:success)
-      expect(response).to render_template(:index)
-      expect(assigns(:albums)).to be_present
+    describe "before user login" do
+      it "works" do
+        get :index
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template(:index)
+        expect(assigns(:albums)).to be_present
+      end
+    end
+
+    describe "after user login" do
+      before(:example) do
+        #below user has to be instance variable, otherwise does not save to test db before login and no id for user
+        @user = FactoryGirl.create(:user)
+        login(@user)
+      end
+
+      it "works" do
+        get :index
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template(:index)
+        expect(assigns(:albums)).to be_present
+      end
+
+      it "works with sorting params" do
+        get :index, params: { direction: "desc", page: "1", search: "", sort: "name", sort_table: "Album", sort_favs: "" }
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template(:index)
+        expect(assigns(:albums)).to be_present
+      end
+
+      # below will not pass, because need more ellaborate setup, since albums index when sort_favs is "true" for logged in user depends on who current user is following
+      # it "works with sorting params" do
+      #   get :index, params: { direction: "desc", page: "1", search: "", sort: "name", sort_table: "Album", sort_favs: "true" }
+      #   expect(response).to have_http_status(:success)
+      #   expect(response).to render_template(:index)
+      #   expect(assigns(:albums)).to be_present
+      # end
+
     end
   end
+
 
   describe "GET new" do
     describe "before admin login" do
