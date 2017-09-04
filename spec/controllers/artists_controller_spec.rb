@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'pry'
+require_relative '../support/shared_examples'
 
 RSpec.describe ArtistsController, type: :controller do
   #below needed so that @albums will be assigned within controller to something, be non-nil, and pass GET index works be_present test
@@ -8,59 +9,14 @@ RSpec.describe ArtistsController, type: :controller do
   end
 
   describe "GET index" do
-    describe "before user login" do
-      it "works" do
-        get :index
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:index)
-        expect(assigns(:artists)).to be_present
-      end
-    end
+    custom_params = { direction: "desc", page: "1", sort: "name_stage", sort_table: "Artist" }
 
-    describe "after user login" do
-      before(:example) do
-        #below user has to be instance variable, otherwise does not save to test db before login and no id for user
-        @user = FactoryGirl.create(:user)
-        login(@user)
-      end
-
-      it "works" do
-        get :index
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:index)
-        expect(assigns(:artists)).to be_present
-      end
-
-      it "works with sort params" do
-        get :index, params: { direction: "desc", page: "1", sort: "name_stage", sort_table: "Artist" }
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:index)
-        expect(assigns(:artists)).to be_present
-      end
-    end
+    it_behaves_like "working get index controller", :artists, custom_params
   end
 
 
   describe "GET new" do
-    describe "before admin login" do
-      it "does not work" do
-        get :new
-        expect(assigns(:artist)).to_not be_present
-        expect(response).to redirect_to(:root)
-      end
-    end
-
-    describe "after login" do
-      before(:example) do
-        login_admin
-      end
-
-      it "does work" do
-        get :new
-        expect(assigns(:artist)).to be_present
-        expect(response).to render_template(:new)
-      end
-    end
+    it_behaves_like "working get new controller", :artist, :root
   end
 
   describe "POST create" do

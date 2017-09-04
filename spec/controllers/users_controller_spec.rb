@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+require_relative '../support/shared_examples'
 
 RSpec.describe UsersController, type: :controller do
   #https://relishapp.com/rspec/rspec-rails/v/2-99/docs/controller-specs/use-of-capybara-in-controller-specs
@@ -26,11 +26,7 @@ RSpec.describe UsersController, type: :controller do
         login(@user)
       end
 
-      it "works" do
-        get :index
-        expect(response).to have_http_status(:success)
-        expect(assigns(:users)).to be_present
-      end
+      it_behaves_like "working get request", :index, :users
     end
   end
 

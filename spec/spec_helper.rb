@@ -18,11 +18,13 @@
 # require capybara/rspec
 require 'support/mailer_macros'
 
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   #http://railscasts.com/episodes/275-how-i-test?autoplay=true
   config.include(MailerMacros)
   config.before(:each) { reset_email }
+
 
   #rspec book pg 103
   # config.alias_example_group_to :pdescribe, pry: true

@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'pry'
+require_relative '../support/shared_examples'
 
 RSpec.describe AlbumsController, type: :controller do
   #below needed so that @albums will be assigned within controller to something, be non-nil, and pass GET index works be_present test
@@ -8,68 +9,13 @@ RSpec.describe AlbumsController, type: :controller do
   end
 
   describe "GET index" do
-    describe "before user login" do
-      it "works" do
-        get :index
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:index)
-        expect(assigns(:albums)).to be_present
-      end
-    end
+    custom_params = { direction: "desc", page: "1", search: "", sort: "name", sort_table: "Album", sort_favs: "" }
 
-    describe "after user login" do
-      before(:example) do
-        #below user has to be instance variable, otherwise does not save to test db before login and no id for user
-        @user = FactoryGirl.create(:user)
-        login(@user)
-      end
-
-      it "works" do
-        get :index
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:index)
-        expect(assigns(:albums)).to be_present
-      end
-
-      it "works with sorting params" do
-        get :index, params: { direction: "desc", page: "1", search: "", sort: "name", sort_table: "Album", sort_favs: "" }
-        expect(response).to have_http_status(:success)
-        expect(response).to render_template(:index)
-        expect(assigns(:albums)).to be_present
-      end
-
-      # below will not pass, because need more ellaborate setup, since albums index when sort_favs is "true" for logged in user depends on who current user is following
-      # it "works with sorting params" do
-      #   get :index, params: { direction: "desc", page: "1", search: "", sort: "name", sort_table: "Album", sort_favs: "true" }
-      #   expect(response).to have_http_status(:success)
-      #   expect(response).to render_template(:index)
-      #   expect(assigns(:albums)).to be_present
-      # end
-
-    end
+    it_behaves_like "working get index controller", :albums, custom_params
   end
 
-
   describe "GET new" do
-    describe "before admin login" do
-      it "does not work" do
-        get :new
-        expect(assigns(:album)).to_not be_present
-        expect(response).to redirect_to(:root)
-      end
-    end
-
-    describe "after login" do
-      before(:example) do
-        login_admin
-      end
-
-      it "does work" do
-        get :new
-        expect(assigns(:album)).to be_present
-        expect(response).to render_template(:new)
-      end
-    end
+    it_behaves_like "working get new controller", :album, :root
   end
 
   describe "POST create" do
