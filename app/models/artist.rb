@@ -19,6 +19,9 @@ class Artist < ApplicationRecord
                   using: {tsearch: { prefix: true } },
                   ignoring: :accents
 
+  def self.new_from_controller(params)
+    new(params)
+  end
 
   def self.search(entry)
     if entry.present?

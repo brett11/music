@@ -34,11 +34,12 @@ class ArtistsController < ApplicationController
   end
 
   def create
-    @artist = Artist.new(artist_params)
+    #rails 4 testing pg 134 --it is best to create method that calls third party method, if you are planning to stub in a test, as we are in the create failure test
+    @artist = Artist.new_from_controller(artist_params)
     respond_to do |format|
       format.html do
         if @artist.save
-          flash[:success] = "Artist successfully created."
+          flash[:success] = "Artist successfully added."
           redirect_to artists_url
         else
           flash[:info] = "Please try again."

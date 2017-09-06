@@ -26,7 +26,7 @@ RSpec.describe UsersController, type: :controller do
         login(@user)
       end
 
-      it_behaves_like "working get request", :index, :users
+      it_behaves_like "successful get request", :index, :users
     end
   end
 

@@ -18,4 +18,8 @@ module ControllerTestHelpers
   def current_user
     User.find(request.session[:user])
   end
+
+  def pluralize_sym(symbol)
+    symbol.to_s.pluralize.to_sym
+  end
 end

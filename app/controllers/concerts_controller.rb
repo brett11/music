@@ -50,7 +50,7 @@ class ConcertsController < ApplicationController
     respond_to do |format|
       format.html do
         if @concert.save
-          flash[:success] = "Show successfully added."
+          flash[:success] = "Concert successfully added."
           redirect_to concerts_url
         else
           flash[:warning] = "Please try again."

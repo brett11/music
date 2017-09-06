@@ -17,7 +17,7 @@ RSpec.describe VenuesController, type: :controller do
   end
 
   describe "POST create" do
-    let(:new_venue_params) { FactoryGirl.attributes_for(:venue)}
+    new_venue_params = FactoryGirl.attributes_for(:venue)
 
     before(:example) do
       #because of how factories work, the "new_venue_params" has a city attribute, containing an instance of City. Need to delete and replace
@@ -25,92 +25,47 @@ RSpec.describe VenuesController, type: :controller do
       new_venue_params[:city_id] = new_venue_params[:city].id
     end
 
-    describe "before admin login" do
-      it "does not allow" do
-        post :create, params: {venue: new_venue_params}
-        expect(assigns(:venue)).to_not be_present
-        expect(response).to redirect_to(:root)
-      end
-    end
-
-
-    describe "after admin login" do
-      before(:example) do
-        login_admin
-      end
-
-      it "redirects to venues_url upon successful venue creation and shows flash" do
-        post :create, params: {venue: new_venue_params}
-        expect(assigns(:venue)).to be_present
-        #pg 57 of Rails testing book
-        expect(response).to redirect_to(:venues)
-        #pg 143 of Rails testing book
-        expect(flash[:success]).to eq("Venue successfully added.")
-      end
-
-      it "renders new upon venue creation failure" do
-        #pg 123 of rails testing book
-        venue_partial_stub = Venue.new(new_venue_params)
-        expect(venue_partial_stub).to receive(:save).and_return(false)
-        expect(Venue).to receive(:new_from_controller).and_return(venue_partial_stub)
-        post :create, params: {venue: new_venue_params}
-        expect(response).to render_template(:new)
-      end
-    end
+    it_behaves_like "working post create controller", :venue, new_venue_params
   end
 
   describe "GET edit" do
-    describe "before admin login" do
-      it "does not work" do
-        get :edit, params: {id: @venue.id }
-        expect(assigns(:venue)).to_not be_present
-        expect(response).to redirect_to(:root)
-      end
-    end
-
-    describe "after login" do
-      before(:example) do
-        login_admin
-      end
-
-      it "does work" do
-        get :edit, params: {id: @venue.id }
-        expect(assigns(:venue)).to be_present
-        expect(response).to render_template(:edit)
-      end
-    end
+    venue_instance = FactoryGirl.create(:venue)
+    it_behaves_like "working get edit controller", :venue, venue_instance
   end
 
   describe "POST update" do
-    describe "before admin login" do
-      it "does not allow" do
-        post :update, params: {id: @venue.id, venue: {name: "New Venue Name"}}
-        expect(assigns(:venue)).to_not be_present
-        expect(response).to redirect_to(:root)
-      end
-    end
+    venue_instance = FactoryGirl.create(:venue)
+    it_behaves_like "working post update controller", :venue, venue_instance, :name, "New Venue Name"
 
-    describe"after admin login" do
-      before(:example) do
-        login_admin
-      end
-
-      it "redirects to venues_url upon successful creation and shows flash" do
-        post :update, params: {id: @venue.id, venue: {name: "New Venue Name"}}
-        expect(assigns(:venue)).to be_present
-        #pg 57 of Rails testing book
-        expect(response).to redirect_to(@venue)
-        #pg 143 of Rails testing book
-        expect(flash[:success]).to eq("Venue info successfully updated")
-      end
-
-      it "renders edit upon update failure" do
-        #posting below without name, which will cause failure of update
-        #binding.pry
-        post :update, params: {id: @venue.id, venue: {name: ""}}
-        #pg 141 of Rails testing book
-        expect(response).to render_template(:edit)
-      end
-    end
+    # describe "before admin login" do
+    #   it "does not allow" do
+    #     post :update, params: {id: @venue.id, venue: {name: "New Venue Name"}}
+    #     expect(assigns(:venue)).to_not be_present
+    #     expect(response).to redirect_to(:root)
+    #   end
+    # end
+    #
+    # describe"after admin login" do
+    #   before(:example) do
+    #     login_admin
+    #   end
+    #
+    #   it "redirects to venues_url upon successful creation and shows flash" do
+    #     post :update, params: {id: @venue.id, venue: {name: "New Venue Name"}}
+    #     expect(assigns(:venue)).to be_present
+    #     #pg 57 of Rails testing book
+    #     expect(response).to redirect_to(@venue)
+    #     #pg 143 of Rails testing book
+    #     expect(flash[:success]).to eq("Venue info successfully updated")
+    #   end
+    #
+    #   it "renders edit upon update failure" do
+    #     #posting below without name, which will cause failure of update
+    #     #binding.pry
+    #     post :update, params: {id: @venue.id, venue: {name: ""}}
+    #     #pg 141 of Rails testing book
+    #     expect(response).to render_template(:edit)
+    #   end
+    # end
   end
 end

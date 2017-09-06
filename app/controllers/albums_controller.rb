@@ -40,9 +40,10 @@ class AlbumsController < ApplicationController
   end
 
   def create
+    #rails 4 testing pg 134 --it is best to create method that calls third party method, if you are planning to stub in a test, as we are in the create failure test
     # album params artist returns artist id only per pry byebug
     #binding.pry
-    @album = Album.new(album_params_less_artist)
+    @album = Album.new_from_controller(album_params_less_artist)
     @artist_ids = album_params[:artist_ids]
     @artist_ids.each do |artist_id|
       artist = Artist.find(artist_id)
