@@ -33,14 +33,15 @@
       </div>
     </div>
     <div class="artist_upcoming_shows row">
-      <h3>Upcoming shows</h3>
+      <h3>Shows</h3>
 
       <div class="add_album">
         <% # https://stackoverflow.com/questions/12360148/rails-link-to-or-button-to-post-request-with-parameters -- rails 5+ %>
         <%= button_to "Add new concert", new_concert_path, method: 'get', id: "new_concert_link", params: { artist_id: @artist.id}, remote: true %>
       </div>
 
-      <%= render 'shared/artist_concerts' %>
+      <%= render 'shared/artist_concerts_upcoming' %>
+      <%= render 'shared/artist_concerts_past' %>
     </div>
 
     <div class="row">

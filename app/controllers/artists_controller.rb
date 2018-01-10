@@ -25,7 +25,8 @@ class ArtistsController < ApplicationController
 
   def show
     @artist = Artist.find(params[:id])
-    @artist_concerts = @artist.concerts.where('dateandtime > ?', DateTime.now).order("dateandtime ASC").paginate(page: params[:page])
+    @artist_concerts_upcoming = @artist.concerts.where('dateandtime > ?', DateTime.now).order("dateandtime ASC").paginate(page: params[:page])
+    @artist_concerts_past = @artist.concerts.where('dateandtime < ?', DateTime.now).order("dateandtime DESC").paginate(page: params[:page])
 
   end
 

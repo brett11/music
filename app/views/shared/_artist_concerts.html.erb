@@ -1,9 +1,0 @@
-<% if @artist_concerts.any? %>
-    <ul class="artist_concerts">
-      <%= render @artist_concerts %>
-    </ul>
-    <%= will_paginate @artist_concerts %>
-
-    <% else %>
-    <p>No shows scheduled at this time.</p>
-<% end %>
