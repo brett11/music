@@ -1,6 +1,6 @@
 <h4>Upcoming Shows</h4>
 <% if @artist_concerts_upcoming.any? %>
-    <ul class="artist_concerts">
+    <ul class="artist_concerts_past row">
       <%= render @artist_concerts_upcoming %>
     </ul>
     <%= will_paginate @artist_concerts_upcoming %>

@@ -1,6 +1,6 @@
 <h4>Past Shows</h4>
 <% if @artist_concerts_past.any? %>
-    <ul class="artist_concerts">
+    <ul class="artist_concerts_past row">
       <%= render @artist_concerts_past %>
     </ul>
     <%= will_paginate @artist_concerts_past %>
