@@ -7,9 +7,9 @@ RSpec.feature "UserFollowsArtists", type: :feature do
   end
 
   before(:example) do
-    @frank_ocean = FactoryGirl.create(:artist, name_stage: "Frank Ocean", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/FrankOcean.jpg", 'image/jpeg'))
-    @u2 = FactoryGirl.create(:artist, name_stage: "U2", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/U2.jpg", 'image/jpeg'))
-    @bon_iver = FactoryGirl.create(:artist, name_stage: "Bon Iver", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/BonIver.jpg", 'image/jpeg'))
+    @frank_ocean = FactoryBot.create(:artist, name_stage: "Frank Ocean", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/FrankOcean.jpg", 'image/jpeg'))
+    @u2 = FactoryBot.create(:artist, name_stage: "U2", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/U2.jpg", 'image/jpeg'))
+    @bon_iver = FactoryBot.create(:artist, name_stage: "Bon Iver", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/BonIver.jpg", 'image/jpeg'))
   end
 
   describe "if not logged in" do
@@ -21,7 +21,7 @@ RSpec.feature "UserFollowsArtists", type: :feature do
   end
 
   describe "if logged in" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     before(:example) do
       login(user)
@@ -52,7 +52,7 @@ RSpec.feature "UserFollowsArtists", type: :feature do
     end
 
     it "updates artist page" do
-      # user = FactoryGirl.create(:user)
+      # user = FactoryBot.create(:user)
       # login(user)
       visit artists_path
       page.find('#frank_ocean form.new_fanship > input[value="Follow"]').click

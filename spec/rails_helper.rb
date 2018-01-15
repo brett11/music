@@ -12,7 +12,7 @@ require 'support/factory_girl'
 require 'capybara/rspec'
 #http://stackoverflow.com/questions/22715519/rspec-error-uninitialized-constant-factorygirl-name-error
 #http://stackoverflow.com/questions/25648456/i-cant-seem-to-add-config-include-factorygirlsyntaxmethods-to-my-rspec-co/25649064#25649064
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 
 #http://stackoverflow.com/questions/17837882/how-to-examine-rspec-variables-with-pry-debugger
 require 'pry'

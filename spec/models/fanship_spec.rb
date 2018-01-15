@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'pry'
 
 RSpec.describe Fanship, type: :model do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:artist) { FactoryGirl.create(:artist) }
-  let(:fanship) { FactoryGirl.create(:fanship, user: user, artist: artist) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:artist) { FactoryBot.create(:artist) }
+  let(:fanship) { FactoryBot.create(:fanship, user: user, artist: artist) }
 
   it "is valid with valid attributes" do
     expect(fanship).to be_valid
@@ -22,8 +22,8 @@ RSpec.describe Fanship, type: :model do
 
   it "shows when user follows artists" do
     #need local fanship below line because fanship is needed and lazily instantiated
-    fanship = FactoryGirl.create(:fanship, user: user, artist: artist)
-    other_artist = FactoryGirl.create(:artist, name_stage: "Arcade Fire")
+    fanship = FactoryBot.create(:fanship, user: user, artist: artist)
+    other_artist = FactoryBot.create(:artist, name_stage: "Arcade Fire")
     #Rails Tutorial chapter 14
     user.following << other_artist
     expect(user.following.include?(artist)).to be_truthy
@@ -34,7 +34,7 @@ RSpec.describe Fanship, type: :model do
     expect(user.following?(artist)).to be_falsey
     user.follow(artist)
     expect(user.following?(artist)).to be_truthy
-    other_artist = FactoryGirl.create(:artist, name_stage: "Arcade Fire")
+    other_artist = FactoryBot.create(:artist, name_stage: "Arcade Fire")
     user.follow(other_artist)
     expect(user.following?(other_artist)).to be_truthy
     user.unfollow(artist)

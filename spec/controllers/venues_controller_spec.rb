@@ -3,7 +3,7 @@ require_relative '../support/shared_examples'
 
 RSpec.describe VenuesController, type: :controller do
   before(:example) do
-    @venue = FactoryGirl.create(:venue)
+    @venue = FactoryBot.create(:venue)
   end
 
   describe "GET index" do
@@ -17,7 +17,7 @@ RSpec.describe VenuesController, type: :controller do
   end
 
   describe "POST create" do
-    new_venue_params = FactoryGirl.attributes_for(:venue)
+    new_venue_params = FactoryBot.attributes_for(:venue)
 
     before(:example) do
       #because of how factories work, the "new_venue_params" has a city attribute, containing an instance of City. Need to delete and replace
@@ -29,12 +29,12 @@ RSpec.describe VenuesController, type: :controller do
   end
 
   describe "GET edit" do
-    venue_instance = FactoryGirl.create(:venue)
+    venue_instance = FactoryBot.create(:venue)
     it_behaves_like "working get edit controller", :venue, venue_instance
   end
 
   describe "POST update" do
-    venue_instance = FactoryGirl.create(:venue)
+    venue_instance = FactoryBot.create(:venue)
     it_behaves_like "working post update controller", :venue, venue_instance, :name, "New Venue Name"
 
     # describe "before admin login" do

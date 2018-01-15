@@ -45,7 +45,7 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl_rails', '~> 4.8'
+  gem "factory_bot_rails"
   gem 'capybara', '~> 2.14', '>= 2.14.4'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'rails-controller-testing', '0.1.1'

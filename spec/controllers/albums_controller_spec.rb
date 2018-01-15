@@ -4,7 +4,7 @@ require_relative '../support/shared_examples'
 RSpec.describe AlbumsController, type: :controller do
   #below needed so that @albums will be assigned within controller to something, be non-nil, and pass GET index works be_present test
   before(:each) do
-    @album = FactoryGirl.create(:album)
+    @album = FactoryBot.create(:album)
   end
 
   describe "GET index" do
@@ -18,7 +18,7 @@ RSpec.describe AlbumsController, type: :controller do
   end
 
   describe "POST create" do
-    new_album_params = FactoryGirl.attributes_for(:album)
+    new_album_params = FactoryBot.attributes_for(:album)
 
     before(:example) do
       #because of how factories work, the "new_album_params" has an artists attribute. Need to delete and replace
@@ -32,12 +32,12 @@ RSpec.describe AlbumsController, type: :controller do
   end
 
   describe "GET edit" do
-    album_instance = FactoryGirl.create(:album)
+    album_instance = FactoryBot.create(:album)
     it_behaves_like "working get edit controller", :album, album_instance
   end
 
   describe "POST update" do
-    album_instance = FactoryGirl.create(:album)
+    album_instance = FactoryBot.create(:album)
     it_behaves_like "working post update controller", :album, album_instance, :name, "New Album Name"
   end
 end

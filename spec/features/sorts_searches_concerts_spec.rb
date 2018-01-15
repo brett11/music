@@ -9,13 +9,13 @@ RSpec.feature "SortsSearchesConcerts", type: :feature do
   end
 
   before(:example) do
-    @frank_ocean = FactoryGirl.create(:artist, name_stage: "Frank Ocean", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/FrankOcean.jpg", 'image/jpeg') )
-    @u2 = FactoryGirl.create(:artist, name_stage: "U2", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/U2.jpg", 'image/jpeg') )
-    @bon_iver = FactoryGirl.create(:artist, name_stage: "Bon Iver", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/BonIver.jpg", 'image/jpeg') )
-    @venue = FactoryGirl.create(:venue)
-    @frank_ocean_concert_20180710 = FactoryGirl.create(:concert, dateandtime: "2018-07-10", artists: [@frank_ocean], venue: @venue )
-    @u2_concert_20180709 = FactoryGirl.create(:concert, dateandtime: "2018-07-09", artists: [@u2], venue: @venue )
-    @bon_iver_concert_20180708 = FactoryGirl.create(:concert, dateandtime: "2018-07-08", artists: [@bon_iver], venue: @venue )
+    @frank_ocean = FactoryBot.create(:artist, name_stage: "Frank Ocean", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/FrankOcean.jpg", 'image/jpeg') )
+    @u2 = FactoryBot.create(:artist, name_stage: "U2", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/U2.jpg", 'image/jpeg') )
+    @bon_iver = FactoryBot.create(:artist, name_stage: "Bon Iver", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/BonIver.jpg", 'image/jpeg') )
+    @venue = FactoryBot.create(:venue)
+    @frank_ocean_concert_20180710 = FactoryBot.create(:concert, dateandtime: "2018-07-10", artists: [@frank_ocean], venue: @venue )
+    @u2_concert_20180709 = FactoryBot.create(:concert, dateandtime: "2018-07-09", artists: [@u2], venue: @venue )
+    @bon_iver_concert_20180708 = FactoryBot.create(:concert, dateandtime: "2018-07-08", artists: [@bon_iver], venue: @venue )
   end
 
   describe "if not logged in" do
@@ -91,13 +91,13 @@ RSpec.feature "SortsSearchesConcerts", type: :feature do
   end
 
   describe "if logged in", :js do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     before(:example) do
       login(user)
       #needed so can sort 3 out of 4 alphatbetically (other one won't be "followed")
-      @grimes = FactoryGirl.create(:artist, name_stage: "Grimes", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/Grimes.jpg", 'image/jpeg') )
-      @grimes_concert_20180711 = FactoryGirl.create(:concert, dateandtime: "2018-07-11", artists: [@grimes], venue: @venue )
+      @grimes = FactoryBot.create(:artist, name_stage: "Grimes", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/Grimes.jpg", 'image/jpeg') )
+      @grimes_concert_20180711 = FactoryBot.create(:concert, dateandtime: "2018-07-11", artists: [@grimes], venue: @venue )
 
       visit artists_path
       page.find('#bon_iver form.new_fanship > input[value="Follow"]').click

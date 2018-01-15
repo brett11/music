@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     name_first "John"
     name_last "Doe"
@@ -17,7 +17,7 @@ FactoryGirl.define do
     name "Self-Titled"
     release_date { 3.years.ago }
     #http://stackoverflow.com/questions/1484374/how-to-create-has-and-belongs-to-many-associations-in-factory-girl
-    artists {[FactoryGirl.create(:artist)]}
+    artists {[FactoryBot.create(:artist)]}
   end
 
   # https://stackoverflow.com/questions/3294824/how-do-i-use-factory-girl-to-generate-a-paperclip-attachment
@@ -29,14 +29,14 @@ FactoryGirl.define do
 
   factory :city do
     name "Chicago"
-    state { FactoryGirl.create(:state) }
-    country { FactoryGirl.create(:country) }
+    state { FactoryBot.create(:state) }
+    country { FactoryBot.create(:country) }
   end
 
   factory :concert do
-    venue {FactoryGirl.create(:venue)}
+    venue {FactoryBot.create(:venue)}
     #http://stackoverflow.com/questions/1484374/how-to-create-has-and-belongs-to-many-associations-in-factory-girl
-    artists {[FactoryGirl.create(:artist)]}
+    artists {[FactoryBot.create(:artist)]}
     dateandtime { 6.months.from_now }
   end
 
@@ -56,12 +56,12 @@ FactoryGirl.define do
 
   factory :venue do
     name "The Venue"
-    city { FactoryGirl.create(:city) }
+    city { FactoryBot.create(:city) }
   end
 
   factory :fanship do
-    user { FactoryGirl.create(:user).id }
-    artist { FactoryGirl.create(:artist).id }
+    user { FactoryBot.create(:user).id }
+    artist { FactoryBot.create(:artist).id }
   end
 
   factory :paperclip_attachment_album do

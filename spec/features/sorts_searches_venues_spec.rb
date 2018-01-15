@@ -9,9 +9,9 @@ RSpec.feature "SortsSearchesVenues", type: :feature do
   end
 
   before(:example) do
-    @auditorium = FactoryGirl.create(:venue, name: "Auditorium Theatre")
-    @chicago = FactoryGirl.create(:venue, name: "Chicago Theatre")
-    @vic = FactoryGirl.create(:venue, name: "Vic Theatre")
+    @auditorium = FactoryBot.create(:venue, name: "Auditorium Theatre")
+    @chicago = FactoryBot.create(:venue, name: "Chicago Theatre")
+    @vic = FactoryBot.create(:venue, name: "Vic Theatre")
   end
 
   describe "if not logged in" do
@@ -41,12 +41,12 @@ RSpec.feature "SortsSearchesVenues", type: :feature do
   end
 
   describe "if logged in" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     before(:example) do
       login(user)
       #needed so can sort 3 out of 4 alphatbetically (other one won't be "followed")
-      @riviera = FactoryGirl.create(:venue, name: "Riviera Theatre")
+      @riviera = FactoryBot.create(:venue, name: "Riviera Theatre")
     end
 
     it "sorts venues by name", :js do

@@ -3,21 +3,21 @@ require_relative '../support/appear_before_matcher'
 
 RSpec.feature "SortsSearchesAlbums", type: :feature do
   #can't use below because lazily loaded and need our data right away for visit albums_path
-  # let(:frank_ocean) { FactoryGirl.create(:artist, name_stage: "Frank Ocean", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/FrankOcean.jpg", 'image/jpeg') ) }
-  # let(:u2) { FactoryGirl.create(:artist, name_stage: "U2", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/U2.jpg", 'image/jpeg') ) }
-  # let(:bon_iver) { FactoryGirl.create(:artist, name_stage: "Bon Iver", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/BonIver.jpg", 'image/jpeg') ) }
+  # let(:frank_ocean) { FactoryBot.create(:artist, name_stage: "Frank Ocean", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/FrankOcean.jpg", 'image/jpeg') ) }
+  # let(:u2) { FactoryBot.create(:artist, name_stage: "U2", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/U2.jpg", 'image/jpeg') ) }
+  # let(:bon_iver) { FactoryBot.create(:artist, name_stage: "Bon Iver", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/BonIver.jpg", 'image/jpeg') ) }
 
   before do
     skip("jquery and rspec not playing nicely")
   end
 
   before(:example) do
-    @frank_ocean = FactoryGirl.create(:artist, name_stage: "Frank Ocean", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/FrankOcean.jpg", 'image/jpeg') )
-    @u2 = FactoryGirl.create(:artist, name_stage: "U2", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/U2.jpg", 'image/jpeg') )
-    @bon_iver = FactoryGirl.create(:artist, name_stage: "Bon Iver", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/BonIver.jpg", 'image/jpeg') )
-    @channel_orange = FactoryGirl.create(:album, name: "Channel Orange", release_date: "2012-07-10", album_cover: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/album_ChannelOrange.jpg", 'image/jpeg'), artists: [@frank_ocean] )
-    @the_joshua_tree = FactoryGirl.create(:album, name: "The Joshua Tree", release_date: "1987-03-09", album_cover: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/album_TheJoshuaTree.jpg", 'image/jpeg'), artists: [@u2] )
-    @for_emma = FactoryGirl.create(:album, name: "For Emma, Forever Ago", release_date: "2007-07-08", album_cover: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/album_ForEmmaForeverAgo.png", 'image/png'), artists: [@bon_iver] )
+    @frank_ocean = FactoryBot.create(:artist, name_stage: "Frank Ocean", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/FrankOcean.jpg", 'image/jpeg') )
+    @u2 = FactoryBot.create(:artist, name_stage: "U2", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/U2.jpg", 'image/jpeg') )
+    @bon_iver = FactoryBot.create(:artist, name_stage: "Bon Iver", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/BonIver.jpg", 'image/jpeg') )
+    @channel_orange = FactoryBot.create(:album, name: "Channel Orange", release_date: "2012-07-10", album_cover: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/album_ChannelOrange.jpg", 'image/jpeg'), artists: [@frank_ocean] )
+    @the_joshua_tree = FactoryBot.create(:album, name: "The Joshua Tree", release_date: "1987-03-09", album_cover: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/album_TheJoshuaTree.jpg", 'image/jpeg'), artists: [@u2] )
+    @for_emma = FactoryBot.create(:album, name: "For Emma, Forever Ago", release_date: "2007-07-08", album_cover: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/album_ForEmmaForeverAgo.png", 'image/png'), artists: [@bon_iver] )
   end
 
   describe "if not logged in" do
@@ -85,13 +85,13 @@ RSpec.feature "SortsSearchesAlbums", type: :feature do
   end
 
   describe "if logged in", :js do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     before(:example) do
       login(user)
       #needed so can sort 3 out of 4 alphatbetically (other one won't be "followed")
-      @grimes = FactoryGirl.create(:artist, name_stage: "Grimes", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/Grimes.jpg", 'image/jpeg') )
-      @art_angels = FactoryGirl.create(:album, name: "Art Angels", release_date: "2015-11-06", album_cover: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/album_ArtAngels.jpg", 'image/jpeg'), artists: [@grimes] )
+      @grimes = FactoryBot.create(:artist, name_stage: "Grimes", avatar: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/Grimes.jpg", 'image/jpeg') )
+      @art_angels = FactoryBot.create(:album, name: "Art Angels", release_date: "2015-11-06", album_cover: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/files/album_ArtAngels.jpg", 'image/jpeg'), artists: [@grimes] )
 
       visit artists_path
       page.find('#bon_iver form.new_fanship > input[value="Follow"]').click

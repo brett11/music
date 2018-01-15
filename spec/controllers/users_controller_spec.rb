@@ -6,7 +6,7 @@ RSpec.describe UsersController, type: :controller do
   #include Capybara::DSL
   #below needed so that @users will be assigned within controller to something, be non-nil, and pass GET index works be_present test
   before(:example) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
   end
 
   describe "GET index" do
@@ -42,7 +42,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe "POST create" do
     it "redirects to root_url upon successful user creation and shows flash" do
-      new_user_params = FactoryGirl.attributes_for(:user)
+      new_user_params = FactoryBot.attributes_for(:user)
       post :create, params: {user: new_user_params}
       expect(assigns(:user)).to be_present
       #pg 57 of Rails testing book
@@ -115,7 +115,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "GET following" do
-    # @artist = FactoryGirl.create(:artist)
+    # @artist = FactoryBot.create(:artist)
 
     describe "when not logged in" do
       it "does not work" do

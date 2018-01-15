@@ -1,7 +1,7 @@
 #https://stackoverflow.com/questions/10121835/how-do-i-simulate-a-login-with-rspec. Bruno Peres
 module FeatureTestHelpers
   def login_admin
-    admin = FactoryGirl.create(:user_admin)
+    admin = FactoryBot.create(:user_admin)
     login(admin)
   end
 
